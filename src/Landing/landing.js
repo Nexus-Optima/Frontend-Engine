@@ -1,9 +1,10 @@
-import HomeSection from './Home/home';
-import React, { useState, useEffect } from 'react';
-import { Box, ThemeProvider, Typography, createTheme, Button, Grid, AppBar, Toolbar } from '@mui/material';
-import './landing.css';
+import React from 'react';
+import { Box, ThemeProvider, Typography, createTheme } from '@mui/material';
 import 'typeface-raleway';
-import Header from './Header/header.js'
+import './landing.css';
+import HomeSection from './Home/home';
+import Header from './Header/header.js';
+import ServicesList from './services/services';
 
 function App() {
   const theme = createTheme({
@@ -11,42 +12,25 @@ function App() {
       fontFamily: 'Raleway, sans-serif',
     },
   });
-  const [isSticky, setSticky] = useState(false);
-    
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 100) {
-        setSticky(true);
-      } else {
-        setSticky(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
-    <div className="App">
-    <ThemeProvider theme = {theme}>
-    <Header />
-    <Box className="scroll-container">
-    <HomeSection />
-    <Box id = "modules" className="section">
-            <Typography variant="h4">Section 2 Content</Typography>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        {/* <Header /> */}
+        <Box className="scroll-container">
+          <HomeSection />
+          <Box id="modules" className="section">
+            <ServicesList />
           </Box>
           <Box className="section" id="section3">
             <Typography variant="h4">Section 3 Content</Typography>
           </Box>
-          <Box id = "contact-us" className="section">
+          <Box id="contact-us" className="section">
             <Typography variant="h4">Section 4 Content</Typography>
           </Box>
-                </Box>
-    </ ThemeProvider>
- </div>
+        </Box>
+      </div>
+    </ThemeProvider>
   );
 }
 
