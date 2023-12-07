@@ -3,7 +3,7 @@ import { Box, ThemeProvider, Typography, Button, Grid, createTheme } from '@mui/
 import 'typeface-raleway';
 import pic from "./../../Images/Data_Analysis.gif"; // Replace with the actual path to your image
 
-function App() {
+
   const buttonStyle = {
     textTransform: 'none',
     backgroundColor: '#6E86FF',
@@ -21,7 +21,7 @@ function App() {
     height: 'auto', // Maintain aspect ratio
     minWidth: '200px' // Minimum width for smaller screens
   };
-
+const HomeSection = () => {
   return (
     <ThemeProvider theme={theme}>
       <Box id="home" className="section" sx={{mx:10}}>
@@ -58,4 +58,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomeSection;
