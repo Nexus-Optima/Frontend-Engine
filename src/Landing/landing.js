@@ -5,6 +5,7 @@ import './landing.css';
 import HomeSection from './Home/home';
 import Header from './Header/header.js';
 import ServicesList from './services/services';
+import ContactUs from './Contact_Us/contact_us.js'
 
 function App() {
   const theme = createTheme({
@@ -20,14 +21,10 @@ function App() {
         <Box className="scroll-container">
           <HomeSection />
           <Box id="modules" className="section">
-            <ServicesList />
+          <ServicesList />
           </Box>
-          <Box className="section" id="section3">
-            <Typography variant="h4">Section 3 Content</Typography>
-          </Box>
-          <Box id="contact-us" className="section">
-            <Typography variant="h4">Section 4 Content</Typography>
-          </Box>
+          <ContactUs />
+      
         </Box>
       </div>
     </ThemeProvider>
