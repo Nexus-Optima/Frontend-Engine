@@ -18,7 +18,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         {/* <Header /> */}
-        <Box className="scroll-container">
+        <Box className="scroll-container" sx={{ m: 2 }}>
           <HomeSection />
           <Box id="modules" className="section">
           <ServicesList />

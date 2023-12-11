@@ -53,7 +53,7 @@ const ServicesList = () => {
             <Grid item xs={12} sm={6} md={4} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
               {index === 0 ? (
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: 2, mx: 1, width: '100%' }}>
-                  <Typography variant="h2" fontWeight="bold" color="black" sx={{ textAlign: 'left' }}>
+                  <Typography variant="h3" fontWeight="bold" color="black" sx={{ textAlign: 'left' }}>
                     OUR <br/> SERVICES
                   </Typography>
                 </Box>

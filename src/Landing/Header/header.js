@@ -2,7 +2,7 @@ import { Typography, Grid, AppBar, Toolbar } from '@mui/material';
 
 const Header = () => {
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: '#465AD0' }}>
+    <AppBar position="sticky" sx={{ backgroundColor: 'white' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={6}>
