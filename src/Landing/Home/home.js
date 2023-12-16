@@ -6,7 +6,7 @@ import pic from "./../../Images/Data_Analysis.gif"; // Replace with the actual p
 
   const buttonStyle = {
     textTransform: 'none',
-    backgroundColor: '#6E86FF',
+    backgroundColor: '#32047F',
     padding: '12px 40px',
   };
 
@@ -28,10 +28,10 @@ const HomeSection = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} sx={{ padding: '10px', textAlign: 'left' }}>
             <Box sx={{ padding: '50px' }}>
-              <Typography variant="h6" sx={{ color: 'green' }}>
+              <Typography variant="h5" fontWeight="bold" sx={{ color: 'green' }}>
                 FASTER, EASIER & BETTER DECISIONS
               </Typography>
-              <Typography variant="h4">
+              <Typography variant="h4" fontWeight="bold">
                 <br />Turn Insights Into Actions to Achieve Goals
               </Typography>
               <Typography variant="h6">
