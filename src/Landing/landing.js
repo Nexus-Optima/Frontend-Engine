@@ -18,13 +18,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         {/* <Header /> */}
-        <Box className="scroll-container" sx={{ m: 2 }}>
-          <HomeSection />
+        <Box className="scroll-container" >
           <Box id="modules" className="section">
-          <ServicesList />
+            <HomeSection />
+            </Box>
+          <Box id="modules" className="section">
+            <ServicesList />
           </Box>
-          <ContactUs />
-      
+          <Box id="contact_us" className="section">
+            <ContactUs />
+          </Box>
         </Box>
       </div>
     </ThemeProvider>
