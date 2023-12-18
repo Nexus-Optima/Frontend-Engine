@@ -21,7 +21,7 @@ function App() {
         <Box className="scroll-container" >
           <Box id="modules" className="section">
             <HomeSection />
-            </Box>
+          </Box>
           <Box id="modules" className="section">
             <ServicesList />
           </Box>
