@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, ThemeProvider, Typography, Button, Grid, TextField, createTheme } from '@mui/material';
-import 'typeface-raleway';
+import { Box, ThemeProvider, Typography, Button, Grid, TextField } from '@mui/material';
+import theme from '../../Utils/themes'
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -32,18 +32,6 @@ const ContactUs = () => {
       console.error('Error:', error);
     });
 };
-
-  const theme = createTheme({
-    typography: {
-      fontFamily: 'Raleway, sans-serif',
-    },
-  });
-
-  const buttonStyle = {
-    textTransform: 'none',
-    backgroundColor: '#32047F',
-    padding: '12px 40px',
-  };
 
   return (
     <ThemeProvider theme={theme}>      
@@ -94,7 +82,7 @@ const ContactUs = () => {
               />
             </Box>
             <br/>
-            <Button type="submit" variant="contained" sx={buttonStyle}>
+            <Button type="submit" variant="contained">
               Send a Message
             </Button>
           </Box>

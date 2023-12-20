@@ -1,19 +1,14 @@
 import React from 'react';
-import { Box, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { Box, ThemeProvider, } from '@mui/material';
 import 'typeface-raleway';
 import './landing.css';
 import HomeSection from './Home/home';
 import Header from './Header/header.js';
 import ServicesList from './services/services';
-import ContactUs from './Contact_Us/contact_us.js'
+import ContactUs from './ContactUs/contact_us.js'
+import theme from '../Utils/themes'
 
 function App() {
-  const theme = createTheme({
-    typography: {
-      fontFamily: 'Raleway, sans-serif',
-    },
-  });
-
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
