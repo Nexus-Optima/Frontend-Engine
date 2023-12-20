@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid, Box, createTheme, ThemeProvider } from '@mui/material';
-import 'typeface-raleway';
+import { Card, CardContent, Typography, Grid, Box, ThemeProvider } from '@mui/material';
 import { QueryStats, DesignServices, Receipt, Insights, Dataset, Storage } from '@mui/icons-material';
+import theme from '../../Utils/themes'
 
 const services = [
   { icon: DesignServices, title: 'OUR SERVICES', description: '' },
@@ -11,12 +11,6 @@ const services = [
   { icon: Insights, title: 'Sales Analysis', description: 'Sales analysis involves examining sales reports to see what goods and services have and have not sold well.' },
   { icon: Dataset, title: 'Data Insights', description: 'Data insights refer to the understanding and interpretation of data to improve business decisions.' },
 ];
-
-const theme = createTheme({
-    typography: {
-      fontFamily: 'Raleway, sans-serif',
-    },
-  });
 
 const ServiceCard = ({ service }) => (
   <Card

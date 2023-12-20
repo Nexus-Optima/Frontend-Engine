@@ -1,27 +1,23 @@
 import React from 'react';
-import { Box, ThemeProvider, Typography, Button, Grid, createTheme } from '@mui/material';
-import 'typeface-raleway';
-import pic from "./../../Images/Data_Analysis.gif"; // Replace with the actual path to your image
+import { useNavigate } from 'react-router-dom';
+import { Box, ThemeProvider, Typography, Button, Grid } from '@mui/material';
+import theme from '../../Utils/themes'
+import pic from "./../../Images/Data_Analysis.gif";
 
-
-  const buttonStyle = {
-    textTransform: 'none',
-    backgroundColor: '#32047F',
-    padding: '12px 40px',
-  };
-
-  const theme = createTheme({
-    typography: {
-      fontFamily: 'Raleway, sans-serif',
-    },
-  });
+const HomeSection = () => {
 
   const imageStyle = {
-    width: '500px', // Set to the original width of the image
-    height: 'auto', // Maintain aspect ratio
-    minWidth: '200px' // Minimum width for smaller screens
+    width: '500px',
+    height: 'auto',
+    minWidth: '200px'
   };
-const HomeSection = () => {
+
+  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate('/register'); 
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Box id="home" className="section" sx={{mx:10}}>
@@ -38,7 +34,7 @@ const HomeSection = () => {
                 <br />Empower your workforce with relevant insights and actions to help improve quality, productivity and culture of the organisation. Convert raw data into action plans to achieve your current objectives and preserve knowledge for the workforce of the future.
               </Typography>
               <br />
-              <Button variant="contained" sx={buttonStyle}>
+              <Button variant="contained" onClick={handleRegisterClick}>
                 Register Now
               </Button>
             </Box>
