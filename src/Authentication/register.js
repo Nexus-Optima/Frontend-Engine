@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { signUp } from 'aws-amplify/auth'
 import {
   TextField,
   Button,
@@ -16,6 +17,25 @@ import GoogleLogo from '../Images/logo512.png';
 import theme from '../Utils/themes'
 
 function Register() {
+
+    const handleRegistration = async () => {
+        try {
+          const { user } = await signUp({
+            username: formData.wemail,
+            password: formData.password,
+            attributes: {
+              email: formData.wemail, 
+              phone_number: `+91${formData.mobile}`,
+              'custom:name': formData.name,
+              'custom:surname': formData.surname,
+            },
+          });
+          console.log(user);
+          navigate('/someRoute');
+        } catch (error) {
+          console.error('Error during registration:', error);
+        }
+    };
 
   const handleMobileChange = (event) => {
     const value = event.target.value.replace(/[^0-9]/g, "");
@@ -35,7 +55,7 @@ function Register() {
     company: '',
     industry: '',
     jfunction: '',
-    jlevel: '',
+    password: ''
   });
 
 
@@ -109,6 +129,20 @@ function Register() {
               </Grid>
               <Grid item xs={12} md={6}>
                     <TextField
+                    name="password"
+                    type="password"
+                    variant="outlined"
+                    color="secondary"
+                    label="Password"
+                    fullWidth
+                    required
+                    sx={{ mb: 2 }}
+                    value={formData.password}
+                    onChange={handleChange}
+                    />
+                </Grid>
+              <Grid item xs={12} md={6}>
+                    <TextField
                     name="mobile"
                     type="tel" 
                     variant='outlined'
@@ -124,7 +158,7 @@ function Register() {
                 </Grid>
               <Grid item xs={12} md={6}>
                     <TextField
-                    name="Company"
+                    name="company"
                     type="text"
                     variant='outlined'
                     color='secondary'
@@ -154,20 +188,6 @@ function Register() {
               </Grid>
               <Grid item xs={12} md={6}>
                     <TextField
-                    name="jfunction"
-                    type="text"
-                    variant='outlined'
-                    color='secondary'
-                    label="Job Function"
-                    fullWidth
-                    required
-                    sx={{ mb: 2 }}
-                    value={formData.jfunction}
-                    onChange={handleChange}
-                    />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                    <TextField
                     name="jlevel"
                     type="text"
                     variant='outlined'
@@ -181,7 +201,7 @@ function Register() {
                     />
               </Grid>
               <Grid item xs={12}>
-                <Button variant="contained">Register</Button>
+                <Button variant="contained" onClick={handleRegistration}>Register</Button>
               </Grid>
             </Grid>
           </Grid>

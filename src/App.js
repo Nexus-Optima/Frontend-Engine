@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './Landing/landing';
 import Register from './Authentication/register'
 import './App.css';
+import { Amplify }  from 'aws-amplify';
+import config from './aws-exports'
+
+Amplify.configure(config)
 
 function App() {
   return (
