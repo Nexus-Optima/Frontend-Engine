@@ -1,0 +1,26 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-appliedbellcurvedash-staging-71923-authRole",
+      "UnauthRoleArn": "arn:aws:iam::697609828266:role/amplify-appliedbellcurvedash-staging-71923-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::697609828266:role/amplify-appliedbellcurvedash-staging-71923-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-appliedbellcurvedash-staging-71923-deployment",
+      "UnauthRoleName": "amplify-appliedbellcurvedash-staging-71923-unauthRole",
+      "StackName": "amplify-appliedbellcurvedash-staging-71923",
+      "StackId": "arn:aws:cloudformation:ap-south-1:697609828266:stack/amplify-appliedbellcurvedash-staging-71923/19c2dde0-9f08-11ee-9be7-069ce21d675c",
+      "AmplifyAppId": "dp8wsoj5bcbnm"
+    },
+    "categories": {
+      "auth": {
+        "AppliedBellCurveDashboard": {}
+      },
+      "storage": {
+        "abcusers7": {}
+      },
+      "api": {
+        "appliedbellcurvedash": {}
+      }
+    }
+  }
+}
