@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ThemeProvider } from '@mui/material/styles';
 import { signUp } from 'aws-amplify/auth'
 import {
@@ -18,20 +18,22 @@ import theme from '../Utils/themes'
 
 function Register() {
 
+    const navigate = useNavigate();
+    
     const handleRegistration = async () => {
         try {
-          const { user } = await signUp({
-            username: formData.wemail,
+          await signUp({
+            username: formData.email,
             password: formData.password,
             attributes: {
-              email: formData.wemail, 
+              email: formData.email, 
               phone_number: `+91${formData.mobile}`,
               'custom:name': formData.name,
               'custom:surname': formData.surname,
             },
           });
-          console.log(user);
-          navigate('/someRoute');
+          
+          navigate('/validate');
         } catch (error) {
           console.error('Error during registration:', error);
         }
@@ -45,12 +47,11 @@ function Register() {
     });
   };
 
-  const navigate = useNavigate();
-
+  
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
-    wemail: '',
+    email: '',
     mobile: '',
     company: '',
     industry: '',
@@ -65,6 +66,10 @@ function Register() {
       [event.target.name]: event.target.value
     });
   };
+
+  const handleLogin=()=>{
+    navigate('/login')
+  }
 
   const industries = ["Technology", "Finance", "Healthcare", "Education", "Other"];
 
@@ -115,7 +120,7 @@ function Register() {
               </Grid>
               <Grid item xs={12} md={6}>
                     <TextField
-                    name="wemail"
+                    name="email"
                     type="text"
                     variant='outlined'
                     color='secondary'
@@ -123,7 +128,7 @@ function Register() {
                     fullWidth
                     required
                     sx={{ mb: 2 }}
-                    value={formData.wemail}
+                    value={formData.email}
                     onChange={handleChange}
                     />
               </Grid>
@@ -199,6 +204,11 @@ function Register() {
                     value={formData.jlevel}
                     onChange={handleChange}
                     />
+              </Grid>
+              <Grid item xs={12} md={7}>
+              </Grid>
+              <Grid item xs={12} md={5}>
+                <NavLink to='/login' style={{paddingLeft: 13, textDecoration: 'none'}}>Already have an Account ? Login Here!</NavLink>
               </Grid>
               <Grid item xs={12}>
                 <Button variant="contained" onClick={handleRegistration}>Register</Button>

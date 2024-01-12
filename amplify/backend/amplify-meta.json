@@ -1,0 +1,105 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-appliedbellcurvedash-dev-141306-authRole",
+      "UnauthRoleArn": "arn:aws:iam::697609828266:role/amplify-appliedbellcurvedash-dev-141306-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::697609828266:role/amplify-appliedbellcurvedash-dev-141306-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-appliedbellcurvedash-dev-141306-deployment",
+      "UnauthRoleName": "amplify-appliedbellcurvedash-dev-141306-unauthRole",
+      "StackName": "amplify-appliedbellcurvedash-dev-141306",
+      "StackId": "arn:aws:cloudformation:ap-south-1:697609828266:stack/amplify-appliedbellcurvedash-dev-141306/1b8acf20-aecb-11ee-a02b-060d5ecc6f06",
+      "AmplifyAppId": "dp8wsoj5bcbnm"
+    }
+  },
+  "api": {
+    "appliedbellcurvedash": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
+          }
+        },
+        "GraphQLAPIIdOutput": "6mjfov5uq5bmblki6nxyjuwxfq",
+        "GraphQLAPIEndpointOutput": "https://mn6bdlblqzek7c6u2oommebbjq.appsync-api.ap-south-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-oa4fsst3vrdpphm5pz3vu6yukq"
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-appliedbellcurvedash-dev-141306-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiappliedbellcurvedash"
+      },
+      "lastPushTimeStamp": "2024-01-09T08:49:34.447Z",
+      "lastPushDirHash": "hyrmF2BPkyD/wAaV6MZEnmf3mGQ="
+    }
+  },
+  "auth": {
+    "AppliedBellCurveDashboard": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
+            "REQUIRES_UPPERCASE"
+          ]
+        },
+        "signupAttributes": [],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-appliedbellcurvedash-dev-141306-deployment/amplify-cfn-templates/auth/AppliedBellCurveDashboard-cloudformation-template.json",
+        "logicalId": "authAppliedBellCurveDashboard"
+      },
+      "lastPushTimeStamp": "2024-01-09T08:49:34.447Z",
+      "output": {
+        "UserPoolId": "ap-south-1_so1O1ELzh",
+        "AppClientIDWeb": "20h85mtv4n9s9353el48aeflcu",
+        "AppClientID": "630rq5502q6c2p8gnl62tnvr6f",
+        "IdentityPoolId": "ap-south-1:8e5baa7d-78e5-4540-83d8-105a457a4e0e",
+        "UserPoolArn": "arn:aws:cognito-idp:ap-south-1:697609828266:userpool/ap-south-1_so1O1ELzh",
+        "IdentityPoolName": "testAuthIdentityPool__dev",
+        "UserPoolName": "AppliedBellCurveDashboard"
+      },
+      "lastPushDirHash": "k7J0GMBtojn6i53T4BMbS4UNzec="
+    }
+  },
+  "storage": {
+    "abcusers7": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "lastPushTimeStamp": "2024-01-09T08:49:34.447Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-appliedbellcurvedash-dev-141306-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storageabcusers7"
+      },
+      "output": {
+        "BucketName": "appliedbellcurve141306-dev",
+        "Region": "ap-south-1"
+      },
+      "lastPushDirHash": "edE95gZreA5Q9Ft6trkAXwZ/E+Q="
+    }
+  }
+}
