@@ -12,6 +12,7 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  setRef,
 } from "@mui/material";
 import GoogleLogo from "../Images/logo512.png";
 import theme from "../Utils/themes";
@@ -21,6 +22,30 @@ function Register() {
 
   const handleRegistration = async () => {
     try {
+      if (formData.name.length === 0) {
+        setError(true);
+      }
+
+      if (formData.surname.length === 0) {
+        setError(true);
+      }
+      if (formData.email.length === 0) {
+        setError(true);
+      }
+
+      if (formData.company.length === 0) {
+        setError(true);
+      }
+      if (formData.industry.length === 0) {
+        setError(true);
+      }
+      if (formData.jfunction.length === 0) {
+        setError(true);
+      }
+      if (formData.password.length === 0) {
+        setError(true);
+      }
+
       await signUp({
         username: formData.email,
         password: formData.password,
@@ -31,8 +56,9 @@ function Register() {
           "custom:surname": formData.surname,
         },
       });
+      console.log(formData.name.length);
 
-      navigate("/validate");
+      navigate("/login");
     } catch (error) {
       console.error("Error during registration:", error);
     }
@@ -57,11 +83,14 @@ function Register() {
     password: "",
   });
 
+  const [error, setError] = useState(false);
+
   const handleChange = (event) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
+    console.log(formData);
   };
 
   const handleLogin = () => {
@@ -141,6 +170,8 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.name}
+                  error={error}
+                  helperText={error ? "This field is required" : ""}
                   onChange={handleChange}
                 />
               </Grid>
@@ -155,6 +186,8 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.surname}
+                  error={error}
+                  helperText={error ? "This field is required" : ""}
                   onChange={handleChange}
                 />
               </Grid>
@@ -169,6 +202,8 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.email}
+                  error={error}
+                  helperText={error ? "This field is required" : ""}
                   onChange={handleChange}
                 />
               </Grid>
@@ -183,6 +218,8 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.password}
+                  error={error}
+                  helperText={error ? "This field is required" : ""}
                   onChange={handleChange}
                 />
               </Grid>
@@ -212,6 +249,8 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.company}
+                  error={error}
+                  helperText={error ? "This field is required" : ""}
                   onChange={handleChange}
                 />
               </Grid>
@@ -245,6 +284,8 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.jlevel}
+                  error={error}
+                  helperText={error ? "This field is required" : ""}
                   onChange={handleChange}
                 />
               </Grid>
