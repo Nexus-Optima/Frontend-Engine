@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { signUp } from "aws-amplify/auth";
@@ -12,7 +12,6 @@ import {
   Select,
   MenuItem,
   InputLabel,
-  setRef,
 } from "@mui/material";
 import GoogleLogo from "../Images/logo512.png";
 import theme from "../Utils/themes";
@@ -23,27 +22,35 @@ function Register() {
   const handleRegistration = async () => {
     try {
       if (formData.name.length === 0) {
-        setError(true);
+        setErrName(true);
       }
 
       if (formData.surname.length === 0) {
-        setError(true);
+        setErrSurname(true);
       }
       if (formData.email.length === 0) {
-        setError(true);
+        setErrEmail(true);
       }
 
       if (formData.company.length === 0) {
-        setError(true);
+        setErrCompany(true);
       }
       if (formData.industry.length === 0) {
-        setError(true);
+        setErrIndustry(true);
       }
       if (formData.jfunction.length === 0) {
-        setError(true);
+        setErrJfunction(true);
       }
       if (formData.password.length === 0) {
-        setError(true);
+        setErrPassword(true);
+      }
+
+      if (formData.industry.length === 0) {
+        setErrIndustry(true);
+      }
+
+      if (formData.mobile.length === 0) {
+        setErrMobile(true);
       }
 
       await signUp({
@@ -83,7 +90,14 @@ function Register() {
     password: "",
   });
 
-  const [error, setError] = useState(false);
+  const [errName, setErrName] = useState(false);
+  const [errSurname, setErrSurname] = useState(false);
+  const [errEmail, setErrEmail] = useState(false);
+  const [errMobile, setErrMobile] = useState(false);
+  const [errCompany, setErrCompany] = useState(false);
+  const [errIndustry, setErrIndustry] = useState(false);
+  const [errJfunction, setErrJfunction] = useState(false);
+  const [errPassword, setErrPassword] = useState(false);
 
   const handleChange = (event) => {
     setFormData({
@@ -96,6 +110,21 @@ function Register() {
   const handleLogin = () => {
     navigate("/login");
   };
+
+  const handleFocus=()=>{
+    setErrName(false);
+    setErrSurname(false);
+    setErrEmail(false);
+    setErrMobile(false);
+    setErrCompany(false);
+    setErrIndustry(false);
+    setErrIndustry(false);
+    setErrJfunction(false);
+    setErrPassword(false);
+  }
+
+
+
 
   const industries = [
     "Technology",
@@ -170,9 +199,10 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.name}
-                  error={error}
-                  helperText={error ? "This field is required" : ""}
+                  error={errName}
+                  helperText={errName ? "This field is required" : ""}
                   onChange={handleChange}
+                  onFocus={handleFocus}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -186,9 +216,10 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.surname}
-                  error={error}
-                  helperText={error ? "This field is required" : ""}
+                  error={errSurname}
+                  helperText={errSurname ? "This field is required" : ""}
                   onChange={handleChange}
+                  onFocus={handleFocus}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -202,9 +233,10 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.email}
-                  error={error}
-                  helperText={error ? "This field is required" : ""}
+                  error={errEmail}
+                  helperText={errEmail ? "This field is required" : ""}
                   onChange={handleChange}
+                  onFocus={handleFocus}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -218,9 +250,10 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.password}
-                  error={error}
-                  helperText={error ? "This field is required" : ""}
+                  error={errPassword}
+                  helperText={errPassword ? "This field is required" : ""}
                   onChange={handleChange}
+                  onFocus={handleFocus}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -232,10 +265,13 @@ function Register() {
                   label="Mobile"
                   fullWidth
                   required
+                  error={errMobile}
                   sx={{ mb: 2 }}
                   value={formData.mobile}
                   onChange={handleMobileChange}
+                  helperText={errMobile ? "This field is required" : ""}
                   inputProps={{ maxLength: 10 }}
+                  onFocus={handleFocus}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -249,9 +285,10 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.company}
-                  error={error}
-                  helperText={error ? "This field is required" : ""}
+                  error={errCompany}
+                  helperText={errCompany ? "This field is required" : ""}
                   onChange={handleChange}
+                  onFocus={handleFocus}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -264,6 +301,9 @@ function Register() {
                     value={formData.industry}
                     label="Select Industry"
                     onChange={handleChange}
+                    error={errIndustry}
+                    onFocus={handleFocus}
+                    helperText={setErrIndustry ? "This field is required" : ""}
                   >
                     {industries.map((industry, index) => (
                       <MenuItem key={index} value={industry}>
@@ -284,9 +324,10 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.jlevel}
-                  error={error}
-                  helperText={error ? "This field is required" : ""}
+                  error={errJfunction}
+                  helperText={errJfunction ? "This field is required" : ""}
                   onChange={handleChange}
+                  onFocus={handleFocus}
                 />
               </Grid>
               <Grid item xs={12} md={7}></Grid>
