@@ -25,9 +25,9 @@ function Register() {
         setErrName(true);
       }
 
-      if (formData.surname.length === 0) {
-        setErrSurname(true);
-      }
+      // if (formData.surname.length === 0) {
+      //   setErrSurname(true);
+      // }
       if (formData.email.length === 0) {
         setErrEmail(true);
       }
@@ -43,6 +43,9 @@ function Register() {
       }
       if (formData.password.length === 0) {
         setErrPassword(true);
+      }
+      if (formData.confirmpassword.length === 0) {
+        setErrConfirmPassword(true);
       }
 
       if (formData.industry.length === 0) {
@@ -88,16 +91,18 @@ function Register() {
     industry: "",
     jfunction: "",
     password: "",
+    confirmpassword:"",
   });
 
   const [errName, setErrName] = useState(false);
-  const [errSurname, setErrSurname] = useState(false);
+  // const [errSurname, setErrSurname] = useState(false);
   const [errEmail, setErrEmail] = useState(false);
   const [errMobile, setErrMobile] = useState(false);
   const [errCompany, setErrCompany] = useState(false);
   const [errIndustry, setErrIndustry] = useState(false);
   const [errJfunction, setErrJfunction] = useState(false);
   const [errPassword, setErrPassword] = useState(false);
+  const [errConfirmPassword, setErrConfirmPassword] = useState(false);
 
   const handleChange = (event) => {
     setFormData({
@@ -113,7 +118,7 @@ function Register() {
 
   const handleFocus=()=>{
     setErrName(false);
-    setErrSurname(false);
+    // setErrSurname(false);
     setErrEmail(false);
     setErrMobile(false);
     setErrCompany(false);
@@ -121,6 +126,7 @@ function Register() {
     setErrIndustry(false);
     setErrJfunction(false);
     setErrPassword(false);
+    setErrConfirmPassword(false);
   }
 
 
@@ -205,7 +211,7 @@ function Register() {
                   onFocus={handleFocus}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              {/* <Grid item xs={12} md={6}>
                 <TextField
                   name="surname"
                   type="text"
@@ -221,7 +227,7 @@ function Register() {
                   onChange={handleChange}
                   onFocus={handleFocus}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} md={6}>
                 <TextField
                   name="email"
@@ -252,6 +258,23 @@ function Register() {
                   value={formData.password}
                   error={errPassword}
                   helperText={errPassword ? "This field is required" : ""}
+                  onChange={handleChange}
+                  onFocus={handleFocus}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  name="confirm password"
+                  type="confirm password"
+                  variant="outlined"
+                  color="secondary"
+                  label="Confirm Password"
+                  fullWidth
+                  required
+                  sx={{ mb: 2 }}
+                  value={formData.confirmpassword}
+                  error={errConfirmPassword}
+                  helperText={errConfirmPassword ? "This field is required" : ""}
                   onChange={handleChange}
                   onFocus={handleFocus}
                 />
