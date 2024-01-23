@@ -7,7 +7,8 @@ import { Amplify } from "aws-amplify";
 import config from "./aws-exports";
 import LoginPage from "./Authentication/login";
 import ValidatePage from "./Authentication/validatepage";
-import DashboardPage from "./Dashboard/DashboardPage";
+import Dashboard from "./Dashboard/Dashboard";
+
 
 Amplify.configure(config);
 
@@ -31,7 +32,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route
             path="/dashboard"
-            element={<DashboardPage updateAuthStatus={updateAuthStatus} />}
+            element={<Dashboard updateAuthStatus={updateAuthStatus} /> }
           />
         </Routes>
       </div>
