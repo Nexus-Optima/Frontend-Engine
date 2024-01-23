@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { signUp } from "aws-amplify/auth";
@@ -20,42 +20,14 @@ function Register() {
   const navigate = useNavigate();
 
   const handleRegistration = async () => {
+    Object.entries(formData).forEach(([key, value]) => {
+      validateField(key, value);
+    });
+
+    const hasErrors = Object.values(errors).some((error) => error);
+    if (hasErrors) return;
+
     try {
-      if (formData.name.length === 0) {
-        setErrName(true);
-      }
-
-      // if (formData.surname.length === 0) {
-      //   setErrSurname(true);
-      // }
-      if (formData.email.length === 0) {
-        setErrEmail(true);
-      }
-
-      if (formData.company.length === 0) {
-        setErrCompany(true);
-      }
-      if (formData.industry.length === 0) {
-        setErrIndustry(true);
-      }
-      if (formData.jfunction.length === 0) {
-        setErrJfunction(true);
-      }
-      if (formData.password.length === 0) {
-        setErrPassword(true);
-      }
-      if (formData.confirmpassword.length === 0) {
-        setErrConfirmPassword(true);
-      }
-
-      if (formData.industry.length === 0) {
-        setErrIndustry(true);
-      }
-
-      if (formData.mobile.length === 0) {
-        setErrMobile(true);
-      }
-
       await signUp({
         username: formData.email,
         password: formData.password,
@@ -67,7 +39,6 @@ function Register() {
         },
       });
       console.log(formData.name.length);
-
       navigate("/login");
     } catch (error) {
       console.error("Error during registration:", error);
@@ -91,46 +62,49 @@ function Register() {
     industry: "",
     jfunction: "",
     password: "",
-    confirmpassword:"",
+    confirmpassword: "",
   });
 
-  const [errName, setErrName] = useState(false);
-  // const [errSurname, setErrSurname] = useState(false);
-  const [errEmail, setErrEmail] = useState(false);
-  const [errMobile, setErrMobile] = useState(false);
-  const [errCompany, setErrCompany] = useState(false);
-  const [errIndustry, setErrIndustry] = useState(false);
-  const [errJfunction, setErrJfunction] = useState(false);
-  const [errPassword, setErrPassword] = useState(false);
-  const [errConfirmPassword, setErrConfirmPassword] = useState(false);
+  const [errors, setErrors] = useState({
+    name: false,
+    email: false,
+    mobile: false,
+    company: false,
+    industry: false,
+    jfunction: false,
+    password: false,
+    confirmpassword: false,
+  });
+
+  const validateField = (fieldName, value) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: value.length === 0,
+    }));
+    if (fieldName === "confirmpassword" && value !== formData.password) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmpassword: true,
+      }));
+      return false;
+    }
+  };
 
   const handleChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-    console.log(formData);
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+    validateField(name, value);
   };
 
-  const handleLogin = () => {
-    navigate("/login");
+  const handleFocus = (fieldName) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: false,
+    }));
   };
-
-  const handleFocus=()=>{
-    setErrName(false);
-    // setErrSurname(false);
-    setErrEmail(false);
-    setErrMobile(false);
-    setErrCompany(false);
-    setErrIndustry(false);
-    setErrIndustry(false);
-    setErrJfunction(false);
-    setErrPassword(false);
-    setErrConfirmPassword(false);
-  }
-
-
-
 
   const industries = [
     "Technology",
@@ -205,29 +179,13 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.name}
-                  error={errName}
-                  helperText={errName ? "This field is required" : ""}
+                  error={errors.name}
+                  helperText={errors.name ? "This field is required" : ""}
                   onChange={handleChange}
-                  onFocus={handleFocus}
+                  onFocus={() => handleFocus("name")}
                 />
               </Grid>
-              {/* <Grid item xs={12} md={6}>
-                <TextField
-                  name="surname"
-                  type="text"
-                  variant="outlined"
-                  color="secondary"
-                  label="Surname"
-                  fullWidth
-                  required
-                  sx={{ mb: 2 }}
-                  value={formData.surname}
-                  error={errSurname}
-                  helperText={errSurname ? "This field is required" : ""}
-                  onChange={handleChange}
-                  onFocus={handleFocus}
-                />
-              </Grid> */}
+
               <Grid item xs={12} md={6}>
                 <TextField
                   name="email"
@@ -239,10 +197,10 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.email}
-                  error={errEmail}
-                  helperText={errEmail ? "This field is required" : ""}
+                  error={errors.email}
+                  helperText={errors.email ? "This field is required" : ""}
                   onChange={handleChange}
-                  onFocus={handleFocus}
+                  onFocus={() => handleFocus("email")}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -256,16 +214,16 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.password}
-                  error={errPassword}
-                  helperText={errPassword ? "This field is required" : ""}
+                  error={errors.password}
+                  helperText={errors.password ? "This field is required" : ""}
                   onChange={handleChange}
-                  onFocus={handleFocus}
+                  onFocus={() => handleFocus("password")}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
-                  name="confirm password"
-                  type="confirm password"
+                  name="confirmpassword"
+                  type="password"
                   variant="outlined"
                   color="secondary"
                   label="Confirm Password"
@@ -273,10 +231,12 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.confirmpassword}
-                  error={errConfirmPassword}
-                  helperText={errConfirmPassword ? "This field is required" : ""}
+                  error={errors.confirmpassword}
+                  helperText={
+                    errors.confirmpassword ? "Password does not match" : ""
+                  }
                   onChange={handleChange}
-                  onFocus={handleFocus}
+                  onFocus={() => handleFocus("confirmpassword")}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -288,13 +248,13 @@ function Register() {
                   label="Mobile"
                   fullWidth
                   required
-                  error={errMobile}
+                  error={errors.mobile}
                   sx={{ mb: 2 }}
                   value={formData.mobile}
                   onChange={handleMobileChange}
-                  helperText={errMobile ? "This field is required" : ""}
+                  helperText={errors.mobile ? "This field is required" : ""}
                   inputProps={{ maxLength: 10 }}
-                  onFocus={handleFocus}
+                  onFocus={() => handleFocus("mobile")}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -308,10 +268,10 @@ function Register() {
                   required
                   sx={{ mb: 2 }}
                   value={formData.company}
-                  error={errCompany}
-                  helperText={errCompany ? "This field is required" : ""}
+                  error={errors.company}
+                  helperText={errors.company ? "This field is required" : ""}
                   onChange={handleChange}
-                  onFocus={handleFocus}
+                  onFocus={() => handleFocus("company")}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -324,9 +284,9 @@ function Register() {
                     value={formData.industry}
                     label="Select Industry"
                     onChange={handleChange}
-                    error={errIndustry}
-                    onFocus={handleFocus}
-                    helperText={setErrIndustry ? "This field is required" : ""}
+                    error={errors.industry}
+                    onFocus={() => handleFocus("industry")}
+                    helperText={errors.industry ? "This field is required" : ""}
                   >
                     {industries.map((industry, index) => (
                       <MenuItem key={index} value={industry}>
@@ -338,7 +298,7 @@ function Register() {
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
-                  name="jlevel"
+                  name="jfunction"
                   type="text"
                   variant="outlined"
                   color="secondary"
@@ -346,11 +306,11 @@ function Register() {
                   fullWidth
                   required
                   sx={{ mb: 2 }}
-                  value={formData.jlevel}
-                  error={errJfunction}
-                  helperText={errJfunction ? "This field is required" : ""}
+                  value={formData.jfunction}
+                  error={errors.jfunction}
+                  helperText={errors.jfunction ? "This field is required" : ""}
                   onChange={handleChange}
-                  onFocus={handleFocus}
+                  onFocus={() => handleFocus("jfunction")}
                 />
               </Grid>
               <Grid item xs={12} md={7}></Grid>

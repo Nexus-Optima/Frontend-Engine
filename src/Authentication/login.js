@@ -1,63 +1,46 @@
 import React, { useState } from "react";
-import {
-  TextField,
-  Button,
-  Container,
-  Paper,
-  Typography,
-  Grid,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { AuthError, signIn } from "aws-amplify/auth";
+import { TextField, Button, Container, Typography, Grid } from "@mui/material";
+
+import { signIn } from "aws-amplify/auth";
 import GoogleLogo from "../Images/logo512.png";
 import { ThemeProvider } from "@mui/material/styles";
-import { Form, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import theme from "../Utils/themes";
 
-const LoginPage = (props) => {
+const LoginPage = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errUser, setErrUser] = useState(false);
-  const [errPass, setErrPass] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [loginError, setLoginError] = useState(null);
 
   // Login function
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const { username, password } = formData;
     try {
-      if (username.length === 0) {
-        setErrUser(true);
-      }
-      if (password.length === 0) {
-        setErrPass(true);
-      }
-      
-      // console.log(username.length,error,password.length);
       await signIn({ username, password });
-      console.log("sucess");
-      props.updateAuthStatus(true);
+      setLoginError(null);
       navigate("/dashboard");
     } catch (error) {
-      error instanceof AuthError &&
-        console.log(error.name, error.message, error.recoverySuggestion);
+      setLoginError("Invalid Username or Password");
+      console.log(error);
     }
   };
 
-  const handleUsernameChange = (e) => {
-    e.preventDefault();
-    const value = e.target.value;
-    setUsername(value);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
+  const handleFocus = (fieldName) => {
+    setLoginError(null);
   };
-
-
-  const handleFocus=()=>{
-    setErrPass(false)
-    setErrUser(false)
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -81,10 +64,7 @@ const LoginPage = (props) => {
               alt="Logo"
               style={{ width: "100px", height: "100px" }}
             />
-            <Typography
-              variant="h5"
-              style={{ color: "white", marginTop: "20px" }}
-            >
+            <Typography variant="h5" style={{ color: "white" }}>
               APPLIED BELL CURVE
             </Typography>
           </Grid>
@@ -112,7 +92,6 @@ const LoginPage = (props) => {
               spacing={2}
               style={{ maxWidth: "80%", marginTop: "20px" }}
             >
-            {/* <form onSubmit={handleLogin}> */}
               <Grid item xs={12} md={6}>
                 <TextField
                   name="username"
@@ -123,11 +102,11 @@ const LoginPage = (props) => {
                   fullWidth
                   required
                   sx={{ mb: 2 }}
-                  // onChange={e=>setUsername(e.target.value)}
-                  onChange={handleUsernameChange}
-                  onFocus={handleFocus}
-                  error={errUser}
-                  helperText={errUser ? "This field is required" : ''}
+                  value={formData.username}
+                  onChange={handleChange}
+                  onFocus={() => handleFocus("username")}
+                  // error={errors.username}
+                  // helperText={errors.username ? "This field is required" : ""}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -140,13 +119,24 @@ const LoginPage = (props) => {
                   fullWidth
                   required
                   sx={{ mb: 2 }}
-                  // onChange={e=>setPassword(e.target.value)}
-                  onChange={handlePasswordChange}
-                  onFocus={handleFocus}
-                  error={errPass}
-                  helperText={errPass ? "This field is required" : ""}
+                  value={formData.password}
+                  onChange={handleChange}
+                  onFocus={() => handleFocus("password")}
+                  // error={errors.password}
+                  // helperText={errors.password ? "This field is required" : ""}
                 />
               </Grid>
+
+              {loginError && (
+                <p
+                  style={{
+                    color: "red",
+                    margin: "10px 0px 10px 350px",
+                  }}
+                >
+                  {loginError}
+                </p>
+              )}
 
               <Grid item xs={12} style={{ width: "500px" }}>
                 <Button variant="contained" onClick={handleLogin}>
