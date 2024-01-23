@@ -1,11 +1,13 @@
 import React from "react";
-import { Typography, Grid, Container, Box, Link } from "@mui/material";
+import { Typography, Grid, Container, Box, Link, Button } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Module from "./Module";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "aws-amplify/auth";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const modules = [
     {
       name: "Forecaster",
@@ -33,6 +35,15 @@ const Dashboard = () => {
       description: "Tool for Inventory Management.",
     },
   ];
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    console.log("hello");
+    await signOut();
+    props.updateAuthStatus(false);
+    navigate("/login");
+  };
+
   document.body.style.overflowY = "hidden";
   return (
     <>
@@ -62,6 +73,7 @@ const Dashboard = () => {
               top: 0,
               left: 0,
               height: "100vh",
+              zIndex:1,
             }}
           >
             <Typography
@@ -94,7 +106,7 @@ const Dashboard = () => {
                 Explore Modules
               </Typography>
             </Link>
-            <Link href="/register" color="inherit">
+            <Link href="#" color="inherit">
               <Typography
                 variant="body2"
                 style={{
@@ -114,7 +126,12 @@ const Dashboard = () => {
                 Contact Us
               </Typography>
             </Link>
-            <Link href="#" color="inherit">
+            <Link
+              onClick={() => {
+                handleLogout();
+              }}
+              color="inherit"
+            >
               <Typography
                 variant="body2"
                 style={{
