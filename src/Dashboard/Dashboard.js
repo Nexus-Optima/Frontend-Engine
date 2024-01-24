@@ -17,7 +17,6 @@ const Dashboard = (props) => {
       name: "Optimiser",
       description: "Tool for Optimising.",
     },
-
     {
       name: "Inventory Management",
       description: "Tool for Inventory Management.",
@@ -34,153 +33,91 @@ const Dashboard = (props) => {
       name: "Inventory Management",
       description: "Tool for Inventory Management.",
     },
+    {
+      name: "Inventory Management",
+      description: "Tool for Inventory Management.",
+    },
+    // ... other modules
   ];
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    console.log("hello");
     await signOut();
     props.updateAuthStatus(false);
     navigate("/login");
   };
 
-  document.body.style.overflowY = "hidden";
+  
+
   return (
     <>
       <Container maxWidth={false} style={{ padding: 0 }}>
-        <Typography
-          variant="h4"
-          component="h2"
-          style={{
-            color: "black",
-            alignItems: "center",
-            position: "relative",
-            padding: "2% 0% 5%",
-            fontWeight: "bold",
-          }}
-        >
-          Welcome Nandan Terry
-        </Typography>
-
-        <Grid container>
+        <Grid container style={{ height: "100vh" }}>
           <Grid
             item
-            xs={12}
-            md={2}
+            xs={2}
             style={{
               background: "#D3D3D3",
-              position: "absolute",
-              top: 0,
-              left: 0,
-              height: "100vh",
-              zIndex:1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "100%",
             }}
           >
             <Typography
               variant="body1"
-              style={{
-                color: "black",
-                padding: "10% 2% 245% 2%",
-                fontWeight: "bold",
-                fontSize: 20,
-              }}
+              style={{ color: "black", padding: "10% 2%", fontWeight: "bold", fontSize: '24px' }}
             >
               Applied Bell Curve
             </Typography>
-            <Link href="#" color="inherit">
-              <Typography
-                variant="body2"
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  padding: "0% 0% 9% 2%",
-                }}
-              >
-                <SearchIcon
-                  sx={{
-                    position: "absolute",
-                    left: "0",
-                    fontSize: 25,
-                  }}
-                ></SearchIcon>
+
+            <Box style={{ padding: "0 2%", marginBottom: "2%" }}>
+              <Button onClick={() => {/* handle navigation */}} style={{ color: "black", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "flex-start", padding: "12px 0", width: "100%", textTransform: "none", fontSize: '20px', backgroundColor:'transparent' }}>
+                <SearchIcon style={{ marginRight: "12px", fontSize: '28px' }} />
                 Explore Modules
-              </Typography>
-            </Link>
-            <Link href="#" color="inherit">
-              <Typography
-                variant="body2"
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  padding: "0% 0% 9% 2%",
-                }}
-              >
-                <CallIcon
-                  sx={{
-                    position: "absolute",
-                    left: "0",
-                    fontSize: 25,
-                    alignItems: "left",
-                  }}
-                ></CallIcon>
+              </Button>
+              <Button onClick={() => {/* handle navigation */}} style={{ color: "black", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "flex-start", padding: "12px 0", width: "100%", textTransform: "none", fontSize: '20px',backgroundColor:'transparent' }}>
+                <CallIcon style={{ marginRight: "12px", fontSize: '28px' }} />
                 Contact Us
-              </Typography>
-            </Link>
-            <Link
-              onClick={() => {
-                handleLogout();
-              }}
-              color="inherit"
-            >
-              <Typography
-                variant="body2"
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  padding: "0% 0% 9% 2%",
-                }}
-              >
-                <LogoutIcon
-                  sx={{
-                    position: "absolute",
-                    left: "0",
-                    fontSize: 25,
-                  }}
-                ></LogoutIcon>
+              </Button>
+              <Button onClick={handleLogout} style={{ color: "black", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "flex-start", padding: "12px 0", width: "100%", textTransform: "none", fontSize: '20px',backgroundColor:'transparent' }}>
+                <LogoutIcon style={{ marginRight: "12px", fontSize: '28px' }} />
                 Sign Out
-              </Typography>
-            </Link>
+              </Button>
+            </Box>
           </Grid>
 
           <Grid
-            xs={12}
-            md={12}
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              position: "relative",
-              paddingLeft: "20%",
+            item
+            xs={10}
+            style={{
+              paddingLeft: '5%', // Adjust the padding to align modules
+              paddingTop: "1%",
+              height: "100%",
+              display: 'flex', // Use flex for better control
+              flexDirection: 'column' // Stack items vertically
             }}
           >
-            <Box
-              sx={{
-                height: "70%",
-                width: "100%",
-                display: "flex",
-                flexWrap: "wrap",
-                overflowY: "scroll",
-                "&::-webkit-scrollbar": {
-                  display: "none",
-                  "-ms-overflow-style": "none",
-                },
+            <Typography
+              variant="h4"
+              component="h2"
+              style={{
+                color: "black",
+                fontWeight: "bold",
+                marginBottom: "20px",
               }}
             >
-              {modules.map(function (module) {
-                return (
-                  <Module name={module.name} description={module.description} />
-                );
-              })}
+              Welcome Nandan Terry
+            </Typography>
+
+            <Box style={{ height: 'calc(100% - 48px)', overflowY: "auto" }}>
+              <Grid container style={{ justifyContent: "center" }} spacing={2}>
+                {modules.map((module, index) => (
+                  <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
+                    <Module name={module.name} description={module.description} />
+                  </Grid>
+                ))}
+              </Grid>
             </Box>
           </Grid>
         </Grid>
