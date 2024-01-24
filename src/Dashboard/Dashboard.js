@@ -32,11 +32,7 @@ const Dashboard = (props) => {
     {
       name: "Inventory Management",
       description: "Tool for Inventory Management.",
-    },
-    {
-      name: "Inventory Management",
-      description: "Tool for Inventory Management.",
-    },
+    }
     // ... other modules
   ];
   const navigate = useNavigate();
