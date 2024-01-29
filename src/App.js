@@ -9,8 +9,6 @@ import LandingPage from "./Landing/landing";
 import Register from "./Authentication/register";
 import LoginPage from "./Authentication/login";
 import ValidatePage from "./Authentication/validatepage";
-
-
 import Dashboard from "./Dashboard/Dashboard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
