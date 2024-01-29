@@ -17,8 +17,6 @@ import config from "./aws-exports";
 import { getCurrentUser } from "aws-amplify/auth";
 import "./App.css";
 
-
-
 Amplify.configure(config);
 
 function App() {
@@ -47,7 +45,14 @@ function App() {
 
   if (loading) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
         <CircularProgress />
       </Box>
     );
@@ -57,27 +62,41 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-
-
           {!isAuthenticated ? (
             <>
               <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<LoginPage updateAuthStatus={updateAuthStatus}/>} />
+              <Route
+                path="/login"
+                element={<LoginPage updateAuthStatus={updateAuthStatus} />}
+              />
               <Route path="/validate" element={<ValidatePage />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/dashboard" element={<Navigate replace to="/login" />} />
+              <Route
+                path="/dashboard"
+                element={<Navigate replace to="/login" />}
+              />
             </>
           ) : (
             <>
-              <Route path="/dashboard" element={<Dashboard  updateAuthStatus={updateAuthStatus} />} />
+              <Route
+                path="/dashboard"
+                element={<Dashboard updateAuthStatus={updateAuthStatus} />}
+              />
               <Route path="/" element={<Navigate replace to="/dashboard" />} />
-              <Route path="/login" element={<Navigate replace to="/dashboard" />} />
-              <Route path="/register" element={<Navigate replace to="/dashboard" />} />
-              <Route path="/validate" element={<Navigate replace to="/dashboard" />} />
+              <Route
+                path="/login"
+                element={<Navigate replace to="/dashboard" />}
+              />
+              <Route
+                path="/register"
+                element={<Navigate replace to="/dashboard" />}
+              />
+              <Route
+                path="/validate"
+                element={<Navigate replace to="/dashboard" />}
+              />
             </>
           )}
-
-
         </Routes>
       </div>
     </Router>
