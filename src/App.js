@@ -20,6 +20,7 @@ import { getCurrentUser } from "aws-amplify/auth";
 import "./App.css";
 
 
+
 Amplify.configure(config);
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
       <div className="App">
         <Routes>
 
+
           {!isAuthenticated ? (
             <>
               <Route path="/" element={<LandingPage />} />
@@ -76,6 +78,7 @@ function App() {
               <Route path="/validate" element={<Navigate replace to="/dashboard" />} />
             </>
           )}
+
 
         </Routes>
       </div>
