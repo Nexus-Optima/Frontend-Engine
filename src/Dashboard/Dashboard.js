@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Grid, Container, Box, Link, Button } from "@mui/material";
+import { Typography, Grid, Container, Box, Button } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -43,8 +43,6 @@ const Dashboard = (props) => {
     navigate("/login");
   };
 
-  
-
   return (
     <>
       <Container maxWidth={false} style={{ padding: 0 }}>
@@ -62,22 +60,73 @@ const Dashboard = (props) => {
           >
             <Typography
               variant="body1"
-              style={{ color: "black", padding: "10% 2%", fontWeight: "bold", fontSize: '24px' }}
+              style={{
+                color: "black",
+                padding: "10% 2%",
+                fontWeight: "bold",
+                fontSize: "24px",
+              }}
             >
               Applied Bell Curve
             </Typography>
 
             <Box style={{ padding: "0 2%", marginBottom: "2%" }}>
-              <Button onClick={() => {/* handle navigation */}} style={{ color: "black", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "flex-start", padding: "12px 0", width: "100%", textTransform: "none", fontSize: '20px', backgroundColor:'transparent' }}>
-                <SearchIcon style={{ marginRight: "12px", fontSize: '28px' }} />
+              <Button
+                onClick={() => {
+                  /* handle navigation */
+                }}
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  padding: "12px 0",
+                  width: "100%",
+                  textTransform: "none",
+                  fontSize: "20px",
+                  backgroundColor: "transparent",
+                }}
+              >
+                <SearchIcon style={{ marginRight: "12px", fontSize: "28px" }} />
                 Explore Modules
               </Button>
-              <Button onClick={() => {/* handle navigation */}} style={{ color: "black", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "flex-start", padding: "12px 0", width: "100%", textTransform: "none", fontSize: '20px',backgroundColor:'transparent' }}>
-                <CallIcon style={{ marginRight: "12px", fontSize: '28px' }} />
+              <Button
+                onClick={() => {
+                  /* handle navigation */
+                }}
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  padding: "12px 0",
+                  width: "100%",
+                  textTransform: "none",
+                  fontSize: "20px",
+                  backgroundColor: "transparent",
+                }}
+              >
+                <CallIcon style={{ marginRight: "12px", fontSize: "28px" }} />
                 Contact Us
               </Button>
-              <Button onClick={handleLogout} style={{ color: "black", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "flex-start", padding: "12px 0", width: "100%", textTransform: "none", fontSize: '20px',backgroundColor:'transparent' }}>
-                <LogoutIcon style={{ marginRight: "12px", fontSize: '28px' }} />
+              <Button
+                onClick={handleLogout}
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  padding: "12px 0",
+                  width: "100%",
+                  textTransform: "none",
+                  fontSize: "20px",
+                  backgroundColor: "transparent",
+                }}
+              >
+                <LogoutIcon style={{ marginRight: "12px", fontSize: "28px" }} />
                 Sign Out
               </Button>
             </Box>
@@ -87,11 +136,11 @@ const Dashboard = (props) => {
             item
             xs={10}
             style={{
-              paddingLeft: '5%', // Adjust the padding to align modules
+              paddingLeft: "5%", // Adjust the padding to align modules
               paddingTop: "1%",
               height: "100%",
-              display: 'flex', // Use flex for better control
-              flexDirection: 'column' // Stack items vertically
+              display: "flex", // Use flex for better control
+              flexDirection: "column", // Stack items vertically
             }}
           >
             <Typography
@@ -106,11 +155,14 @@ const Dashboard = (props) => {
               Welcome Nandan Terry
             </Typography>
 
-            <Box style={{ height: 'calc(100% - 48px)', overflowY: "auto" }}>
+            <Box style={{ height: "calc(100% - 48px)", overflowY: "auto" }}>
               <Grid container style={{ justifyContent: "center" }} spacing={2}>
                 {modules.map((module, index) => (
                   <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
-                    <Module name={module.name} description={module.description} />
+                    <Module
+                      name={module.name}
+                      description={module.description}
+                    />
                   </Grid>
                 ))}
               </Grid>

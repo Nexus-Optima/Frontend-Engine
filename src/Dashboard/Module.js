@@ -1,16 +1,22 @@
 import React from "react";
-import { Typography, Card, CardContent, CardActions, Button } from "@mui/material";
-import { makeStyles } from '@mui/styles';
+import {
+  Typography,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   cardStyle: {
-    '&:hover': {
-      boxShadow: '0 8px 16px 0 rgba(0, 0, 0, 0.2)',
-      transform: 'translateY(-4px)'
-    }
+    "&:hover": {
+      boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.2)",
+      transform: "translateY(-4px)",
+    },
   },
   launchButton: {
-    '&:hover': {
+    "&:hover": {
       backgroundColor: "grey",
       color: "white",
     },
@@ -23,7 +29,7 @@ const Module = ({ name, description }) => {
   return (
     <Card
       style={{
-        width: '300px',
+        width: "300px",
         margin: "10px 30px",
         display: "flex",
         flexDirection: "column",
@@ -43,7 +49,7 @@ const Module = ({ name, description }) => {
           style={{
             fontWeight: "bold",
             textAlign: "center",
-            marginBottom: '10px'
+            marginBottom: "10px",
           }}
         >
           {name}
@@ -59,7 +65,7 @@ const Module = ({ name, description }) => {
           {description}
         </Typography>
       </CardContent>
-      <CardActions style={{ justifyContent: "center", paddingBottom: '10px' }}>
+      <CardActions style={{ justifyContent: "center", paddingBottom: "10px" }}>
         <Button
           size="small"
           style={{
@@ -67,7 +73,7 @@ const Module = ({ name, description }) => {
             color: "white",
             borderRadius: "0.5rem",
             cursor: "pointer",
-            padding: "0.5rem 2rem"
+            padding: "0.5rem 2rem",
           }}
           className={classes.launchButton}
         >
