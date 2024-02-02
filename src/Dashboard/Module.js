@@ -33,11 +33,11 @@ const Module = ({ name, description }) => {
         margin: "10px 30px",
         display: "flex",
         flexDirection: "column",
-        height: "320px",
-        borderRadius: "20px",
-        border: "3px solid black",
-        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
-        transition: "0.3s",
+        height: '320px',
+        borderRadius: '20px',
+        border: "1px solid black",
+        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
+        transition: '0.3s'
       }}
       className={classes.cardStyle}
     >
