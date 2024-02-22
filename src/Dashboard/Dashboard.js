@@ -1,49 +1,43 @@
-import React from "react";
-import { Typography, Grid, Container, Box, Link, Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Typography, Grid, Container, Box, Button } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Module from "./Module";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
+import { MODULE_DESCRIPTIONS } from "../Utils/constants";
 
 const Dashboard = (props) => {
-  const modules = [
-    {
-      name: "Forecaster",
-      description: "Tool for commodities forecasting.",
-    },
-    {
-      name: "Optimiser",
-      description: "Tool for Optimising.",
-    },
-    {
-      name: "Inventory Management",
-      description: "Tool for Inventory Management.",
-    },
-    {
-      name: "Inventory Management",
-      description: "Tool for Inventory Management.",
-    },
-    {
-      name: "Inventory Management",
-      description: "Tool for Inventory Management.",
-    },
-    {
-      name: "Inventory Management",
-      description: "Tool for Inventory Management.",
-    }
-    // ... other modules
-  ];
+  const [subscribedModuleIds, setSubscribedModuleIds] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchSubscribedModules = async () => {
+      try {
+        console.log(props.userEmail);
+        const response = await fetch(
+          `http://127.0.0.1:5000/get_user?userId=${props.userEmail}` 
+        );
+        const userData = await response.json();
+        const ids = userData.map((item) => item.moduleName);
+        setSubscribedModuleIds(ids);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchSubscribedModules();
+  }, [props.userEmail]); 
 
   const handleLogout = async () => {
     await signOut();
     props.updateAuthStatus(false);
     navigate("/login");
   };
-
-  
 
   return (
     <>
@@ -60,38 +54,92 @@ const Dashboard = (props) => {
               height: "100%",
             }}
           >
+            {/* Sidebar content */}
             <Typography
               variant="body1"
-              style={{ color: "black", padding: "10% 2%", fontWeight: "bold", fontSize: '24px' }}
+              style={{
+                color: "black",
+                padding: "10% 2%",
+                fontWeight: "bold",
+                fontSize: "24px",
+              }}
             >
               Applied Bell Curve
             </Typography>
 
+            {/* Navigation buttons */}
             <Box style={{ padding: "0 2%", marginBottom: "2%" }}>
-              <Button onClick={() => {/* handle navigation */}} style={{ color: "black", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "flex-start", padding: "12px 0", width: "100%", textTransform: "none", fontSize: '20px', backgroundColor:'transparent' }}>
-                <SearchIcon style={{ marginRight: "12px", fontSize: '28px' }} />
+              <Button
+                onClick={() => {
+                  /* handle navigation */
+                }}
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  padding: "12px 0",
+                  width: "100%",
+                  textTransform: "none",
+                  fontSize: "20px",
+                  backgroundColor: "transparent",
+                }}
+              >
+                <SearchIcon style={{ marginRight: "12px", fontSize: "28px" }} />
                 Explore Modules
               </Button>
-              <Button onClick={() => {/* handle navigation */}} style={{ color: "black", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "flex-start", padding: "12px 0", width: "100%", textTransform: "none", fontSize: '20px',backgroundColor:'transparent' }}>
-                <CallIcon style={{ marginRight: "12px", fontSize: '28px' }} />
+              <Button
+                onClick={() => {
+                  /* handle navigation */
+                }}
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  padding: "12px 0",
+                  width: "100%",
+                  textTransform: "none",
+                  fontSize: "20px",
+                  backgroundColor: "transparent",
+                }}
+              >
+                <CallIcon style={{ marginRight: "12px", fontSize: "28px" }} />
                 Contact Us
               </Button>
-              <Button onClick={handleLogout} style={{ color: "black", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "flex-start", padding: "12px 0", width: "100%", textTransform: "none", fontSize: '20px',backgroundColor:'transparent' }}>
-                <LogoutIcon style={{ marginRight: "12px", fontSize: '28px' }} />
+              <Button
+                onClick={handleLogout}
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  padding: "12px 0",
+                  width: "100%",
+                  textTransform: "none",
+                  fontSize: "20px",
+                  backgroundColor: "transparent",
+                }}
+              >
+                <LogoutIcon style={{ marginRight: "12px", fontSize: "28px" }} />
                 Sign Out
               </Button>
             </Box>
           </Grid>
 
+          {/* Main content */}
           <Grid
             item
             xs={10}
             style={{
-              paddingLeft: '5%', // Adjust the padding to align modules
+              paddingLeft: "5%", // Adjust the padding to align modules
               paddingTop: "1%",
               height: "100%",
-              display: 'flex', // Use flex for better control
-              flexDirection: 'column' // Stack items vertically
+              display: "flex", // Use flex for better control
+              flexDirection: "column", // Stack items vertically
             }}
           >
             <Typography
@@ -106,14 +154,30 @@ const Dashboard = (props) => {
               Welcome Nandan Terry
             </Typography>
 
-            <Box style={{ height: 'calc(100% - 48px)', overflowY: "auto" }}>
-              <Grid container style={{ justifyContent: "center" }} spacing={2}>
-                {modules.map((module, index) => (
-                  <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
-                    <Module name={module.name} description={module.description} />
-                  </Grid>
-                ))}
-              </Grid>
+            {/* Module display */}
+            <Box style={{ height: "calc(100% - 48px)", overflowY: "auto" }}>
+              {loading ? (
+                <Typography>Loading...</Typography>
+              ) : (
+                <Grid
+                  container
+                  style={{ justifyContent: "center" }}
+                  spacing={2}
+                >
+                  {subscribedModuleIds.map((moduleName, index) => {
+                    return (
+                      <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
+                        <Module
+                          name={MODULE_DESCRIPTIONS[moduleName].name}
+                          description={
+                            MODULE_DESCRIPTIONS[moduleName].description
+                          }
+                        />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              )}
             </Box>
           </Grid>
         </Grid>
