@@ -8,7 +8,7 @@ import {
 import LandingPage from "./Landing/landing";
 import Register from "./Authentication/register";
 import LoginPage from "./Authentication/login";
-import ValidatePage from "./Authentication/validatepage";
+// import ValidatePage from "./Authentication/validatepage";
 import Dashboard from "./Dashboard/Dashboard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -16,6 +16,8 @@ import { Amplify } from "aws-amplify";
 import config from "./aws-exports";
 import { getCurrentUser } from "aws-amplify/auth";
 import "./App.css";
+import ForgotPassword from "./Settings/ForgotPassword";
+import Settings from "./Settings/Settings";
 
 Amplify.configure(config);
 
@@ -64,12 +66,13 @@ function App() {
         <Routes>
           {!isAuthenticated ? (
             <>
+              <Route path="/forgot_password" element={<ForgotPassword />} />
               <Route path="/" element={<LandingPage />} />
               <Route
                 path="/login"
                 element={<LoginPage updateAuthStatus={updateAuthStatus} />}
               />
-              <Route path="/validate" element={<ValidatePage />} />
+              {/* <Route path="/validate" element={<ValidatePage />} /> */}
               <Route path="/register" element={<Register />} />
               <Route
                 path="/dashboard"
@@ -78,6 +81,7 @@ function App() {
             </>
           ) : (
             <>
+              <Route path="/settings" element={<Settings />} />
               <Route
                 path="/dashboard"
                 element={<Dashboard updateAuthStatus={updateAuthStatus} />}

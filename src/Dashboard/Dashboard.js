@@ -3,6 +3,7 @@ import { Typography, Grid, Container, Box, Button } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
+import SettingsIcon from '@mui/icons-material/Settings';
 import Module from "./Module";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
@@ -110,6 +111,26 @@ const Dashboard = (props) => {
               >
                 <CallIcon style={{ marginRight: "12px", fontSize: "28px" }} />
                 Contact Us
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate('/settings')  
+                }}
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  padding: "12px 0",
+                  width: "100%",
+                  textTransform: "none",
+                  fontSize: "20px",
+                  backgroundColor: "transparent",
+                }}
+              >
+                <SettingsIcon style={{ marginRight: "12px", fontSize: "28px" }} />
+                Settings
               </Button>
               <Button
                 onClick={handleLogout}
