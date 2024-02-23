@@ -7,7 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { NavLink, useNavigate } from "react-router-dom";
 import theme from "../Utils/themes";
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -23,6 +23,7 @@ const LoginPage = () => {
     try {
       await signIn({ username, password });
       setLoginError(null);
+      props.updateAuthStatus(true);
       navigate("/dashboard");
     } catch (error) {
       setLoginError("Invalid Username or Password");
