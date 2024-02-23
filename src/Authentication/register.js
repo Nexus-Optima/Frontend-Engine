@@ -25,7 +25,7 @@ function Register() {
     });
 
     const hasErrors = Object.values(errors).some((error) => error);
-    if (hasErrors) return;
+    if (hasErrors) return;  
 
     try {
       await signUp({
