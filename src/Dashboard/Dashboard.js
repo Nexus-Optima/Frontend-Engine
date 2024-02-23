@@ -9,20 +9,21 @@ import { signOut } from "aws-amplify/auth";
 import { MODULE_DESCRIPTIONS } from "../Utils/constants";
 
 const Dashboard = (props) => {
-  const [subscribedModuleIds, setSubscribedModuleIds] = useState([]);
+  const [subscribedModuleNames, setSubscribedModuleNames] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSubscribedModules = async () => {
       try {
-        console.log(props.userEmail);
         const response = await fetch(
-          `http://127.0.0.1:5000/get_user?userId=${props.userEmail}` 
+          `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
         );
         const userData = await response.json();
-        const ids = userData.map((item) => item.moduleName);
-        setSubscribedModuleIds(ids);
+        const uniqueModuleNames = [
+          ...new Set(userData.map((item) => item.moduleName)),
+        ];
+        setSubscribedModuleNames(uniqueModuleNames);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -31,7 +32,7 @@ const Dashboard = (props) => {
     };
 
     fetchSubscribedModules();
-  }, [props.userEmail]); 
+  }, [props.userEmail]);
 
   const handleLogout = async () => {
     await signOut();
@@ -164,7 +165,7 @@ const Dashboard = (props) => {
                   style={{ justifyContent: "center" }}
                   spacing={2}
                 >
-                  {subscribedModuleIds.map((moduleName, index) => {
+                  {subscribedModuleNames.map((moduleName, index) => {
                     return (
                       <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
                         <Module
