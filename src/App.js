@@ -8,6 +8,7 @@ import {
 import LandingPage from "./Landing/landing";
 import Register from "./Authentication/register";
 import LoginPage from "./Authentication/login";
+// import ValidatePage from "./Authentication/validatepage";
 import Dashboard from "./Dashboard/Dashboard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -16,12 +17,15 @@ import config from "./aws-exports";
 import { getCurrentUser } from "aws-amplify/auth";
 import "./App.css";
 import Explore_Modules from "./Explore/explore_modules";
+import ForgotPassword from "./Settings/ForgotPassword";
+import Settings from "./Settings/Settings";
 
 Amplify.configure(config);
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState(null); 
 
   function updateAuthStatus(authStatus) {
     setIsAuthenticated(authStatus);
@@ -32,7 +36,9 @@ function App() {
       try {
         let response = await getCurrentUser();
         console.log(response)
+        const userEmail = response['signInDetails']['loginId'];
         setIsAuthenticated(true);
+        setUserEmail(userEmail); 
       } catch (error) {
         console.error("Authentication check failed", error);
         setIsAuthenticated(false);
@@ -65,11 +71,13 @@ function App() {
         <Routes>
           {!isAuthenticated ? (
             <>
+              <Route path="/forgot_password" element={<ForgotPassword />} />
               <Route path="/" element={<LandingPage />} />
               <Route
                 path="/login"
                 element={<LoginPage updateAuthStatus={updateAuthStatus} />}
               />
+              {/* <Route path="/validate" element={<ValidatePage />} /> */}
               <Route path="/register" element={<Register />} />
               <Route path="/explore" element={<Explore_Modules />} />
               <Route
@@ -79,9 +87,10 @@ function App() {
             </>
           ) : (
             <>
+              <Route path="/settings" element={<Settings />} />
               <Route
                 path="/dashboard"
-                element={<Dashboard updateAuthStatus={updateAuthStatus} />}
+                element={<Dashboard updateAuthStatus={updateAuthStatus} userEmail={userEmail} />} // Pass userEmail as prop
               />
               <Route path="/" element={<Navigate replace to="/dashboard" />} />
               <Route
