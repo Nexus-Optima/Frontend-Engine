@@ -5,9 +5,9 @@ import theme from '../../Utils/themes'
 
 const services = [
   { icon: DesignServices, title: 'OUR SERVICES', description: '' },
-  { icon: QueryStats, title: 'Forecasting', description: 'Forecasting is a method of making informed predictions by using historical data as the main input for determining the course of future trends.' },
-  { icon: Receipt, title: 'Optimiser', description: 'Optimize" is a verb that means to make something as good or effective as possible. ' },
-  { icon: Storage, title: 'Inventory Management', description: 'Inventory management refers to the process of storing, ordering, and selling of goods and services.' },
+  { icon: QueryStats, title: 'Forecasting', description: 'With Forecaster, organizations can gain insights into the complexities of commodity markets. Forecaster analyzes the global demand and supply, local demand and supply and performs sentiment analysis to predict commodity prices. Procurement managers can use Forecaster to devise their procurement strategy and stay ahead of the market.' },
+  { icon: Receipt, title: 'Optimiser', description: 'Buy the optimum quantity of commodities at the right time to reduce cost of raw material and increase profits. Optimizer uses the in-built Forecaster engine to predict prices and creates a customized action plan using AI, suggesting the most optimum purchase plan.' },
+  { icon: Storage, title: 'Inventory Management', description: 'Reduce inventory costs and downtime using Inventory Manager. Track real time current inventory levels and optimum inventory levels and automate inventory planning. Embedded analytics provide answers to – what to buy, how much to buy and when to buy.' },
   { icon: Insights, title: 'Sales Analysis', description: 'Sales analysis involves examining sales reports to see what goods and services have and have not sold well.' },
   { icon: Dataset, title: 'Data Insights', description: 'Data insights refer to the understanding and interpretation of data to improve business decisions.' },
 ];

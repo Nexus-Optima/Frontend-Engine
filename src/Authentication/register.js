@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import GoogleLogo from "../Images/logo512.png";
 import theme from "../Utils/themes";
+import { ConsoleLogger } from "aws-amplify/utils";
 
 function Register() {
   const navigate = useNavigate();
@@ -32,13 +33,10 @@ function Register() {
         username: formData.email,
         password: formData.password,
         attributes: {
-          email: formData.email,
-          phone_number: `+91${formData.mobile}`,
           "custom:name": formData.name,
-          "custom:surname": formData.surname,
+          "custom:companyName": formData.company,
         },
       });
-      console.log(formData.name.length);
       navigate("/login");
     } catch (error) {
       console.error("Error during registration:", error);

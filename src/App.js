@@ -16,6 +16,7 @@ import { Amplify } from "aws-amplify";
 import config from "./aws-exports";
 import { getCurrentUser } from "aws-amplify/auth";
 import "./App.css";
+import Explore_Modules from "./Explore/explore_modules";
 import ForgotPassword from "./Settings/ForgotPassword";
 import Settings from "./Settings/Settings";
 
@@ -34,6 +35,7 @@ function App() {
     const checkAuthState = async () => {
       try {
         let response = await getCurrentUser();
+        console.log(response)
         const userEmail = response['signInDetails']['loginId'];
         setIsAuthenticated(true);
         setUserEmail(userEmail); 
@@ -77,6 +79,7 @@ function App() {
               />
               {/* <Route path="/validate" element={<ValidatePage />} /> */}
               <Route path="/register" element={<Register />} />
+              <Route path="/explore" element={<Explore_Modules />} />
               <Route
                 path="/dashboard"
                 element={<Navigate replace to="/login" />}
@@ -98,6 +101,7 @@ function App() {
                 path="/register"
                 element={<Navigate replace to="/dashboard" />}
               />
+              <Route path="/explore" element={<Explore_Modules />} />
               <Route
                 path="/validate"
                 element={<Navigate replace to="/dashboard" />}

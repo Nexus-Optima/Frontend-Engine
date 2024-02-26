@@ -6,13 +6,14 @@ import HomeSection from "./Home/home";
 import Header from "./Header/header.js";
 import ServicesList from "./services/services";
 import ContactUs from "./ContactUs/contact_us.js";
+import Footer from "./Footer/footer"
 import theme from "../Utils/themes";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        {/* <Header /> */}
+        <Header />
         <Box className="scroll-container">
           <Box id="modules" className="section">
             <HomeSection />
@@ -24,6 +25,7 @@ function App() {
             <ContactUs />
           </Box>
         </Box>
+        <Footer/>
       </div>
     </ThemeProvider>
   );
