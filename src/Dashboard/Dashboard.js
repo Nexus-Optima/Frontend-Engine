@@ -43,6 +43,10 @@ const Dashboard = (props) => {
     navigate("/login");
   };
 
+  const handleExplore = async () => {
+    navigate("/explore");
+  };
+
   return (
     <>
       <Container maxWidth={false} style={{ padding: 0 }}>
@@ -72,9 +76,7 @@ const Dashboard = (props) => {
 
             <Box style={{ padding: "0 2%", marginBottom: "2%" }}>
               <Button
-                onClick={() => {
-                  /* handle navigation */
-                }}
+                onClick={handleExplore}
                 style={{
                   color: "black",
                   fontWeight: "bold",

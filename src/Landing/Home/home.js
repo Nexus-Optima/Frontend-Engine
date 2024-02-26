@@ -13,8 +13,8 @@ const HomeSection = () => {
 
   const navigate = useNavigate();
 
-  const handleRegisterClick = () => {
-    navigate("/register");
+  const hangleLoginClick = () => {
+    navigate("/login");
   };
 
   return (
@@ -43,9 +43,7 @@ const HomeSection = () => {
                 the future.
               </Typography>
               <br />
-              <Button variant="contained" onClick={handleRegisterClick}>
-                Register Now
-              </Button>
+              <Button variant="contained" onClick={hangleLoginClick}>Get Started</Button>
             </Box>
           </Grid>
           <Grid item xs={12} md={6} sx={{ padding: "40px" }}>

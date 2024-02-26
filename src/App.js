@@ -8,7 +8,6 @@ import {
 import LandingPage from "./Landing/landing";
 import Register from "./Authentication/register";
 import LoginPage from "./Authentication/login";
-import ValidatePage from "./Authentication/validatepage";
 import Dashboard from "./Dashboard/Dashboard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -16,6 +15,7 @@ import { Amplify } from "aws-amplify";
 import config from "./aws-exports";
 import { getCurrentUser } from "aws-amplify/auth";
 import "./App.css";
+import Explore_Modules from "./Explore/explore_modules";
 
 Amplify.configure(config);
 
@@ -30,7 +30,8 @@ function App() {
   useEffect(() => {
     const checkAuthState = async () => {
       try {
-        await getCurrentUser();
+        let response = await getCurrentUser();
+        console.log(response)
         setIsAuthenticated(true);
       } catch (error) {
         console.error("Authentication check failed", error);
@@ -69,8 +70,8 @@ function App() {
                 path="/login"
                 element={<LoginPage updateAuthStatus={updateAuthStatus} />}
               />
-              <Route path="/validate" element={<ValidatePage />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/explore" element={<Explore_Modules />} />
               <Route
                 path="/dashboard"
                 element={<Navigate replace to="/login" />}
@@ -91,6 +92,7 @@ function App() {
                 path="/register"
                 element={<Navigate replace to="/dashboard" />}
               />
+              <Route path="/explore" element={<Explore_Modules />} />
               <Route
                 path="/validate"
                 element={<Navigate replace to="/dashboard" />}
