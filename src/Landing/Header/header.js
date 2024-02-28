@@ -9,6 +9,10 @@ const Header = () => {
   const handleExplore = async () => {
     navigate("/explore");
   };
+  const handleContactUs = async () => {
+    navigate("/contactus");
+  };
+
 
   return (
     <AppBar position="static" sx={{ 
@@ -47,7 +51,7 @@ const Header = () => {
             <SearchIcon sx={{ mr: 1 }} />
             <Typography variant="h6">Modules</Typography>
           </Button>
-          <Button onClick={() => {/* handle navigation */}} sx={{ 
+          <Button onClick={handleContactUs} sx={{ 
             color: "white", 
             backgroundColor: 'transparent', 
             textDecoration: "none", 

@@ -20,7 +20,7 @@ const Footer = () => {
             Quick Links
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3 }}>
-          <Link to="#" style={{ color: 'inherit', textDecoration: 'none' }}>Send an enquiry</Link>
+          <Link to="/contactus" style={{ color: 'inherit', textDecoration: 'none' }}>Send an enquiry</Link>
             {/* Use React Router's Link for internal navigation */}
             <Link to="/explore" style={{ color: 'inherit', textDecoration: 'none' }}>Explore Modules</Link>
           </Box>

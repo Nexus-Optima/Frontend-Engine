@@ -17,6 +17,7 @@ import config from "./aws-exports";
 import { getCurrentUser } from "aws-amplify/auth";
 import "./App.css";
 import Explore_Modules from "./Explore/explore_modules";
+import ContactUs from "./ContactUs/contact_us";
 import ForgotPassword from "./Settings/ForgotPassword";
 import Settings from "./Settings/Settings";
 
@@ -80,6 +81,7 @@ function App() {
               {/* <Route path="/validate" element={<ValidatePage />} /> */}
               <Route path="/register" element={<Register />} />
               <Route path="/explore" element={<Explore_Modules />} />
+              <Route path="/contactus" element={<ContactUs />} />
               <Route
                 path="/dashboard"
                 element={<Navigate replace to="/login" />}
@@ -102,6 +104,7 @@ function App() {
                 element={<Navigate replace to="/dashboard" />}
               />
               <Route path="/explore" element={<Explore_Modules />} />
+              <Route path="/contactus" element={<ContactUs />} />
               <Route
                 path="/validate"
                 element={<Navigate replace to="/dashboard" />}
