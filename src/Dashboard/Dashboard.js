@@ -21,11 +21,14 @@ const Dashboard = (props) => {
           `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
         );
         const userData = await response.json();
-        const uniqueModuleNames = [
-          ...new Set(userData.map((item) => item.moduleName)),
-        ];
-        setSubscribedModuleNames(uniqueModuleNames);
-        setLoading(false);
+        if (typeof userData === 'object' && userData !== null) {
+          const uniqueModuleNames = Object.values(userData).map(item => item.moduleName);
+          setSubscribedModuleNames(uniqueModuleNames);
+          setLoading(false);
+        } else {
+          console.error("User data is not in the expected format:", userData);
+          setLoading(false);
+        }
       } catch (error) {
         console.error("Error fetching user data:", error);
         setLoading(false);
@@ -189,16 +192,20 @@ const Dashboard = (props) => {
                   spacing={2}
                 >
                   {subscribedModuleNames.map((moduleName, index) => {
-                    return (
-                      <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
-                        <Module
-                          name={MODULE_DESCRIPTIONS[moduleName].name}
-                          description={
-                            MODULE_DESCRIPTIONS[moduleName].description
-                          }
-                        />
-                      </Grid>
-                    );
+                    const moduleDescription = MODULE_DESCRIPTIONS[moduleName];
+                    if (moduleDescription) {
+                      return (
+                        <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
+                          <Module
+                            name={moduleDescription.name}
+                            description={moduleDescription.description}
+                          />
+                        </Grid>
+                      );
+                    } else {
+                      console.error(`Module description not available for moduleName: ${moduleName}`);
+                      return null;
+                    }
                   })}
                 </Grid>
               )}
