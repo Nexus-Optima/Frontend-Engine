@@ -72,7 +72,7 @@ function App() {
         <Routes>
           {!isAuthenticated ? (
             <>
-              <Route path="/forgot_password" element={<ForgotPassword />} />
+              {/* <Route path="/forgot_password" element={<ForgotPassword />} /> */}
               <Route path="/" element={<LandingPage />} />
               <Route
                 path="/login"
@@ -89,6 +89,7 @@ function App() {
             </>
           ) : (
             <>
+             <Route path="/forgot_password" element={<ForgotPassword />} />
               <Route path="/settings" element={<Settings />} />
               <Route
                 path="/dashboard"

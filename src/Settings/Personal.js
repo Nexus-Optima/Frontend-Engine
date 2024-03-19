@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import {  useNavigate } from "react-router-dom";
 import {
     TextField,
     Button,
@@ -10,9 +10,37 @@ import HomeIcon from '@mui/icons-material/Home';
 
 const Personal = () => {
     const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+      username: "",
+      email: "",
+      mobile: "",
+      company: "",
+    });
+
+
     const handleHomePage=()=>{
         navigate('/dashboard')
     }
+
+    const handlePersonalDetails=async()=>{
+      const requesttData=formData;   
+      
+   
+    }
+
+    const handleChange=(e)=>{
+      e.preventDefault();
+      const {name,value}=e.target;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+      console.log(formData);
+
+    }
+
+
   return (
     <>
     <Grid
@@ -48,7 +76,7 @@ const Personal = () => {
             >
               <Grid item xs={12} md={6}>
                 <TextField
-                  name="name"
+                  name="username"
                   type="text"
                   variant="outlined"
                   color="secondary"
@@ -56,10 +84,10 @@ const Personal = () => {
                   fullWidth
                   required
                   sx={{ mb: 2, paddingBottom: "10%" }}
-                  // value={formData.name}
+                  value={formData.username}
                   // error={errors.name}
                   // helperText={errors.name ? "This field is required" : ""}
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   // onFocus={() => handleFocus("name")}
                 />
               </Grid>
@@ -74,10 +102,10 @@ const Personal = () => {
                   fullWidth
                   required
                   sx={{ mb: 2 }}
-                  // value={formData.email}
+                  value={formData.email}
                   // error={errors.email}
                   // helperText={errors.email ? "This field is required" : ""}
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   // onFocus={() => handleFocus("email")}
                 />
               </Grid>
@@ -85,7 +113,7 @@ const Personal = () => {
               <Grid item xs={12} md={6}>
                 <TextField
                   name="mobile"
-                  type="tel"
+                  type="text"
                   variant="outlined"
                   color="secondary"
                   label="Mobile"
@@ -93,8 +121,8 @@ const Personal = () => {
                   required
                   // error={errors.mobile}
                   sx={{ mb: 2 }}
-                  // value={formData.mobile}
-                  // onChange={handleMobileChange}
+                  value={formData.mobile}
+                  onChange={handleChange}
                   // helperText={errors.mobile ? "This field is required" : ""}
                   // inputProps={{ maxLength: 10 }}
                   // onFocus={() => handleFocus("mobile")}
@@ -103,18 +131,18 @@ const Personal = () => {
 
               <Grid item xs={12} md={6}>
                 <TextField
-                  name="password"
-                  type="password"
+                  name="company"
+                  type="text"
                   variant="outlined"
                   color="secondary"
                   label="Company"
                   fullWidth
                   required
                   sx={{ mb: 2 }}
-                  // value={formData.password}
+                  value={formData.company}
                   // error={errors.password}
                   // helperText={errors.password ? "This field is required" : ""}
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   // onFocus={() => handleFocus("password")}
                 />
               </Grid>
@@ -126,6 +154,7 @@ const Personal = () => {
                 <Button
                   variant="contained"
                   style={{ backgroundColor: "black" }}
+                  onClick={handlePersonalDetails}
                 >
                   Save Changes
                 </Button>
