@@ -12,6 +12,7 @@ import { MODULE_DESCRIPTIONS } from "../Utils/constants";
 const Dashboard = (props) => {
   const [subscribedModuleNames, setSubscribedModuleNames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,12 +22,9 @@ const Dashboard = (props) => {
           `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
         );
         const userData = await response.json();
-        if (typeof userData === 'object' && userData !== null) {
+        if (userData !== null) {
           const uniqueModuleNames = Object.values(userData).map(item => item.moduleName);
           setSubscribedModuleNames(uniqueModuleNames);
-          setLoading(false);
-        } else {
-          console.error("User data is not in the expected format:", userData);
           setLoading(false);
         }
       } catch (error) {
@@ -203,11 +201,16 @@ const Dashboard = (props) => {
                         </Grid>
                       );
                     } else {
-                      console.error(`Module description not available for moduleName: ${moduleName}`);
+                      setError(true);
                       return null;
                     }
                   })}
                 </Grid>
+              )}
+              {error && (
+                <Typography style={{ color: "black", textAlign: "center", marginTop: 20 }}>
+                  Some modules are unavailable at the moment. Please try again later.
+                </Typography>
               )}
             </Box>
           </Grid>
