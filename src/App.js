@@ -26,7 +26,7 @@ Amplify.configure(config);
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [userEmail, setUserEmail] = useState(null); 
+  const [userEmail, setUserEmail] = useState(null);
 
   function updateAuthStatus(authStatus) {
     setIsAuthenticated(authStatus);
@@ -36,10 +36,10 @@ function App() {
     const checkAuthState = async () => {
       try {
         let response = await getCurrentUser();
-        console.log(response)
-        const userEmail = response['signInDetails']['loginId'];
+        console.log(response);
+        const userEmail = response["signInDetails"]["loginId"];
         setIsAuthenticated(true);
-        setUserEmail(userEmail); 
+        setUserEmail(userEmail);
       } catch (error) {
         console.error("Authentication check failed", error);
         setIsAuthenticated(false);
@@ -89,11 +89,19 @@ function App() {
             </>
           ) : (
             <>
-             <Route path="/forgot_password" element={<ForgotPassword />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/forgot_password" element={<ForgotPassword />} />
+              <Route
+                path="/settings"
+                element={<Settings userEmail={userEmail} />}
+              />
               <Route
                 path="/dashboard"
-                element={<Dashboard updateAuthStatus={updateAuthStatus} userEmail={userEmail} />} // Pass userEmail as prop
+                element={
+                  <Dashboard
+                    updateAuthStatus={updateAuthStatus}
+                    userEmail={userEmail}
+                  />
+                } // Pass userEmail as prop
               />
               <Route path="/" element={<Navigate replace to="/dashboard" />} />
               <Route

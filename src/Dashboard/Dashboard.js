@@ -8,10 +8,12 @@ import Module from "./Module";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
 import { MODULE_DESCRIPTIONS } from "../Utils/constants";
+import { fetchUserDetails } from "../api/UserDetailsService";
 
 const Dashboard = (props) => {
   const [subscribedModuleNames, setSubscribedModuleNames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [username, setUsername]=useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +23,7 @@ const Dashboard = (props) => {
           `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
         );
         const userData = await response.json();
+        console.log(userData)
         const uniqueModuleNames = [
           ...new Set(userData.map((item) => item.moduleName)),
         ];
@@ -33,6 +36,17 @@ const Dashboard = (props) => {
     };
 
     fetchSubscribedModules();
+
+    const UserDetails=fetchUserDetails({ userEmail: props.userEmail });
+    UserDetails.then((result)=>{
+      const data= result[0];
+      if(data){
+        setUsername(data?.username)
+      }
+      
+      console.log(data?.username);
+    })
+    
   }, [props.userEmail]);
 
   const handleLogout = async () => {
@@ -175,7 +189,7 @@ const Dashboard = (props) => {
                 marginBottom: "20px",
               }}
             >
-              Welcome Nandan Terry
+              Welcome {username}
             </Typography>
 
             {/* Module display */}
