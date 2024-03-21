@@ -36,8 +36,6 @@ function Register() {
       company:formData.company
     };
 
-    console.log(requestBody);
-
     try {
       const response = await fetch(`${process.env.REACT_APP_UPDATE}/update_details`, {
         method: 'POST',
@@ -50,9 +48,7 @@ function Register() {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
       const data = await response.json();
-      console.log('POST request successful:', data);
       
       // Reset form fields after successful submission
       setFormData({userid:'',username:'',email:'',phone:'',company:''});

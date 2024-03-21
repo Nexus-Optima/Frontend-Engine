@@ -3,17 +3,17 @@ import { Typography, Grid, Container, Box, Button } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
 import Module from "./Module";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
 import { MODULE_DESCRIPTIONS } from "../Utils/constants";
-import { fetchUserDetails } from "../api/UserDetailsService";
+import { fetchUserDetails } from "../Services/UserDetailsService";
 
 const Dashboard = (props) => {
   const [subscribedModuleNames, setSubscribedModuleNames] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [username, setUsername]=useState('');
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,7 +23,6 @@ const Dashboard = (props) => {
           `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
         );
         const userData = await response.json();
-        console.log(userData)
         const uniqueModuleNames = [
           ...new Set(userData.map((item) => item.moduleName)),
         ];
@@ -37,16 +36,11 @@ const Dashboard = (props) => {
 
     fetchSubscribedModules();
 
-    const UserDetails=fetchUserDetails({ userEmail: props.userEmail });
-    UserDetails.then((result)=>{
-      const data= result[0];
-      if(data){
-        setUsername(data?.username)
-      }
-      
-      console.log(data?.username);
-    })
-    
+    const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
+    UserDetails.then((result) => {
+      const data = result[0];
+      setUsername(data?.username);  
+    });
   }, [props.userEmail]);
 
   const handleLogout = async () => {
@@ -129,7 +123,7 @@ const Dashboard = (props) => {
               </Button>
               <Button
                 onClick={() => {
-                  navigate('/settings')  
+                  navigate("/settings");
                 }}
                 style={{
                   color: "black",
@@ -144,7 +138,9 @@ const Dashboard = (props) => {
                   backgroundColor: "transparent",
                 }}
               >
-                <SettingsIcon style={{ marginRight: "12px", fontSize: "28px" }} />
+                <SettingsIcon
+                  style={{ marginRight: "12px", fontSize: "28px" }}
+                />
                 Settings
               </Button>
               <Button

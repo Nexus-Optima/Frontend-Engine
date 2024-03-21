@@ -36,7 +36,6 @@ function App() {
     const checkAuthState = async () => {
       try {
         let response = await getCurrentUser();
-        console.log(response);
         const userEmail = response["signInDetails"]["loginId"];
         setIsAuthenticated(true);
         setUserEmail(userEmail);

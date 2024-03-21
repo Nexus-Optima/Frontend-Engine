@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Typography, Grid } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import { fetchUserDetails } from "../api/UserDetailsService";
+import { fetchUserDetails } from "../Services/UserDetailsService";
 
 const Personal = (props) => {
   const navigate = useNavigate();
@@ -11,18 +11,14 @@ const Personal = (props) => {
     const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
     UserDetails.then((result) => {
       const data = result[0];
-      if (data) {
         setFormData({
           username: data?.username,
           email: data?.email,
           mobile: data?.phone,
-          company: data?.company
-        })
-      }
-
-    });   
+          company: data?.company,
+        });
+    });
   }, []);
-
 
   const [formData, setFormData] = useState({
     username: "",
