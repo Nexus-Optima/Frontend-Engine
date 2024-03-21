@@ -12,6 +12,7 @@ import { MODULE_DESCRIPTIONS } from "../Utils/constants";
 const Dashboard = (props) => {
   const [subscribedModuleNames, setSubscribedModuleNames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,11 +22,11 @@ const Dashboard = (props) => {
           `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
         );
         const userData = await response.json();
-        const uniqueModuleNames = [
-          ...new Set(userData.map((item) => item.moduleName)),
-        ];
-        setSubscribedModuleNames(uniqueModuleNames);
-        setLoading(false);
+        if (userData !== null) {
+          const uniqueModuleNames = Object.values(userData).map(item => item.moduleName);
+          setSubscribedModuleNames(uniqueModuleNames);
+          setLoading(false);
+        }
       } catch (error) {
         console.error("Error fetching user data:", error);
         setLoading(false);
@@ -189,18 +190,27 @@ const Dashboard = (props) => {
                   spacing={2}
                 >
                   {subscribedModuleNames.map((moduleName, index) => {
-                    return (
-                      <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
-                        <Module
-                          name={MODULE_DESCRIPTIONS[moduleName].name}
-                          description={
-                            MODULE_DESCRIPTIONS[moduleName].description
-                          }
-                        />
-                      </Grid>
-                    );
+                    const moduleDescription = MODULE_DESCRIPTIONS[moduleName];
+                    if (moduleDescription) {
+                      return (
+                        <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
+                          <Module
+                            name={moduleDescription.name}
+                            description={moduleDescription.description}
+                          />
+                        </Grid>
+                      );
+                    } else {
+                      setError(true);
+                      return null;
+                    }
                   })}
                 </Grid>
+              )}
+              {error && (
+                <Typography style={{ color: "black", textAlign: "center", marginTop: 20 }}>
+                  Some modules are unavailable at the moment. Please try again later.
+                </Typography>
               )}
             </Box>
           </Grid>
