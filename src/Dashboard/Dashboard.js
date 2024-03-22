@@ -14,6 +14,7 @@ const Dashboard = (props) => {
   const [subscribedModuleNames, setSubscribedModuleNames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,18 +30,22 @@ const Dashboard = (props) => {
         setSubscribedModuleNames(uniqueModuleNames);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        setError(error.message);
+        // console.error("Error fetching user data:", error);
         setLoading(false);
       }
     };
-
     fetchSubscribedModules();
 
     const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
-    UserDetails.then((result) => {
-      const data = result[0];
-      setUsername(data?.username);  
-    });
+    if (UserDetails) {
+      setError("OOPS!!! Fetching issue......");
+    } else {
+      UserDetails.then((result) => {
+        const data = result[0];
+        setUsername(data?.username);
+      });
+    }
   }, [props.userEmail]);
 
   const handleLogout = async () => {
@@ -189,6 +194,13 @@ const Dashboard = (props) => {
             </Typography>
 
             {/* Module display */}
+            {error && (
+              <div
+                style={{ color: "red", fontSize: "3rem", fontStyle: "italic" }}
+              >
+                {error}
+              </div>
+            )}
             <Box style={{ height: "calc(100% - 48px)", overflowY: "auto" }}>
               {loading ? (
                 <Typography>Loading...</Typography>

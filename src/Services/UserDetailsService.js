@@ -1,4 +1,5 @@
 export const fetchUserDetails = async ({userEmail}) =>{
+
     try {
         const response_userdetails = await fetch(
           `${process.env.REACT_APP_USER_DETAILS}?email=${userEmail}`

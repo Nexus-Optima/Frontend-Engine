@@ -6,19 +6,24 @@ import { fetchUserDetails } from "../Services/UserDetailsService";
 
 const Personal = (props) => {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
-    UserDetails.then((result) => {
-      const data = result[0];
+    if (UserDetails) {
+      setError("OOPS!!!  Failed to fetch......");
+    } else {
+      UserDetails.then((result) => {
+        const data = result[0];
         setFormData({
           username: data?.username,
           email: data?.email,
           mobile: data?.phone,
           company: data?.company,
         });
-    });
-  }, []);
+      });
+    }
+  }, [props.userEmail]);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -42,7 +47,6 @@ const Personal = (props) => {
       ...prevFormData,
       [name]: value,
     }));
-    console.log(formData);
   };
 
   return (
@@ -76,6 +80,11 @@ const Personal = (props) => {
         >
           Settings
         </Typography>
+        {error && (
+          <div style={{ color: "red", fontSize: "1rem", fontStyle: "italic" }}>
+            {error}
+          </div>
+        )}
         <Grid
           container
           spacing={2}
