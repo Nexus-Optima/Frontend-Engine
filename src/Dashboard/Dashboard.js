@@ -24,21 +24,23 @@ const Dashboard = (props) => {
           `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
         );
         const userData = await response.json();
-        const uniqueModuleNames = [
-          ...new Set(userData.map((item) => item.moduleName)),
-        ];
-        setSubscribedModuleNames(uniqueModuleNames);
-        setLoading(false);
+
+        if (userData !== null) {
+          const uniqueModuleNames = Object.values(userData).map(
+            (item) => item.moduleName
+          );
+          setSubscribedModuleNames(uniqueModuleNames);
+          setLoading(false);
+        }
       } catch (error) {
-        setError(error.message);
-        // console.error("Error fetching user data:", error);
+        console.error("Error fetching user data:", error);
         setLoading(false);
       }
     };
     fetchSubscribedModules();
 
     const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
-    if (UserDetails) {
+    if (UserDetails === null) {
       setError("OOPS!!! Fetching issue......");
     } else {
       UserDetails.then((result) => {

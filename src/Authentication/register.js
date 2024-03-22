@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import GoogleLogo from "../Images/logo512.png";
 import theme from "../Utils/themes";
-import { ConsoleLogger } from "aws-amplify/utils";
+
 
 function Register() {
   const navigate = useNavigate();
@@ -48,8 +48,7 @@ function Register() {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const data = await response.json();
-      
+
       // Reset form fields after successful submission
       setFormData({userid:'',username:'',email:'',phone:'',company:''});
     } catch (error) {

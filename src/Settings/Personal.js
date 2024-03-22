@@ -10,12 +10,13 @@ const Personal = (props) => {
 
   useEffect(() => {
     const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
-    if (UserDetails) {
+    if (UserDetails === null) {
       setError("OOPS!!!  Failed to fetch......");
     } else {
       UserDetails.then((result) => {
         const data = result[0];
         setFormData({
+          userid: data?.email,
           username: data?.username,
           email: data?.email,
           mobile: data?.phone,
@@ -26,6 +27,7 @@ const Personal = (props) => {
   }, [props.userEmail]);
 
   const [formData, setFormData] = useState({
+    userid: "",
     username: "",
     email: "",
     mobile: "",
@@ -37,7 +39,32 @@ const Personal = (props) => {
   };
 
   const handlePersonalDetails = async () => {
-    const requesttData = formData;
+    const requestBody = {
+      email: formData.email,
+      userid: formData.email,
+      username: formData.username,
+      phone: formData.mobile,
+      company: formData.company,
+    };
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_UPDATE_PERSONAL_DETAILS}/${props.userEmail}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.error("There was an error:", error);
+    }
   };
 
   const handleChange = (e) => {
@@ -80,7 +107,7 @@ const Personal = (props) => {
         >
           Settings
         </Typography>
-        {error && (
+        {error !== null && (
           <div style={{ color: "red", fontSize: "1rem", fontStyle: "italic" }}>
             {error}
           </div>
@@ -101,10 +128,7 @@ const Personal = (props) => {
               required
               sx={{ mb: 2, paddingBottom: "10%" }}
               value={formData.username}
-              // error={errors.name}
-              // helperText={errors.name ? "This field is required" : ""}
               onChange={handleChange}
-              // onFocus={() => handleFocus("name")}
             />
           </Grid>
 
@@ -119,10 +143,8 @@ const Personal = (props) => {
               required
               sx={{ mb: 2 }}
               value={formData.email}
-              // error={errors.email}
-              // helperText={errors.email ? "This field is required" : ""}
+              disabled
               onChange={handleChange}
-              // onFocus={() => handleFocus("email")}
             />
           </Grid>
 
@@ -135,13 +157,9 @@ const Personal = (props) => {
               label="Mobile"
               fullWidth
               required
-              // error={errors.mobile}
               sx={{ mb: 2 }}
               value={formData.mobile}
               onChange={handleChange}
-              // helperText={errors.mobile ? "This field is required" : ""}
-              // inputProps={{ maxLength: 10 }}
-              // onFocus={() => handleFocus("mobile")}
             />
           </Grid>
 
@@ -156,10 +174,7 @@ const Personal = (props) => {
               required
               sx={{ mb: 2 }}
               value={formData.company}
-              // error={errors.password}
-              // helperText={errors.password ? "This field is required" : ""}
               onChange={handleChange}
-              // onFocus={() => handleFocus("password")}
             />
           </Grid>
 
