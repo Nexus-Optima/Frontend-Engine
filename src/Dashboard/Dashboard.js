@@ -3,16 +3,18 @@ import { Typography, Grid, Container, Box, Button } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
 import Module from "./Module";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
 import { MODULE_DESCRIPTIONS } from "../Utils/constants";
+import { fetchUserDetails } from "../Services/UserDetailsService";
 
 const Dashboard = (props) => {
   const [subscribedModuleNames, setSubscribedModuleNames] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,8 +24,11 @@ const Dashboard = (props) => {
           `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
         );
         const userData = await response.json();
+
         if (userData !== null) {
-          const uniqueModuleNames = Object.values(userData).map(item => item.moduleName);
+          const uniqueModuleNames = Object.values(userData).map(
+            (item) => item.moduleName
+          );
           setSubscribedModuleNames(uniqueModuleNames);
           setLoading(false);
         }
@@ -32,8 +37,17 @@ const Dashboard = (props) => {
         setLoading(false);
       }
     };
-
     fetchSubscribedModules();
+
+    const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
+    if (UserDetails === null) {
+      setError("OOPS!!! Fetching issue......");
+    } else {
+      UserDetails.then((result) => {
+        const data = result[0];
+        setUsername(data?.username);
+      });
+    }
   }, [props.userEmail]);
 
   const handleLogout = async () => {
@@ -116,7 +130,7 @@ const Dashboard = (props) => {
               </Button>
               <Button
                 onClick={() => {
-                  navigate('/settings')  
+                  navigate("/settings");
                 }}
                 style={{
                   color: "black",
@@ -131,7 +145,9 @@ const Dashboard = (props) => {
                   backgroundColor: "transparent",
                 }}
               >
-                <SettingsIcon style={{ marginRight: "12px", fontSize: "28px" }} />
+                <SettingsIcon
+                  style={{ marginRight: "12px", fontSize: "28px" }}
+                />
                 Settings
               </Button>
               <Button
@@ -176,10 +192,17 @@ const Dashboard = (props) => {
                 marginBottom: "20px",
               }}
             >
-              Welcome Nandan Terry
+              Welcome {username}
             </Typography>
 
             {/* Module display */}
+            {error && (
+              <div
+                style={{ color: "red", fontSize: "3rem", fontStyle: "italic" }}
+              >
+                {error}
+              </div>
+            )}
             <Box style={{ height: "calc(100% - 48px)", overflowY: "auto" }}>
               {loading ? (
                 <Typography>Loading...</Typography>

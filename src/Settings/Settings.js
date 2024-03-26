@@ -4,7 +4,7 @@ import { Typography, Container, Grid } from "@mui/material";
 import Personal from "./Personal";
 import PrivacySettings from "./PrivacySettings";
 
-const Settings = () => {
+const Settings = (props) => {
   const [activeComponent, setActiveComponent] = useState(true);
 
   const buttonStylePersonal = {
@@ -98,7 +98,7 @@ const Settings = () => {
               </Button>
             </Box>
           </Grid>
-          {activeComponent ? <Personal /> : <PrivacySettings />}
+          {activeComponent ? <Personal userEmail={props.userEmail} /> : <PrivacySettings />}
         </Grid>
       </Container>
     </>

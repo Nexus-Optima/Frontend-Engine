@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import GoogleLogo from "../Images/logo512.png";
 import theme from "../Utils/themes";
-import { ConsoleLogger } from "aws-amplify/utils";
+
 
 function Register() {
   const navigate = useNavigate();
@@ -28,6 +28,33 @@ function Register() {
     const hasErrors = Object.values(errors).some((error) => error);
     if (hasErrors) return;  
 
+    const requestBody = {
+      userid: formData.email,
+      username:formData.name,
+      email: formData.email,
+      phone:formData.mobile,
+      company:formData.company
+    };
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_UPDATE}/update_details`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      // Reset form fields after successful submission
+      setFormData({userid:'',username:'',email:'',phone:'',company:''});
+    } catch (error) {
+      console.error('There was an error:', error);
+    }
+  
     try {
       await signUp({
         username: formData.email,
