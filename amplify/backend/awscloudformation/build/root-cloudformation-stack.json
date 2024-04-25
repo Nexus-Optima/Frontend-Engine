@@ -1,5 +1,5 @@
 {
-  "Description": "Root Stack for AWS Amplify Console",
+  "Description": "Root Stack for AWS Amplify CLI",
   "AWSTemplateFormatVersion": "2010-09-09",
   "Parameters": {
     "DeploymentBucketName": {
@@ -152,58 +152,40 @@
         }
       }
     },
-    "apiappliedbellcurvedash": {
+    "authfrontendengine739fcbf1": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-appliedbellcurvedash-dev-141306-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-frontendengine-dev-152350-deployment/amplify-cfn-templates/auth/frontendengine739fcbf1-cloudformation-template.json",
         "Parameters": {
-          "AppSyncApiName": "appliedbellcurvedash",
-          "DynamoDBBillingMode": "PAY_PER_REQUEST",
-          "DynamoDBEnableServerSideEncryption": false,
-          "S3DeploymentBucket": "amplify-appliedbellcurvedash-dev-141306-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/272d6178270a3c9fbcf8a4a38814b6c5b065a28f",
-          "env": "dev"
-        }
-      }
-    },
-    "authAppliedBellCurveDashboard": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-appliedbellcurvedash-dev-141306-deployment/amplify-cfn-templates/auth/AppliedBellCurveDashboard-cloudformation-template.json",
-        "Parameters": {
-          "identityPoolName": "testAuthIdentityPool",
+          "identityPoolName": "frontendengine739fcbf1_identitypool_739fcbf1",
           "allowUnauthenticatedIdentities": false,
-          "resourceNameTruncated": "applied2d8eae8",
-          "userPoolName": "AppliedBellCurveDashboard",
+          "resourceNameTruncated": "fronte739fcbf1",
+          "userPoolName": "frontendengine739fcbf1_userpool_739fcbf1",
           "autoVerifiedAttributes": "email",
           "mfaConfiguration": "OFF",
           "mfaTypes": "SMS Text Message",
           "smsAuthenticationMessage": "Your authentication code is {####}",
           "smsVerificationMessage": "Your verification code is {####}",
-          "emailVerificationSubject": "Verification code: {####}",
-          "emailVerificationMessage": "Verification code: {####}",
+          "emailVerificationSubject": "Your verification code",
+          "emailVerificationMessage": "Your verification code is {####}",
           "defaultPasswordPolicy": false,
           "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": "Requires Lowercase,Requires Numbers,Requires Symbols,Requires Uppercase",
-          "requiredAttributes": "",
+          "passwordPolicyCharacters": "",
+          "requiredAttributes": "email",
           "aliasAttributes": "",
           "userpoolClientGenerateSecret": false,
           "userpoolClientRefreshTokenValidity": 30,
-          "userpoolClientWriteAttributes": "",
-          "userpoolClientReadAttributes": "",
-          "userpoolClientLambdaRole": "Applied2d8eae8_userpoolclient_lambda_role",
+          "userpoolClientWriteAttributes": "email",
+          "userpoolClientReadAttributes": "email",
+          "userpoolClientLambdaRole": "fronte739fcbf1_userpoolclient_lambda_role",
           "userpoolClientSetAttributes": false,
-          "sharedId": "d2d8eae8",
-          "resourceName": "AppliedBellCurveDashboard",
+          "sharedId": "739fcbf1",
+          "resourceName": "frontendengine739fcbf1",
           "authSelections": "identityPoolAndUserPool",
-          "serviceName": "Cognito",
+          "useDefault": "default",
           "usernameAttributes": "email",
-          "useDefault": "manual",
-          "userPoolGroups": false,
           "userPoolGroupList": "",
-          "adminQueries": false,
-          "thirdPartyAuth": false,
-          "authProviders": "",
+          "serviceName": "Cognito",
           "usernameCaseSensitive": false,
           "useEnabledMfas": true,
           "authRoleArn": {
@@ -224,44 +206,11 @@
         }
       }
     },
-    "storageabcusers7": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-appliedbellcurvedash-dev-141306-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
-        "Parameters": {
-          "bucketName": "appliedbellcurve",
-          "selectedGuestPermissions": "",
-          "selectedAuthenticatedPermissions": "s3:PutObject,s3:GetObject,s3:ListBucket",
-          "unauthRoleName": {
-            "Ref": "UnauthRoleName"
-          },
-          "authRoleName": {
-            "Ref": "AuthRoleName"
-          },
-          "s3PrivatePolicy": "Private_policy_23af0716",
-          "s3ProtectedPolicy": "Protected_policy_23af0716",
-          "s3PublicPolicy": "Public_policy_23af0716",
-          "s3ReadPolicy": "read_policy_23af0716",
-          "s3UploadsPolicy": "Uploads_policy_23af0716",
-          "authPolicyName": "s3_amplify_23af0716",
-          "unauthPolicyName": "s3_amplify_23af0716",
-          "AuthenticatedAllowList": "ALLOW",
-          "GuestAllowList": "DISALLOW",
-          "s3PermissionsAuthenticatedPrivate": "s3:PutObject,s3:GetObject",
-          "s3PermissionsAuthenticatedProtected": "s3:PutObject,s3:GetObject",
-          "s3PermissionsAuthenticatedPublic": "s3:PutObject,s3:GetObject",
-          "s3PermissionsAuthenticatedUploads": "s3:PutObject",
-          "s3PermissionsGuestPublic": "DISALLOW",
-          "s3PermissionsGuestUploads": "DISALLOW",
-          "env": "dev"
-        }
-      }
-    },
     "UpdateRolesWithIDPFunction": {
       "DependsOn": [
         "AuthRole",
         "UnauthRole",
-        "authAppliedBellCurveDashboard"
+        "authfrontendengine739fcbf1"
       ],
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -369,7 +318,7 @@
         },
         "idpId": {
           "Fn::GetAtt": [
-            "authAppliedBellCurveDashboard",
+            "authfrontendengine739fcbf1",
             "Outputs.IdentityPoolId"
           ]
         },
