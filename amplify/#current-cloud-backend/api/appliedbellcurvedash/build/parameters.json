@@ -1,7 +1,0 @@
-{
-    "AppSyncApiName": "appliedbellcurvedash",
-    "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "DynamoDBEnableServerSideEncryption": false,
-    "S3DeploymentBucket": "amplify-appliedbellcurvedash-dev-141306-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/272d6178270a3c9fbcf8a4a38814b6c5b065a28f"
-}
