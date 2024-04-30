@@ -7,41 +7,33 @@ import { ThemeProvider } from "@mui/material/styles";
 import { NavLink, useNavigate } from "react-router-dom";
 import theme from "../Utils/themes";
 
-const LoginPage = (props) => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
+import { useUser } from "../Context/userContext";
 
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const { login } = useUser(); // Use the login function from context
+  const [formData, setFormData] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = useState(null);
 
-  // Login function
   const handleLogin = async (e) => {
-    e.preventDefault();
-    const { username, password } = formData;
-    try {
-      await signIn({ username, password });
-      setLoginError(null);
-      props.updateAuthStatus(true);
-      navigate("/dashboard");
-    } catch (error) {
-      setLoginError("Invalid Username or Password");
-      console.log(error);
-    }
+      e.preventDefault();
+      const { username, password } = formData;
+      try {
+          await signIn({ username, password });
+          login(username);
+          navigate("/dashboard");
+      } catch (error) {
+          setLoginError("Invalid Username or Password");
+          console.log(error);
+      }
   };
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+      const { name, value } = event.target;
+      setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleFocus = (fieldName) => {
-    setLoginError(null);
-  };
+  const handleFocus = () => setLoginError(null);
 
   return (
     <ThemeProvider theme={theme}>
