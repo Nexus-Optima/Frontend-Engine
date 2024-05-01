@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Typography, Grid } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { fetchUserDetails } from "../Services/UserDetailsService";
+import { useUser } from "../Context/userContext";
 
 const Personal = (props) => {
+  const { user }= useUser();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
+    const UserDetails = fetchUserDetails({ userEmail: user['email'] });
     if (UserDetails === null) {
       setError("OOPS!!!  Failed to fetch......");
     } else {

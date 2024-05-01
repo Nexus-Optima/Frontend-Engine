@@ -9,8 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
 import { MODULE_DESCRIPTIONS } from "../Utils/constants";
 import { fetchUserDetails } from "../Services/UserDetailsService";
+import { useUser } from "../Context/userContext";
 
-const Dashboard = (props) => {
+const Dashboard = () => {
+  const { user, logout } = useUser();
   const [subscribedModuleNames, setSubscribedModuleNames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
@@ -18,41 +20,39 @@ const Dashboard = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchSubscribedModules = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
-        );
-        const userData = await response.json();
-
-        if (userData !== null) {
-          const uniqueModuleNames = Object.values(userData).map(
-            (item) => item.moduleName
+    if (user.isAuthenticated) {
+      const fetchSubscribedModules = async () => {
+        try {
+          const response = await fetch(
+            `${process.env.REACT_APP_URL}?userId=${user['email']}`
           );
-          setSubscribedModuleNames(uniqueModuleNames);
-          setLoading(false);
+          const userData = await response.json();
+          if (userData) {
+            const uniqueModuleNames = Object.values(userData).map(
+              item => item.moduleName
+            );
+            setSubscribedModuleNames(uniqueModuleNames);
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
         }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
         setLoading(false);
-      }
-    };
-    fetchSubscribedModules();
-
-    const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
-    if (UserDetails === null) {
-      setError("OOPS!!! Fetching issue......");
-    } else {
-      UserDetails.then((result) => {
-        const data = result[0];
-        setUsername(data?.username);
+      };
+      fetchSubscribedModules();
+  
+      fetchUserDetails({ userEmail: user['email'] }).then(result => {
+        if (result && result.length > 0) {
+          setUsername(result[0]?.username);
+        } else {
+          setError("OOPS!!! Fetching issue......");
+        }
       });
     }
-  }, [props.userEmail]);
+  }, [user]);
 
   const handleLogout = async () => {
     await signOut();
-    props.updateAuthStatus(false);
+    logout();
     navigate("/login");
   };
 
@@ -224,7 +224,7 @@ const Dashboard = (props) => {
                         </Grid>
                       );
                     } else {
-                      setError(true);
+                      // setError(true);
                       return null;
                     }
                   })}
