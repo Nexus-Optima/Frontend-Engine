@@ -18,20 +18,29 @@ const Dashboard = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
     const fetchSubscribedModules = async () => {
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
-        );
-        const userData = await response.json();
 
-        if (userData !== null) {
-          const uniqueModuleNames = Object.values(userData).map(
-            (item) => item.moduleName
+        if(props.userEmail){
+          const response = await fetch(
+            `${process.env.REACT_APP_URL}?userId=${props.userEmail}`
           );
-          setSubscribedModuleNames(uniqueModuleNames);
-          setLoading(false);
+          const userData = await response.json();
+          // console.log(userData);
+  
+          if (userData !== null) {
+            const uniqueModuleNames = Object.values(userData).map(
+              (item) => item.moduleName
+            );
+            setSubscribedModuleNames(uniqueModuleNames);
+            setLoading(false);
+          }
         }
+        else{
+          alert("Error")
+        }
+        
       } catch (error) {
         console.error("Error fetching user data:", error);
         setLoading(false);
@@ -39,15 +48,18 @@ const Dashboard = (props) => {
     };
     fetchSubscribedModules();
 
-    const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
-    if (UserDetails === null) {
-      setError("OOPS!!! Fetching issue......");
-    } else {
-      UserDetails.then((result) => {
-        const data = result[0];
-        setUsername(data?.username);
-      });
+    if (props.userEmail) {
+      const UserDetails = fetchUserDetails({ userEmail: props.userEmail });
+      if (UserDetails === null) {
+        setError("OOPS!!! Fetching issue......");
+      } else {
+        UserDetails.then((result) => {
+          const data = result[0];
+          setUsername(data?.username);
+        });
+      }
     }
+   
   }, [props.userEmail]);
 
   const handleLogout = async () => {
@@ -220,19 +232,24 @@ const Dashboard = (props) => {
                           <Module
                             name={moduleDescription.name}
                             description={moduleDescription.description}
+                            userEmail={props.userEmail}
+                            username={username}
                           />
                         </Grid>
                       );
                     } else {
-                      setError(true);
+                      // setError(true);
                       return null;
                     }
                   })}
                 </Grid>
               )}
               {error && (
-                <Typography style={{ color: "black", textAlign: "center", marginTop: 20 }}>
-                  Some modules are unavailable at the moment. Please try again later.
+                <Typography
+                  style={{ color: "black", textAlign: "center", marginTop: 20 }}
+                >
+                  Some modules are unavailable at the moment. Please try again
+                  later.
                 </Typography>
               )}
             </Box>

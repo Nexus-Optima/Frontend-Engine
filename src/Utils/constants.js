@@ -1,5 +1,5 @@
 export const MODULE_DESCRIPTIONS = {
-  forecasting: {
+  forecast: {
     name: "Forecasting",
     description: "Tool for commodities Forecasting",
   },
@@ -8,7 +8,7 @@ export const MODULE_DESCRIPTIONS = {
     description: "Tool for Optimising",
   },
   inventory_management: {
-    name: "Inventory Management",
+    name: "InventoryManagement",
     description: "Tool for Inventory Management",
   },
   // Add other module descriptions here
