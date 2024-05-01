@@ -220,6 +220,8 @@ const Dashboard = () => {
                           <Module
                             name={moduleDescription.name}
                             description={moduleDescription.description}
+                            userEmail={props.userEmail}
+                            username={username}
                           />
                         </Grid>
                       );
@@ -231,8 +233,11 @@ const Dashboard = () => {
                 </Grid>
               )}
               {error && (
-                <Typography style={{ color: "black", textAlign: "center", marginTop: 20 }}>
-                  Some modules are unavailable at the moment. Please try again later.
+                <Typography
+                  style={{ color: "black", textAlign: "center", marginTop: 20 }}
+                >
+                  Some modules are unavailable at the moment. Please try again
+                  later.
                 </Typography>
               )}
             </Box>

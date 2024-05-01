@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, Typography, Grid } from "@mui/material";
-
-import { signIn } from "aws-amplify/auth";
+import { signIn} from "aws-amplify/auth";
 import GoogleLogo from "../Images/logo512.png";
 import { ThemeProvider } from "@mui/material/styles";
 import { NavLink, useNavigate } from "react-router-dom";

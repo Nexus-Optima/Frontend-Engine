@@ -23,8 +23,22 @@ const useStyles = makeStyles({
   },
 });
 
-const Module = ({ name, description }) => {
+const Module = ({ name, description, userEmail, username }) => {
   const classes = useStyles();
+
+  const handleLaunch = async (e) => {
+    e.preventDefault();
+    try {
+      const sessionInfo = {
+        email: userEmail,
+        username: username,
+      };
+      const queryString = new URLSearchParams(sessionInfo).toString();
+      window.location.href = `https://abhilaksh.dziq5tl57ctj0.amplifyapp.com/?${queryString}`;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Card
@@ -33,11 +47,11 @@ const Module = ({ name, description }) => {
         margin: "10px 30px",
         display: "flex",
         flexDirection: "column",
-        height: '320px',
-        borderRadius: '20px',
+        height: "320px",
+        borderRadius: "20px",
         border: "1px solid black",
-        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
-        transition: '0.3s'
+        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
+        transition: "0.3s",
       }}
       className={classes.cardStyle}
     >
@@ -75,6 +89,7 @@ const Module = ({ name, description }) => {
             cursor: "pointer",
             padding: "0.5rem 2rem",
           }}
+          onClick={handleLaunch}
           className={classes.launchButton}
         >
           Launch
