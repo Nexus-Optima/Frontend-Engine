@@ -34,7 +34,7 @@ const Module = ({ name, description, userEmail, username }) => {
         username: username,
       };
       const queryString = new URLSearchParams(sessionInfo).toString();
-      window.location.href = `https://abhilaksh.dziq5tl57ctj0.amplifyapp.com/?${queryString}`;
+      window.location.href = `https://main.dziq5tl57ctj0.amplifyapp.com/?${queryString}`;
     } catch (error) {
       console.log(error);
     }

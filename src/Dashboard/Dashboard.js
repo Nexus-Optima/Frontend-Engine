@@ -220,7 +220,7 @@ const Dashboard = () => {
                           <Module
                             name={moduleDescription.name}
                             description={moduleDescription.description}
-                            userEmail={props.userEmail}
+                            userEmail={user['email']}
                             username={username}
                           />
                         </Grid>
