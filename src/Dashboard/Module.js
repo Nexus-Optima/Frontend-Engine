@@ -50,8 +50,8 @@ const Module = ({ name, description, userEmail, username }) => {
         height: "320px",
         borderRadius: "20px",
         border: "1px solid black",
-        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
         transition: "0.3s",
+        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
       }}
       className={classes.cardStyle}
     >
@@ -100,3 +100,4 @@ const Module = ({ name, description, userEmail, username }) => {
 };
 
 export default Module;
+
