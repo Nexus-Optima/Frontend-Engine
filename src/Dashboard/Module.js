@@ -43,7 +43,7 @@ const Module = ({ name, description, userEmail, username,module }) => {
   return (
     <Card
       style={{
-        width: "90%",
+        width: "85%",
         margin: "5% 10%",
         display: "flex",
         flexDirection: "column",
@@ -75,7 +75,7 @@ const Module = ({ name, description, userEmail, username,module }) => {
             color="error"
             style={{
               textAlign: "justify",
-              margin: "0% 2% 50%",
+              margin: "0% 2% 40%",
             }}
           >
             Error launching module. Please try again later.
@@ -89,7 +89,7 @@ const Module = ({ name, description, userEmail, username,module }) => {
               component="p"
               style={{
                 textAlign: "justify",
-                margin: "0% 2% 50%",
+                margin: "0% 2% 40%",
               }}
             >
               {description}

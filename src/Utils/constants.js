@@ -1,5 +1,5 @@
 export const MODULE_DESCRIPTIONS = {
-  forecast: {
+  forecasting: {
     name: "Forecasting",
     description: "Tool for commodities Forecasting",
     link:"https://main.d3s7ohgkb2cf86.amplifyapp.com/",
