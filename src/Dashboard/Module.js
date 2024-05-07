@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import {
   Typography,
   Card,
@@ -26,7 +26,6 @@ const useStyles = makeStyles({
 const Module = ({ name, description, userEmail, username }) => {
   const classes = useStyles();
   const [error, setError] = useState(false);
-
   const handleLaunch = async (e) => {
     e.preventDefault();
     try {
@@ -35,7 +34,11 @@ const Module = ({ name, description, userEmail, username }) => {
         username: username,
       };
       const queryString = new URLSearchParams(sessionInfo).toString();
-      window.location.href = `${process.env.REACT_APP_SUBDOMAIN_URL}?${queryString}`;
+      if (`${name}` === "Forecasting") {
+        window.location.href = `https://main.d3s7ohgkb2cf86.amplifyapp.com/?${queryString}`;
+      } else {
+        window.location.href = `https://main.dziq5tl57ctj0.amplifyapp.com/?${queryString}`;
+      }
     } catch (error) {
       setError(true);
     }
@@ -68,9 +71,9 @@ const Module = ({ name, description, userEmail, username }) => {
         >
           {name}
         </Typography>
-        </CardContent>
-        {error ? (
-          <>
+      </CardContent>
+      {error ? (
+        <>
           <Typography
             variant="body2"
             color="error"
@@ -81,22 +84,24 @@ const Module = ({ name, description, userEmail, username }) => {
           >
             Error launching module. Please try again later.
           </Typography>
-          </>
-        ):(<>
-        <CardContent>
-        <Typography
-          variant="body2"
-          component="p"
-          style={{
-            textAlign: "justify",
-            margin: "0% 2% 50%",
-          }}
-        >
-          {description}
-        </Typography>
-      </CardContent>
-    </>)}
-        
+        </>
+      ) : (
+        <>
+          <CardContent>
+            <Typography
+              variant="body2"
+              component="p"
+              style={{
+                textAlign: "justify",
+                margin: "0% 2% 50%",
+              }}
+            >
+              {description}
+            </Typography>
+          </CardContent>
+        </>
+      )}
+
       <CardActions style={{ justifyContent: "center", paddingBottom: "2%" }}>
         <Button
           size="small"
