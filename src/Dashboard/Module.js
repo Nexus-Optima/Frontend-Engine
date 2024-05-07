@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Module = ({ name, description, userEmail, username }) => {
+const Module = ({ name, description, userEmail, username,module }) => {
   const classes = useStyles();
   const [error, setError] = useState(false);
   const handleLaunch = async (e) => {
@@ -34,11 +34,7 @@ const Module = ({ name, description, userEmail, username }) => {
         username: username,
       };
       const queryString = new URLSearchParams(sessionInfo).toString();
-      if (`${name}` === "Forecasting") {
-        window.location.href = `https://main.d3s7ohgkb2cf86.amplifyapp.com/?${queryString}`;
-      } else {
-        window.location.href = `https://main.dziq5tl57ctj0.amplifyapp.com/?${queryString}`;
-      }
+      window.location.href = `${module.link}?${queryString}`;
     } catch (error) {
       setError(true);
     }

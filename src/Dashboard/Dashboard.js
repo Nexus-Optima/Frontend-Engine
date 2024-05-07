@@ -222,6 +222,7 @@ const Dashboard = () => {
                             description={moduleDescription.description}
                             userEmail={user['email']}
                             username={username}
+                            module={moduleDescription}
                           />
                         </Grid>
                       );
