@@ -60,6 +60,10 @@ const Dashboard = () => {
     navigate("/explore");
   };
 
+  const handleContactUs = async () => {
+    navigate("/contactus");
+  };
+
   return (
     <>
       <Container maxWidth={false} style={{ padding: 0 }}>
@@ -109,9 +113,7 @@ const Dashboard = () => {
                 Explore Modules
               </Button>
               <Button
-                onClick={() => {
-                  /* handle navigation */
-                }}
+                onClick={handleContactUs}
                 style={{
                   color: "black",
                   fontWeight: "bold",
