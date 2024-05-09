@@ -7,6 +7,8 @@ import {
   Button,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import CryptoJS from "crypto-js";
+
 
 const useStyles = makeStyles({
   cardStyle: {
@@ -23,6 +25,16 @@ const useStyles = makeStyles({
   },
 });
 
+const encryptData = (data, secretKey,setError) => {
+  try {
+    const jsonData = JSON.stringify(data);
+    const encryptedData = CryptoJS.AES.encrypt(jsonData, secretKey).toString();
+    return encryptedData;
+  } catch (error) {
+    setError(true);
+  }
+};
+
 const Module = ({ name, description, userEmail, username,module }) => {
   const classes = useStyles();
   const [error, setError] = useState(false);
@@ -33,8 +45,9 @@ const Module = ({ name, description, userEmail, username,module }) => {
         email: userEmail,
         username: username,
       };
-      const queryString = new URLSearchParams(sessionInfo).toString();
-      window.location.href = `${module.link}?${queryString}`;
+      const secretKey = process.env.REACT_APP_SECRET_KEY;
+      const encryptedData = encryptData(sessionInfo, secretKey,setError);
+      window.location.href = `${module.link}?data=${encryptedData}`;
     } catch (error) {
       setError(true);
     }
