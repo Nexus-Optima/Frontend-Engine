@@ -14,6 +14,7 @@ import pic from "./../Images/Applied_Bell_Curve_white.png";
 import { useUser } from "../Context/userContext";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import GoogleLogo from "../Images/white-22.png";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -101,7 +102,7 @@ const ContactUs = () => {
             <img
               src={pic}
               alt="Logo"
-              style={{ width: "500px", height: "628px" }}
+              style={{ width: "70%", height: "70%" }}
             />
           </Grid>
 
