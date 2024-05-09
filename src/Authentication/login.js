@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, Typography, Grid } from "@mui/material";
 import { signIn} from "aws-amplify/auth";
-import GoogleLogo from "../Images/logo512.png";
+import GoogleLogo from "../Images/white-22.png";
 import { ThemeProvider } from "@mui/material/styles";
 import { NavLink, useNavigate } from "react-router-dom";
 import theme from "../Utils/themes";
@@ -54,11 +54,8 @@ const LoginPage = () => {
             <img
               src={GoogleLogo}
               alt="Logo"
-              style={{ width: "100px", height: "100px" }}
+              style={{ width: "70%", height: "70%" }}
             />
-            <Typography variant="h5" style={{ color: "white" }}>
-              APPLIED BELL CURVE
-            </Typography>
           </Grid>
 
           {/* Right column */}

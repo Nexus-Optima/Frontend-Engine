@@ -13,7 +13,7 @@ import {
   MenuItem,
   InputLabel,
 } from "@mui/material";
-import GoogleLogo from "../Images/logo512.png";
+import GoogleLogo from "../Images/white-22.png";
 import theme from "../Utils/themes";
 
 
@@ -159,14 +159,8 @@ function Register() {
             <img
               src={GoogleLogo}
               alt="Logo"
-              style={{ width: "100px", height: "100px" }}
+              style={{ width: "70%", height: "70%" }}
             />
-            <Typography
-              variant="h5"
-              style={{ color: "white", marginTop: "20px" }}
-            >
-              APPLIED BELL CURVE
-            </Typography>
           </Grid>
 
           {/* Right column */}
