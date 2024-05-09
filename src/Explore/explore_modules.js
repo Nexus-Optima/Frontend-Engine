@@ -61,7 +61,7 @@ function ExploreModules() {
             Applied Bell Curve
           </Typography>
           <Box sx={{flexGrow:1}}></Box>
-          <IconButton color="inherit" onClick={() => navigate('/')} sx={{ marginRight: 5 }}>
+          <IconButton color="inherit" onClick={() => navigate('/dashboard')} sx={{ marginRight: 5 }}>
             <HomeIcon />
           </IconButton>
         </Toolbar>
@@ -133,7 +133,7 @@ function ExploreModules() {
                 </Box>
               </CardContent>
               <CardActions sx={{ justifyContent: 'center', display: 'flex', width: '100%' }}>
-                <Button variant="contained" size="large" sx={{ maxWidth: 'fit-content', width: '40%' }}>Get Quote</Button>
+                <Button variant="contained" size="large" sx={{ maxWidth: 'fit-content', width: '40%' }} onClick={() => navigate(`/contactus?module=${modules[visibleModuleIndex].name}`)}>Get Quote</Button>
               </CardActions>
             </Card>
           ) : (
