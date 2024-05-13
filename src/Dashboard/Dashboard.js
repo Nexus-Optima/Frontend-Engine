@@ -10,7 +10,7 @@ import { signOut } from "aws-amplify/auth";
 import { MODULE_DESCRIPTIONS } from "../Utils/constants";
 import { fetchUserDetails } from "../Services/UserDetailsService";
 import { useUser } from "../Context/userContext";
-import pic from "./../Images/Applied_Bell_Curve_black.png";
+import pic from "./../Images/abc_image.png";
 
 const Dashboard = () => {
   const { user, logout } = useUser();
@@ -81,12 +81,17 @@ const Dashboard = () => {
             }}
           >
             {/* Sidebar content */}
-            <img
-              src={pic}
-              alt="Applied Bell Curve"
-              style={{ width: "128%", height: "50%",marginBottom:"20%"}}
-            />
-
+            <Box style={{ padding: 0, flexGrow: 0, display: 'flex', alignItems: 'flex-start' }}>
+              <img
+                src={pic}
+                alt="Applied Bell Curve"
+                style={{
+                  marginTop: 10,
+                  width: '100%', // Ensures the image takes full width
+                  display: 'block', // Ensures the image does not add extra space around it
+                }}
+              />
+            </Box>
             {/* Navigation buttons */}
             <Box style={{ padding: "0 2%", marginBottom: "2%" }}>
               <Button

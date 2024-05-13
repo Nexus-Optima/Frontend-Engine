@@ -13,7 +13,7 @@ import {
   MenuItem,
   InputLabel,
 } from "@mui/material";
-import GoogleLogo from "../Images/white-22.png";
+import pic from "../Images/white-22.png";
 import theme from "../Utils/themes";
 
 
@@ -157,9 +157,9 @@ function Register() {
             }}
           >
             <img
-              src={GoogleLogo}
+              src={pic}
               alt="Logo"
-              style={{ width: "70%", height: "70%" }}
+              style={{ width: "100%", height: "70%" }}
             />
           </Grid>
 
