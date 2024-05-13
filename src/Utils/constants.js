@@ -2,7 +2,7 @@ export const MODULE_DESCRIPTIONS = {
   forecasting: {
     name: "Forecasting",
     description: "Tool for commodities Forecasting",
-    link:"https://main.d3s7ohgkb2cf86.amplifyapp.com/",
+    link:"https://forecast.appliedbellcurve.com",
   },
   optimising: {
     name: "Optimiser",
@@ -11,7 +11,7 @@ export const MODULE_DESCRIPTIONS = {
   inventory_management: {
     name: "InventoryManagement",
     description: "Tool for Inventory Management",
-    link:"https://main.dziq5tl57ctj0.amplifyapp.com/",
+    link:"https://shelf.appliedbellcurve.com",
   },
   // Add other module descriptions here
 };

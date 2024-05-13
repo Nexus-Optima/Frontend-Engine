@@ -37,7 +37,7 @@ function Register() {
     };
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_UPDATE}/update_details`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/update_details`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
