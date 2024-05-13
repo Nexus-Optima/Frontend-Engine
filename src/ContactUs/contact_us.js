@@ -102,7 +102,7 @@ const ContactUs = () => {
             <img
               src={pic}
               alt="Logo"
-              style={{ width: "70%", height: "70%" }}
+              style={{ width: "100%", height: "70%" }}
             />
           </Grid>
 
