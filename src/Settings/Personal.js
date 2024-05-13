@@ -51,7 +51,7 @@ const Personal = (props) => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_UPDATE_PERSONAL_DETAILS}/${props.userEmail}`,
+        `${process.env.REACT_APP_BACKEND}/update_personal_details${props.userEmail}`,
         {
           method: "PUT",
           headers: {
