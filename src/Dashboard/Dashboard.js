@@ -10,6 +10,7 @@ import { signOut } from "aws-amplify/auth";
 import { MODULE_DESCRIPTIONS } from "../Utils/constants";
 import { fetchUserDetails } from "../Services/UserDetailsService";
 import { useUser } from "../Context/userContext";
+import pic from "./../Images/Applied_Bell_Curve_black.png";
 
 const Dashboard = () => {
   const { user, logout } = useUser();
@@ -24,7 +25,7 @@ const Dashboard = () => {
       const fetchSubscribedModules = async () => {
         try {
           const response = await fetch(
-            `${process.env.REACT_APP_URL}?userId=${user["email"]}`
+            `${process.env.REACT_APP_BACKEND}/get_user?userId=${user["email"]}`
           );
           const userData = await response.json();
           if (userData) {
@@ -80,17 +81,11 @@ const Dashboard = () => {
             }}
           >
             {/* Sidebar content */}
-            <Typography
-              variant="body1"
-              style={{
-                color: "black",
-                padding: "10% 2%",
-                fontWeight: "bold",
-                fontSize: "24px",
-              }}
-            >
-              Applied Bell Curve
-            </Typography>
+            <img
+              src={pic}
+              alt="Applied Bell Curve"
+              style={{ width: "128%", height: "50%",marginBottom:"20%"}}
+            />
 
             {/* Navigation buttons */}
             <Box style={{ padding: "0 2%", marginBottom: "2%" }}>

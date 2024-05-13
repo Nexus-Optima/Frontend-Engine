@@ -9,8 +9,11 @@ import {
   Container,
 } from "@mui/material";
 import theme from "../Utils/themes";
-import GoogleLogo from "../Images/logo512.png";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
+import pic from "./../Images/Applied_Bell_Curve_white.png";
+import { useUser } from "../Context/userContext";
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +23,8 @@ const ContactUs = () => {
   });
 
   const location = useLocation();
+  const { user } = useUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const moduleName = new URLSearchParams(location.search).get("module");
@@ -35,11 +40,19 @@ const ContactUs = () => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  const handleArrow = () => {
+    if (user.isAuthenticated) {
+      navigate("/dashboard");
+    } else {
+      navigate("/");
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     console.log(formData);
-    fetch(`${process.env.REACT_APP_EMAIL}`, {
+    fetch(`${process.env.REACT_APP_BACKEND}/send-email`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,16 +84,25 @@ const ContactUs = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              position:"relative",
             }}
           >
+            <IconButton
+              style={{
+                position: "absolute",
+                top: 10,
+                left: 10,
+                color: "white",
+              }}
+              onClick={handleArrow}
+            >
+              <ArrowBackIcon />
+            </IconButton>
             <img
-              src={GoogleLogo}
+              src={pic}
               alt="Logo"
-              style={{ width: "100px", height: "100px" }}
+              style={{ width: "500px", height: "628px" }}
             />
-            <Typography variant="h5" style={{ color: "white" }}>
-              APPLIED BELL CURVE
-            </Typography>
           </Grid>
 
           {/* Right column */}
