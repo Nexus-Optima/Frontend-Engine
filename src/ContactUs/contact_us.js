@@ -79,7 +79,7 @@ const ContactUs = () => {
             xs={12}
             md={4}
             style={{
-              background: "#32047F",
+              backgroundColor:"#063954", 
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -120,7 +120,8 @@ const ContactUs = () => {
             {/* <Grid container spacing={1} sx={{ mx: 10 }}> */}
             {/* <Grid item xs={12} sm={5} sx={{ textAlign: "left" }}> */}
             <Box component="form" onSubmit={handleSubmit}>
-              <Typography variant="h6" sx={{ color: "green" }}>
+             {/* <Typography variant="h6" sx={{ color: "green" }}> */}
+              <Typography variant="h6">
                 Contact Us
               </Typography>
               <Typography variant="h4">Get in Touch With Us</Typography>

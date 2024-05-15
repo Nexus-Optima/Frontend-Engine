@@ -11,7 +11,8 @@ export const MODULE_DESCRIPTIONS = {
   inventory_management: {
     name: "InventoryManagement",
     description: "Tool for Inventory Management",
-    link:"https://shelf.appliedbellcurve.com",
+    // link:"https://shelf.appliedbellcurve.com",
+    link:"http://localhost:3001/",
   },
   // Add other module descriptions here
 };
