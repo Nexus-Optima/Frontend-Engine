@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <AppBar position="static" sx={{ 
-        backgroundColor: "rgba(50, 4, 127, 0.98)",
+        backgroundColor:"#063954",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         marginTop: theme.spacing(0.40),
         marginLeft: "auto",

@@ -2,10 +2,12 @@ import { createTheme } from '@mui/material/styles';
 
 export const buttonStyle = {
   textTransform: 'none',
-  backgroundColor: '#32047F',
+  backgroundColor: '#01CEFF',
   padding: '12px 40px',
+  color:"black",
   '&:hover': {
-    backgroundColor: '#4b2ca3', // Hover color
+    backgroundColor: '#063954',// Hover color
+    color:"white" 
   },
 };
 

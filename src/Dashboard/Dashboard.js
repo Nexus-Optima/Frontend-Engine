@@ -182,7 +182,7 @@ const Dashboard = () => {
               paddingTop: "1%",
               height: "100%",
               display: "flex", // Use flex for better control
-              flexDirection: "column", // Stack items vertically
+              flexDirection: "column", // Stack items vertically 
             }}
           >
             <Typography

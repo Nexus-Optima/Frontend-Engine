@@ -5,7 +5,8 @@ import pic from "../Images/white-22.png";
 import { ThemeProvider } from "@mui/material/styles";
 import { NavLink, useNavigate } from "react-router-dom";
 import theme from "../Utils/themes";
-
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useUser } from "../Context/userContext";
 
 const LoginPage = () => {
@@ -33,6 +34,10 @@ const LoginPage = () => {
   };
 
   const handleFocus = () => setLoginError(null);
+  
+  const handleArrow = () => {
+      navigate("/");
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,13 +49,24 @@ const LoginPage = () => {
             xs={12}
             md={4}
             style={{
-              background: "#32047F",
+              backgroundColor:"#063954", 
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
+            <IconButton
+              style={{
+                position: "absolute",
+                top: 10,
+                left: 10,
+                color: "white",
+              }}
+              onClick={handleArrow}
+            >
+              <ArrowBackIcon />
+            </IconButton>
             <img
               src={pic}
               alt="Logo"
@@ -128,7 +144,7 @@ const LoginPage = () => {
               )}
 
               <Grid item xs={12} style={{ width: "500px" }}>
-                <Button variant="contained" onClick={handleLogin}>
+                <Button variant="contained" onClick={handleLogin} >
                   LOGIN
                 </Button>
               </Grid>
@@ -136,7 +152,7 @@ const LoginPage = () => {
               <Grid item xs={12}>
                 <NavLink
                   to="/register"
-                  style={{ paddingLeft: 13, textDecoration: "none" }}
+                  style={{ paddingLeft: 13, textDecoration: "none",color:'#063954' }}
                 >
                   Don't have an account ? Register Here{" "}
                 </NavLink>

@@ -15,7 +15,8 @@ import {
 } from "@mui/material";
 import pic from "../Images/white-22.png";
 import theme from "../Utils/themes";
-
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Register() {
   const navigate = useNavigate();
@@ -138,6 +139,10 @@ function Register() {
     "Education",
     "Other",
   ];
+  
+  const handleArrow = () => {
+      navigate("/");
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -149,13 +154,24 @@ function Register() {
             xs={12}
             md={4}
             style={{
-              background: "#32047F",
+              backgroundColor:"#063954", 
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
+            <IconButton
+              style={{
+                position: "absolute",
+                top: 10,
+                left: 10,
+                color: "white",
+              }}
+              onClick={handleArrow}
+            >
+              <ArrowBackIcon />
+            </IconButton>
             <img
               src={pic}
               alt="Logo"
@@ -336,7 +352,7 @@ function Register() {
               <Grid item xs={12} md={5}>
                 <NavLink
                   to="/login"
-                  style={{ paddingLeft: 13, textDecoration: "none" }}
+                  style={{ paddingLeft: 13, textDecoration: "none",color:'#063954' }}
                 >
                   Already have an Account ? Login Here!
                 </NavLink>

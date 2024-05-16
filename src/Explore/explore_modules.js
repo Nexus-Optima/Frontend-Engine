@@ -87,7 +87,7 @@ function ExploreModules() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBar position="static">
-        <Toolbar sx={{ backgroundColor: "#32047F" }}>
+        <Toolbar sx={{   backgroundColor:"#063954", }}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
             Applied Bell Curve
           </Typography>
@@ -264,7 +264,7 @@ function ExploreModules() {
                 <Button
                   variant="contained"
                   size="large"
-                  sx={{ maxWidth: "fit-content", width: "40%" }}
+                  sx={{ maxWidth: "fit-content", width: "40%"}}
                   onClick={() =>
                     navigate(
                       `/contactus?module=${modules[visibleModuleIndex].name}`

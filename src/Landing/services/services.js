@@ -19,8 +19,8 @@ const ServiceCard = ({ service }) => (
       maxWidth: '100%', 
       height: '90%', 
       display: 'flex', 
-      flexDirection: 'column', 
-      background: '#32047F',
+      flexDirection: 'column',
+      backgroundColor:"#063954", 
       borderRadius: 3,
       mx: 1
     }}
