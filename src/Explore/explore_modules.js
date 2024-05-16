@@ -20,6 +20,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import HomeIcon from "@mui/icons-material/Home";
 import theme from "../Utils/themes";
 import { useUser } from "../Context/userContext";
+import Inventorygif from "../Gifs/Inventory_Mangement.gif";
+import Forecastgif from "../Gifs/Forecasting.gif";
 
 function ExploreModules() {
   const navigate = useNavigate();
@@ -28,22 +30,22 @@ function ExploreModules() {
       name: "Forecast Tool",
       definition:
         "Commodity markets are volatile and have multiple unpredictable forces at play. In most cases, limited knowledge and sentiment drives procurement of commodities, leading to fluctuations in the profitability of the organization. In Forecaster, Machine Learning and Sentiment Analysis are used to predict future price movements. Global indices, weather conditions, plant shutdowns, end market movement, etc. are taken into consideration. Futures and news articles from across the globe are also analyzed to enhance the accuracy of the model. Along with price forecasting, Forecaster also allows organizations to make their own predictions and to track their performance. Forecaster is meant to assist procurement managers in their decision-making process and turn decision takers into decision makers",
-      features: ["Feature 1", "Feature 2"],
-      images: ["your_image_url_1_here"], // Array of image URLs
+      features: ["Overview page", "Insights page"],
+      gif: Forecastgif,
     },
     {
       name: "Optimiser",
       definition:
         "Procurement strategies for manufacturers play a crucial role in defining the overall profitability of the organization. Lack of awareness of the market and misinformation can lead to errors in decision making. Optimizer uses the in-built Forecaster engine to track global markets and analytics to create customized action plan for organizations. Procurement managers can use insights to create their own strategy and track their performance. Optimizer is meant to simplify planning and to improve decision making.",
       features: ["Feature 3", "Feature 4"],
-      images: ["your_image_url_1_here"], // Array of image URLs
+      //gif:,
     },
     {
       name: "Inventory Manager",
       definition:
         "Inventory management involves understanding the current levels of inventory, predicting the future consumption patterns, negotiating with vendors and coordinating with manufacturing sites. Inefficient management can lead to higher inventory costs, increase in downtime due to unavailability of raw materials and inaccurate price discovery. Inventory Manager automates the pipeline for inventory management. IM first uses APIs to track real time current stocks and analytics to categorize current stock into Understock, To Be Indented, To Be Ordered and Overstock. IM then fetches pending deliveries and requisitions and creates an action plan for all materials. IM finally prioritizes these actions plans into High, Medium and Low. Organizations can use IM to automate pipelines to efficiently manage inventories in a systematic and sustainable manner.",
-      features: ["Feature 5", "Feature 6"],
-      images: ["your_image_url_1_here"], // Array of image URLs
+      features: ["Summary page, ", "Action Plan page ", "Current Levels page"],
+      gif: Inventorygif,
     },
   ];
 
@@ -80,18 +82,51 @@ function ExploreModules() {
         module.definition.toLowerCase().includes(value.toLowerCase())
     );
     setModules(filteredModules);
-    setVisibleModuleIndex(0); // Reset visible module index to show the first result
+    setVisibleModuleIndex(0);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar sx={{   backgroundColor:"#063954", }}>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
-            Applied Bell Curve
-          </Typography>
-          <Box sx={{ flexGrow: 1 }}></Box>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "#063954",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          marginTop: theme.spacing(0.4),
+          marginLeft: "auto",
+          marginRight: { xs: "auto", sm: "auto", md: theme.spacing(11.5) },
+          borderRadius: "10px",
+          width: { xs: "100%", sm: "90%" },
+          height: { xs: theme.spacing(8), md: theme.spacing(8) },
+        }}
+      >
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          {/* Applied Bell Curve Text on the Left */}
+          <Button
+            sx={{
+              color: "white",
+              backgroundColor: "transparent",
+              textDecoration: "none",
+              textTransform: "none",
+              "&:hover": { backgroundColor: "transparent" },
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}
+            >
+              Applied Bell Curve
+            </Typography>
+          </Button>
+          {/* Home Button on right */}
           <IconButton
             color="inherit"
             onClick={handleHomeClick}
@@ -145,7 +180,7 @@ function ExploreModules() {
                 minWidth: 300,
                 m: 1,
                 flexGrow: 1,
-                height: "90%",
+                height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -238,18 +273,13 @@ function ExploreModules() {
                         gap: 2,
                       }}
                     >
-                      {/* Images Section with horizontal scroller */}
-                      {modules[visibleModuleIndex].images.map(
-                        (image, index) => (
-                          <Box
-                            key={index}
-                            component="img"
-                            src={image}
-                            alt={`Module Visual ${index + 1}`}
-                            sx={{ width: 160, height: 90, objectFit: "cover" }}
-                          />
-                        )
-                      )}
+                      {/* GIF Section */}
+                      <Box
+                        component="img"
+                        src={modules[visibleModuleIndex].gif}
+                        alt={`Module Visual`}
+                        sx={{ width: 550, height: 260, objectFit: "cover" }}
+                      />
                     </Box>
                   </Box>
                 </Box>
@@ -264,7 +294,7 @@ function ExploreModules() {
                 <Button
                   variant="contained"
                   size="large"
-                  sx={{ maxWidth: "fit-content", width: "40%"}}
+                  sx={{ maxWidth: "fit-content", width: "40%" }}
                   onClick={() =>
                     navigate(
                       `/contactus?module=${modules[visibleModuleIndex].name}`
