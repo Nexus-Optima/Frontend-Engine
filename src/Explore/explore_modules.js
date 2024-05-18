@@ -22,7 +22,7 @@ import {
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import HomeIcon from "@mui/icons-material/Home";
-import CircleIcon from '@mui/icons-material/Circle';
+import CircleIcon from "@mui/icons-material/Circle";
 import theme from "../Utils/themes";
 import { useUser } from "../Context/userContext";
 import Inventorygif from "../Gifs/Inventory_Mangement.gif";
@@ -147,7 +147,13 @@ function ExploreModules() {
         </Toolbar>
       </AppBar>
       <Box
-        sx={{ display: "flex", justifyContent: "center", p: 2, marginTop: 1, marginRight: 5 }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          p: 2,
+          marginTop: 1,
+          marginRight: 5,
+        }}
       >
         <TextField
           fullWidth
@@ -229,7 +235,6 @@ function ExploreModules() {
                 </Typography>
                 <Typography
                   variant="inherit"
-                  color="text.secondary"
                   sx={{ marginBottom: 2, textAlign: "justify" }}
                 >
                   {modules[visibleModuleIndex].definition}
@@ -255,17 +260,32 @@ function ExploreModules() {
                     <List>
                       {modules[visibleModuleIndex].features.map(
                         (feature, index) => (
-                          <ListItem key={index} sx={{ alignItems: "flex-start", padding: 0 }}>
-                            <ListItemIcon sx={{ minWidth: "auto", paddingTop: "5px" }}>
-                              <CircleIcon fontSize="small" />
+                          <ListItem
+                            key={index}
+                            sx={{
+                              alignItems: "flex-start",
+                              padding: 0,
+                              fontWeight: "bold",
+                              textAlign: "justify",
+                            }}
+                          >
+                            <ListItemIcon
+                              sx={{ minWidth: "auto", marginTop: 0.5 }}
+                            >
+                              <CircleIcon
+                                sx={{ fontSize: 10, color: "black" }}
+                              />
                             </ListItemIcon>
-                            <ListItemText primary={feature} />
+                            <ListItemText
+                              primary={feature}
+                              sx={{ margin: 0 }}
+                            />
                           </ListItem>
                         )
                       )}
                     </List>
                   </Box>
-                  <Box sx={{ flex: 1 }}>
+                  <Box sx={{ flex: 1, padding: 0.25 }}>
                     <Box
                       component="img"
                       src={modules[visibleModuleIndex].gif}
