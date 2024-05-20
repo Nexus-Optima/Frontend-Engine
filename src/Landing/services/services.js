@@ -22,7 +22,7 @@ const ServiceCard = ({ service }) => (
       flexDirection: 'column',
       backgroundColor:"#063954", 
       borderRadius: 3,
-      mx: 1
+      mx: 1,
     }}
   >
     <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: 2, margin: 3 }}>

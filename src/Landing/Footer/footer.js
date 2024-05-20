@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography } from '@mui/material';
-import MuiLink from '@mui/material/Link'; // Renamed Material-UI Link
+import { Box, Grid, Typography, Link as MuiLink } from '@mui/material';
 import { Link } from 'react-router-dom'; // React Router DOM Link for navigation
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -9,37 +8,35 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 const Footer = () => {
   return (
-    <Box component="footer" sx={{ 
-      backgroundColor:"#063954", 
-      color: "white",  
+    <Box component="footer" sx={{
+      backgroundColor: "#063954",
+      color: "white",
       width: '100%',
+      py: 3, // Adds padding vertically
     }}>
-      <Grid container spacing={5} justifyContent="center" textAlign="center" sx={{ maxWidth: '100%', margin: '0 auto'}}>
-        <Grid item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom sx={{fontWeight:'bold'}}>
+      <Grid container spacing={2} justifyContent="center" sx={{ maxWidth: '100%', m: '0 auto' }}>
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', textAlign: 'center' }}>
             Quick Links
           </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3 }}>
-          <Link to="/contactus" style={{ color: 'inherit', textDecoration: 'none' }}>Send an enquiry</Link>
-            {/* Use React Router's Link for internal navigation */}
-            <Link to="/explore" style={{ color: 'inherit', textDecoration: 'none' }}>Explore Modules</Link>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', alignItems: 'center', gap: 1 }}>
+            <Link to="/contactus" style={{ color: 'inherit', textDecoration: 'none', textAlign: 'center' }}>Send an enquiry</Link>
+            <Link to="/explore" style={{ color: 'inherit', textDecoration: 'none', textAlign: 'center' }}>Explore Modules</Link>
           </Box>
         </Grid>
         
-        <Grid item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom sx={{fontWeight:'bold'}}>
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', textAlign: 'center' }}>
             Contact Us
           </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-            <Typography color="inherit" sx={{ mb: 3 }}>admin@appliedbellcurve.com</Typography>
-          </Box>
+          <Typography color="inherit" sx={{ textAlign: 'center' }}>admin@appliedbellcurve.com</Typography>
         </Grid>
         
-        <Grid item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom sx={{fontWeight:'bold'}}>
+        <Grid item xs={12} md={4}>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', textAlign: 'center' }}>
             Follow Us
           </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
             <MuiLink href="#" color="inherit"><FacebookIcon /></MuiLink>
             <MuiLink href="#" color="inherit"><TwitterIcon /></MuiLink>
             <MuiLink href="#" color="inherit"><LinkedInIcon /></MuiLink>
