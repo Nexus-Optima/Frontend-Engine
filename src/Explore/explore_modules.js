@@ -14,12 +14,19 @@ import {
   Box,
   Divider,
   TextField,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
 } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import HomeIcon from "@mui/icons-material/Home";
+import CircleIcon from "@mui/icons-material/Circle";
 import theme from "../Utils/themes";
 import { useUser } from "../Context/userContext";
+import Inventorygif from "../Gifs/Inventory_Mangement.gif";
+import Forecastgif from "../Gifs/Forecasting.gif";
 
 function ExploreModules() {
   const navigate = useNavigate();
@@ -28,22 +35,29 @@ function ExploreModules() {
       name: "Forecast Tool",
       definition:
         "Commodity markets are volatile and have multiple unpredictable forces at play. In most cases, limited knowledge and sentiment drives procurement of commodities, leading to fluctuations in the profitability of the organization. In Forecaster, Machine Learning and Sentiment Analysis are used to predict future price movements. Global indices, weather conditions, plant shutdowns, end market movement, etc. are taken into consideration. Futures and news articles from across the globe are also analyzed to enhance the accuracy of the model. Along with price forecasting, Forecaster also allows organizations to make their own predictions and to track their performance. Forecaster is meant to assist procurement managers in their decision-making process and turn decision takers into decision makers",
-      features: ["Feature 1", "Feature 2"],
-      images: ["your_image_url_1_here"], // Array of image URLs
+      features: [
+        "Overview section which gives insights by comparing the actual and forecast values based on the commodity name",
+        "Insights section which provides News based on Commodity name",
+      ],
+      gif: Forecastgif,
     },
     {
       name: "Optimiser",
       definition:
         "Procurement strategies for manufacturers play a crucial role in defining the overall profitability of the organization. Lack of awareness of the market and misinformation can lead to errors in decision making. Optimizer uses the in-built Forecaster engine to track global markets and analytics to create customized action plan for organizations. Procurement managers can use insights to create their own strategy and track their performance. Optimizer is meant to simplify planning and to improve decision making.",
       features: ["Feature 3", "Feature 4"],
-      images: ["your_image_url_1_here"], // Array of image URLs
+      //gif:,
     },
     {
       name: "Inventory Manager",
       definition:
         "Inventory management involves understanding the current levels of inventory, predicting the future consumption patterns, negotiating with vendors and coordinating with manufacturing sites. Inefficient management can lead to higher inventory costs, increase in downtime due to unavailability of raw materials and inaccurate price discovery. Inventory Manager automates the pipeline for inventory management. IM first uses APIs to track real time current stocks and analytics to categorize current stock into Understock, To Be Indented, To Be Ordered and Overstock. IM then fetches pending deliveries and requisitions and creates an action plan for all materials. IM finally prioritizes these actions plans into High, Medium and Low. Organizations can use IM to automate pipelines to efficiently manage inventories in a systematic and sustainable manner.",
-      features: ["Feature 5", "Feature 6"],
-      images: ["your_image_url_1_here"], // Array of image URLs
+      features: [
+        "Summary section which gives the detailed summary of Current Stock category and priority tables,displaying Material List based on the provided input, ",
+        "Action Plan section which provides various material details and required action plan for them",
+        "Current Levels section which also gives the material details but including their quantities",
+      ],
+      gif: Inventorygif,
     },
   ];
 
@@ -80,18 +94,49 @@ function ExploreModules() {
         module.definition.toLowerCase().includes(value.toLowerCase())
     );
     setModules(filteredModules);
-    setVisibleModuleIndex(0); // Reset visible module index to show the first result
+    setVisibleModuleIndex(0);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar sx={{   backgroundColor:"#063954", }}>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
-            Applied Bell Curve
-          </Typography>
-          <Box sx={{ flexGrow: 1 }}></Box>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "#063954",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          marginTop: theme.spacing(0.8),
+          marginLeft: "auto",
+          marginRight: { xs: "auto", sm: "auto", md: theme.spacing(11.5) },
+          borderRadius: "10px",
+          width: { xs: "100%", sm: "90%" },
+          height: { xs: theme.spacing(8), md: theme.spacing(8) },
+        }}
+      >
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <Button
+            sx={{
+              color: "white",
+              backgroundColor: "transparent",
+              textDecoration: "none",
+              textTransform: "none",
+              "&:hover": { backgroundColor: "transparent" },
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}
+            >
+              Applied Bell Curve
+            </Typography>
+          </Button>
           <IconButton
             color="inherit"
             onClick={handleHomeClick}
@@ -102,7 +147,13 @@ function ExploreModules() {
         </Toolbar>
       </AppBar>
       <Box
-        sx={{ display: "flex", justifyContent: "center", p: 2, marginTop: 1 }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          p: 2,
+          marginTop: 1,
+          marginRight: 5,
+        }}
       >
         <TextField
           fullWidth
@@ -110,7 +161,7 @@ function ExploreModules() {
           variant="outlined"
           value={searchTerm}
           onChange={handleSearchChange}
-          sx={{ maxWidth: "calc(100% - 215px)" }}
+          sx={{ maxWidth: "calc(100% - 80px)" }}
         />
       </Box>
       <Box
@@ -145,13 +196,13 @@ function ExploreModules() {
                 minWidth: 300,
                 m: 1,
                 flexGrow: 1,
-                height: "90%",
+                height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
-              <CardContent>
+              <CardContent sx={{ flexGrow: 1 }}>
                 {/* Tool Name Header */}
                 <Box
                   sx={{
@@ -180,11 +231,10 @@ function ExploreModules() {
                     textAlign: "justify",
                   }}
                 >
-                  Why is it needed ?
+                  Why is it needed?
                 </Typography>
                 <Typography
                   variant="inherit"
-                  color="text.secondary"
                   sx={{ marginBottom: 2, textAlign: "justify" }}
                 >
                   {modules[visibleModuleIndex].definition}
@@ -199,7 +249,7 @@ function ExploreModules() {
                     marginBottom: 2,
                   }}
                 >
-                  <Box sx={{ flex: 0, justifyContent: "flex-start" }}>
+                  <Box sx={{ flex: 1, marginRight: 2 }}>
                     <Typography
                       variant="h6"
                       component="div"
@@ -207,50 +257,48 @@ function ExploreModules() {
                     >
                       Features
                     </Typography>
-                    {modules[visibleModuleIndex].features.map(
-                      (feature, index) => (
-                        <Box
-                          key={index}
-                          sx={{ display: "flex", alignItems: "center" }}
-                        >
-                          <Box
-                            sx={{
-                              width: "6px",
-                              height: "6px",
-                              borderRadius: "50%",
-                              backgroundColor: "text.secondary",
-                              mr: 1,
-                            }}
-                          ></Box>
-                          <Typography variant="inherit" color="text.secondary">
-                            {feature}
-                          </Typography>
-                        </Box>
-                      )
-                    )}
-                  </Box>
-                  <Box sx={{ flex: 0 }}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        gap: 2,
-                      }}
-                    >
-                      {/* Images Section with horizontal scroller */}
-                      {modules[visibleModuleIndex].images.map(
-                        (image, index) => (
-                          <Box
+                    <List>
+                      {modules[visibleModuleIndex].features.map(
+                        (feature, index) => (
+                          <ListItem
                             key={index}
-                            component="img"
-                            src={image}
-                            alt={`Module Visual ${index + 1}`}
-                            sx={{ width: 160, height: 90, objectFit: "cover" }}
-                          />
+                            sx={{
+                              alignItems: "flex-start",
+                              padding: 0,
+                              fontWeight: "bold",
+                              textAlign: "justify",
+                            }}
+                          >
+                            <ListItemIcon
+                              sx={{ minWidth: "auto", marginTop: 0.5 }}
+                            >
+                              <CircleIcon
+                                sx={{ fontSize: 10, color: "black" }}
+                              />
+                            </ListItemIcon>
+                            <ListItemText
+                              primary={feature}
+                              sx={{ margin: 0 }}
+                            />
+                          </ListItem>
                         )
                       )}
-                    </Box>
+                    </List>
+                  </Box>
+                  <Box sx={{ flex: 1, padding: 0.25 }}>
+                    <Box
+                      component="img"
+                      src={modules[visibleModuleIndex].gif}
+                      alt={`Module Visual`}
+                      sx={{
+                        width: "100%",
+                        height: "auto",
+                        maxHeight: 260,
+                        objectFit: "cover",
+                        border: "2px solid black",
+                        borderRadius: "10px",
+                      }}
+                    />
                   </Box>
                 </Box>
               </CardContent>
@@ -264,7 +312,7 @@ function ExploreModules() {
                 <Button
                   variant="contained"
                   size="large"
-                  sx={{ maxWidth: "fit-content", width: "40%"}}
+                  sx={{ maxWidth: "fit-content", width: "40%" }}
                   onClick={() =>
                     navigate(
                       `/contactus?module=${modules[visibleModuleIndex].name}`
