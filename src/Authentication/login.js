@@ -48,12 +48,13 @@ const LoginPage = () => {
             item
             xs={12}
             md={4}
-            style={{
+            sx={{
               backgroundColor:"#063954", 
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              height: { xs: '30vh', md: '100vh' }
             }}
           >
             <IconButton
@@ -70,7 +71,7 @@ const LoginPage = () => {
             <img
               src={pic}
               alt="Logo"
-              style={{ width: "100%", height: "70%" }}
+              style={{ width: "100%", height: "100%" }}
             />
           </Grid>
 
