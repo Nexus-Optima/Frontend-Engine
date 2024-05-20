@@ -42,13 +42,6 @@ function ExploreModules() {
       gif: Forecastgif,
     },
     {
-      name: "Optimiser",
-      definition:
-        "Procurement strategies for manufacturers play a crucial role in defining the overall profitability of the organization. Lack of awareness of the market and misinformation can lead to errors in decision making. Optimizer uses the in-built Forecaster engine to track global markets and analytics to create customized action plan for organizations. Procurement managers can use insights to create their own strategy and track their performance. Optimizer is meant to simplify planning and to improve decision making.",
-      features: ["Feature 3", "Feature 4"],
-      //gif:,
-    },
-    {
       name: "Inventory Manager",
       definition:
         "Inventory management involves understanding the current levels of inventory, predicting the future consumption patterns, negotiating with vendors and coordinating with manufacturing sites. Inefficient management can lead to higher inventory costs, increase in downtime due to unavailability of raw materials and inaccurate price discovery. Inventory Manager automates the pipeline for inventory management. IM first uses APIs to track real time current stocks and analytics to categorize current stock into Understock, To Be Indented, To Be Ordered and Overstock. IM then fetches pending deliveries and requisitions and creates an action plan for all materials. IM finally prioritizes these actions plans into High, Medium and Low. Organizations can use IM to automate pipelines to efficiently manage inventories in a systematic and sustainable manner.",
@@ -107,7 +100,7 @@ function ExploreModules() {
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           marginTop: theme.spacing(0.8),
           marginLeft: "auto",
-          marginRight: { xs: "auto", sm: "auto", md: theme.spacing(11.5) },
+          marginRight: "auto",
           borderRadius: "10px",
           width: { xs: "100%", sm: "90%" },
           height: { xs: theme.spacing(8), md: theme.spacing(8) },
@@ -152,7 +145,7 @@ function ExploreModules() {
           justifyContent: "center",
           p: 2,
           marginTop: 1,
-          marginRight: 5,
+          width: "100%",
         }}
       >
         <TextField
@@ -161,7 +154,7 @@ function ExploreModules() {
           variant="outlined"
           value={searchTerm}
           onChange={handleSearchChange}
-          sx={{ maxWidth: "calc(100% - 80px)" }}
+          sx={{ maxWidth: "90%" }}
         />
       </Box>
       <Box
@@ -169,25 +162,31 @@ function ExploreModules() {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
           p: 2,
           height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 48px - 70px)`,
           overflow: "hidden",
-          px: 10,
+          maxWidth: "90%",
+          margin: "auto",
+          position: "relative",
         }}
       >
         <IconButton
           onClick={() => handleScroll("left")}
           disabled={visibleModuleIndex === 0}
+          sx={{ position: "absolute", left: 0 }}
         >
           <ArrowBackIosNewIcon />
         </IconButton>
         <Box
           sx={{
             display: "flex",
-            overflow: "hidden",
+            overflowY: "auto",
+            overflowX: "hidden",
             width: "100%",
-            height: "95%",
+            height: "100%",
+            position: "relative",
+            flexDirection: "column",
           }}
         >
           {modules.length > 0 ? (
@@ -247,9 +246,10 @@ function ExploreModules() {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     marginBottom: 2,
+                    flexWrap: "wrap",
                   }}
                 >
-                  <Box sx={{ flex: 1, marginRight: 2 }}>
+                  <Box sx={{ flex: 1, marginRight: 2, minWidth: "250px" }}>
                     <Typography
                       variant="h6"
                       component="div"
@@ -285,16 +285,15 @@ function ExploreModules() {
                       )}
                     </List>
                   </Box>
-                  <Box sx={{ flex: 1, padding: 0.25 }}>
+                  <Box sx={{ flex: 1, padding: 0.25, minWidth: "250px" }}>
                     <Box
                       component="img"
                       src={modules[visibleModuleIndex].gif}
                       alt={`Module Visual`}
                       sx={{
-                        width: "100%",
-                        height: "auto",
-                        maxHeight: 260,
-                        objectFit: "cover",
+                        width: "90%",
+                        maxHeight: 300, // Set a maximum height
+                        objectFit: "contain", // Maintain aspect ratio
                         border: "2px solid black",
                         borderRadius: "10px",
                       }}
@@ -332,6 +331,7 @@ function ExploreModules() {
         <IconButton
           onClick={() => handleScroll("right")}
           disabled={visibleModuleIndex === modules.length - 1}
+          sx={{ position: "absolute", right: 0 }}
         >
           <ArrowForwardIosIcon />
         </IconButton>
