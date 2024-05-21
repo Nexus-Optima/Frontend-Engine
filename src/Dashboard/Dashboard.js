@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Grid, Container, Box, Button } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  Container,
+  Box,
+  Button,
+  Menu,
+  MenuItem,
+  IconButton,
+  useTheme,
+} from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SettingsIcon from "@mui/icons-material/Settings";
+import MenuIcon from "@mui/icons-material/Menu";
 import Module from "./Module";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
@@ -19,6 +30,9 @@ const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const theme = useTheme();
+  const [mobileMenuAnchorEl, setMobileMenuAnchorEl] = useState(null);
+  const isMobileMenuOpen = Boolean(mobileMenuAnchorEl);
 
   useEffect(() => {
     if (user.isAuthenticated) {
@@ -51,106 +65,179 @@ const Dashboard = () => {
     }
   }, [user]);
 
+  const handleMobileMenuClose = () => {
+    setMobileMenuAnchorEl(null);
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleNavigate = (path) => {
+    navigate(path);
+    handleMobileMenuClose();
+  };
   const handleLogout = async () => {
     await signOut();
     logout();
-    navigate("/login");
+    handleNavigate("/login");
   };
 
-  const handleExplore = async () => {
-    navigate("/explore");
-  };
-
-  const handleContactUs = async () => {
-    navigate("/contactus");
-  };
+  const mobileMenu = (
+    <Menu
+      anchorEl={mobileMenuAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem onClick={() => handleNavigate("/explore")}>
+        <SearchIcon sx={{ mr: 1 }} /> Explore Modules
+      </MenuItem>
+      <MenuItem onClick={() => handleNavigate("/contactus")}>
+        <CallIcon sx={{ mr: 1 }} /> Contact Us
+      </MenuItem>
+      <MenuItem onClick={() => handleNavigate("/settings")}>
+        <SettingsIcon sx={{ mr: 1 }} /> Settings
+      </MenuItem>
+      <MenuItem onClick={handleLogout}>
+        <LogoutIcon sx={{ mr: 1 }} /> Sign Out
+      </MenuItem>
+    </Menu>
+  );
 
   return (
     <>
       <Container maxWidth={false} style={{ padding: 0 }}>
-        <Grid container style={{ height: "100vh" }}>
+        <Grid container style={{ minHeight: "100vh" }}>
           <Grid
             item
-            xs={2}
+            xs={12}
+            md={2}
             style={{
               background: "#D3D3D3",
               display: "flex",
               flexDirection: "column",
+              alignItems: "center",
               justifyContent: "space-between",
-              height: "100%",
+              height: { xs: "30vh", md: "100vh" },
             }}
           >
             {/* Sidebar content */}
-            <Box style={{ padding: 0, flexGrow: 0, display: 'flex', alignItems: 'flex-start' }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                padding: 0,
+                flexGrow: 0,
+                alignItems: "flex-start",
+              }}
+            >
               <img
                 src={pic}
                 alt="Applied Bell Curve"
                 style={{
-                  marginTop: 10,
-                  width: '100%', // Ensures the image takes full width
-                  display: 'block', // Ensures the image does not add extra space around it
+                  width: "100%",
+                  display: "block",
+                  height: "auto",
                 }}
               />
             </Box>
             {/* Navigation buttons */}
-            <Box style={{ padding: "0 2%", marginBottom: "2%" }}>
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                flexDirection: "column",
+                alignItems: "flex-start",
+                width: "100%",
+                padding: theme.spacing(2),
+              }}
+            >
               <Button
-                onClick={handleExplore}
+                onClick={() => handleNavigate("/explore")}
                 style={{
                   color: "black",
                   fontWeight: "bold",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "flex-start",
-                  padding: "12px 0",
                   width: "100%",
                   textTransform: "none",
                   fontSize: "20px",
                   backgroundColor: "transparent",
+                  marginBottom: theme.spacing(1),
                 }}
               >
-                <SearchIcon style={{ marginRight: "12px", fontSize: "28px" }} />
-                Explore Modules
+                <SearchIcon sx={{ mr: 1 }} />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: { xs: "0.875rem", sm: "1rem", md: "1.2rem" },
+                    fontWeight: "bold",
+                  }}
+                >
+                  Explore Modules
+                </Typography>
               </Button>
               <Button
-                onClick={handleContactUs}
+                onClick={() => handleNavigate("/contactus")}
                 style={{
                   color: "black",
                   fontWeight: "bold",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "flex-start",
-                  padding: "12px 0",
                   width: "100%",
                   textTransform: "none",
                   fontSize: "20px",
                   backgroundColor: "transparent",
+                  marginBottom: theme.spacing(1),
                 }}
               >
-                <CallIcon style={{ marginRight: "12px", fontSize: "28px" }} />
-                Contact Us
+                <CallIcon sx={{ mr: 1 }} />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: { xs: "0.875rem", sm: "1rem", md: "1.2rem" },
+                    fontWeight: "bold",
+                  }}
+                >
+                  Contact Us
+                </Typography>
               </Button>
               <Button
-                onClick={() => {
-                  navigate("/settings");
-                }}
+                onClick={() => handleNavigate("/settings")}
                 style={{
                   color: "black",
                   fontWeight: "bold",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "flex-start",
-                  padding: "12px 0",
                   width: "100%",
                   textTransform: "none",
                   fontSize: "20px",
                   backgroundColor: "transparent",
+                  marginBottom: theme.spacing(1),
                 }}
               >
-                <SettingsIcon
-                  style={{ marginRight: "12px", fontSize: "28px" }}
-                />
-                Settings
+                <SettingsIcon sx={{ mr: 1 }} />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: { xs: "0.875rem", sm: "1rem", md: "1.2rem" },
+                    fontWeight: "bold",
+                  }}
+                >
+                  Settings
+                </Typography>
               </Button>
               <Button
                 onClick={handleLogout}
@@ -160,29 +247,49 @@ const Dashboard = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "flex-start",
-                  padding: "12px 0",
                   width: "100%",
                   textTransform: "none",
                   fontSize: "20px",
                   backgroundColor: "transparent",
+                  marginBottom: theme.spacing(1),
                 }}
               >
-                <LogoutIcon style={{ marginRight: "12px", fontSize: "28px" }} />
-                Sign Out
+                <LogoutIcon sx={{ mr: 1 }} />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: { xs: "0.875rem", sm: "1rem", md: "1.2rem" },
+                    fontWeight: "bold",
+                  }}
+                >
+                  Sign Out
+                </Typography>
               </Button>
             </Box>
+            <IconButton
+              size="large"
+              edge="end"
+              color="inherit"
+              aria-label="menu"
+              sx={{ display: { xs: "flex", md: "none" } }}
+              onClick={handleMobileMenuOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+            {mobileMenu}
           </Grid>
 
           {/* Main content */}
           <Grid
             item
-            xs={10}
+            xs={12}
+            md={10}
             style={{
-              paddingLeft: "5%", // Adjust the padding to align modules
+              paddingLeft: "5%",
               paddingTop: "1%",
-              height: "100%",
-              display: "flex", // Use flex for better control
-              flexDirection: "column", // Stack items vertically 
+              height: "100vh",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             <Typography
@@ -211,14 +318,17 @@ const Dashboard = () => {
               ) : (
                 <Grid
                   container
-                  style={{ justifyContent: "center" }}
+                  style={{
+                    justifyContent: "center",
+                    height: { xs: "20vh", md: "50vh" },
+                  }}
                   spacing={2}
                 >
                   {subscribedModuleNames
                     .filter(
                       (moduleName, index, array) =>
                         array.indexOf(moduleName) === index
-                    ) 
+                    )
                     .map((moduleName, index) => {
                       const moduleDescription = MODULE_DESCRIPTIONS[moduleName];
                       if (moduleDescription) {
@@ -234,7 +344,6 @@ const Dashboard = () => {
                           </Grid>
                         );
                       } else {
-                        // setError(true);
                         return null;
                       }
                     })}
