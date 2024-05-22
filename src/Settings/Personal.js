@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Typography, Grid } from "@mui/material";
+import { TextField, Button, Typography, Grid, Box } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { fetchUserDetails } from "../Services/UserDetailsService";
 import { useUser } from "../Context/userContext";
 
 const Personal = (props) => {
-  const { user }= useUser();
+  const { user } = useUser();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const UserDetails = fetchUserDetails({ userEmail: user['email'] });
+    const UserDetails = fetchUserDetails({ userEmail: user["email"] });
     if (UserDetails === null) {
       setError("OOPS!!!  Failed to fetch......");
     } else {
@@ -26,7 +26,7 @@ const Personal = (props) => {
         });
       });
     }
-  }, [props.userEmail]);
+  }, [user]);
 
   const [formData, setFormData] = useState({
     userid: "",
@@ -84,31 +84,48 @@ const Personal = (props) => {
         item
         xs={10}
         style={{
-          paddingLeft: "5%", // Adjust the padding to align modules
-          paddingTop: "1%",
-          height: "100%",
-          display: "flex", // Use flex for better control
-          flexDirection: "column", // Stack items vertically
+          paddingLeft: "5%",
+          height: "90%",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        <HomeIcon
-          sx={{ paddingLeft: "90%", fontSize: "50px" }}
-          onClick={handleHomePage}
-        />
-
-        <Typography
-          variant="h2"
-          component="h2"
-          style={{
-            color: "black",
-            fontWeight: "bold",
-            marginBottom: "20px",
-            paddingRight: "10%",
-            marginTop: "10%",
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: { xs: "space-between" },
+            alignItems: "center",
+            width: "80%",
+            paddingLeft: { md: "13%" },
+            mt: { xs: 2, md: 0 },
           }}
         >
-          Settings
-        </Typography>
+          <Typography
+            variant="h2"
+            component="h2"
+            sx={{
+              color: "black",
+              fontWeight: "bold",
+              textAlign: "center",
+              paddingLeft: { xs: "30%" },
+              marginTop: { md: "10%" },
+              fontSize: { xs: "2rem", sm: "2rem", md: "3rem" },
+            }}
+          >
+            Settings
+          </Typography>
+          <HomeIcon
+            sx={{
+              fontSize: { xs: "2.5rem", md: "3rem" },
+              cursor: "pointer",
+              paddingLeft: { xs: "28%" },
+              paddingRight: { md: "2%" },
+              marginBottom: { xs: "2%", md: "20%" },
+              marginTop:{md:"1%"}
+            }}
+            onClick={handleHomePage}
+          />
+        </Box>
         {error !== null && (
           <div style={{ color: "red", fontSize: "1rem", fontStyle: "italic" }}>
             {error}

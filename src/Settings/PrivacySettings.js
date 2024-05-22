@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-import { TextField, Typography, Grid } from "@mui/material";
+import { TextField, Typography, Grid, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { updatePassword } from "aws-amplify/auth";
 import HomeIcon from "@mui/icons-material/Home";
@@ -13,9 +13,9 @@ const PrivacySettings = () => {
     confirmPassword: "",
   });
 
-    const handleHomePage=()=>{
-        navigate('/dashboard')
-    }
+  const handleHomePage = () => {
+    navigate("/dashboard");
+  };
   const [error, setError] = useState({
     oldPassword: false,
     newPassword: false,
@@ -78,20 +78,41 @@ const PrivacySettings = () => {
         flexDirection: "column", // Stack items vertically
       }}
     >
-      <HomeIcon sx={{ paddingLeft: "90%", fontSize: "50px" }} onClick={handleHomePage} />
-      <Typography
-        variant="h2"
-        component="h2"
-        style={{
-          color: "black",
-          fontWeight: "bold",
-          marginBottom: "20px",
-          paddingRight: "10%",
-          marginTop: "10%",
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: { xs: "space-between" },
+          alignItems: "center",
+          width: "80%",
+          paddingLeft: { md: "13%" },
+          mt: { xs: 2, md: 0 },
         }}
       >
-        Settings
-      </Typography>
+        <Typography
+          variant="h2"
+          component="h2"
+          sx={{
+            color: "black",
+            fontWeight: "bold",
+            textAlign: "center",
+            paddingLeft: { xs: "30%" },
+            marginTop: { md: "10%" },
+            fontSize: { xs: "2rem", sm: "2rem", md: "3rem" },
+          }}
+        >
+          Settings
+        </Typography>
+        <HomeIcon
+          sx={{
+            fontSize: { xs: "2.5rem", md: "3rem" },
+            cursor: "pointer",
+            paddingLeft: { xs: "28%" },
+            paddingRight: { md: "2%" },
+            marginBottom: { xs: "2%",md:"20%" },
+          }}
+          onClick={handleHomePage}
+        />
+      </Box>
       <Grid
         container
         spacing={2}
@@ -142,7 +163,7 @@ const PrivacySettings = () => {
             label="Old Password"
             fullWidth
             required
-            sx={{ mb: 2, paddingBottom: "10%" }}
+            sx={{ mb: 2, paddingBottom: "5%" }}
             value={formData.oldPassword}
             error={error.oldPassword}
             helperText={error.oldPassword ? "This field is required" : ""}
