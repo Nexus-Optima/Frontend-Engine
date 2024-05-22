@@ -12,7 +12,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import { Amplify } from "aws-amplify";
 import config from "./aws-exports";
 import "./App.css";
-import Explore_Modules from "./Explore/explore_modules";
+import ExploreModules from "./Explore/explore_modules";
 import ContactUs from "./ContactUs/contact_us";
 import ForgotPassword from "./Settings/ForgotPassword";
 import Settings from "./Settings/Settings";
@@ -21,9 +21,9 @@ import { UserProvider, useUser } from "./Context/userContext";
 Amplify.configure(config);
 
 function ProtectedRoute({ children }) {
-    const { user } = useUser();
-    console.log(user)
-    return user.isAuthenticated ? children : <Navigate replace to="/login" />;
+  const { user } = useUser();
+  console.log(user);
+  return user.isAuthenticated ? children : <Navigate replace to="/login" />;
 }
 
 function App() {
@@ -35,11 +35,25 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/explore" element={<Explore_Modules />} />
+            <Route path="/explore" element={<ExploreModules />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/forgot_password" element={<ForgotPassword />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
             {/* Redirect user if they access any unknown route */}
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

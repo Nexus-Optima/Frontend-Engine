@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, Typography, Grid } from "@mui/material";
-import { signIn} from "aws-amplify/auth";
+import { signIn } from "aws-amplify/auth";
 import pic from "../Images/white-22.png";
 import { ThemeProvider } from "@mui/material/styles";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Navigate } from "react-router-dom";
 import theme from "../Utils/themes";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -11,33 +11,37 @@ import { useUser } from "../Context/userContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { login } = useUser(); // Use the login function from context
+  const { login, user } = useUser(); // Use the login function from context
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = useState(null);
 
   const handleLogin = async (e) => {
-      e.preventDefault();
-      const { username, password } = formData;
-      try {
-          await signIn({ username, password });
-          login(username);
-          navigate("/dashboard");
-      } catch (error) {
-          setLoginError("Invalid Username or Password");
-          console.log(error);
-      }
+    e.preventDefault();
+    const { username, password } = formData;
+    try {
+      await signIn({ username, password });
+      login(username);
+      navigate("/dashboard");
+    } catch (error) {
+      setLoginError("Invalid Username or Password");
+      console.log(error);
+    }
   };
 
   const handleChange = (event) => {
-      const { name, value } = event.target;
-      setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const handleFocus = () => setLoginError(null);
-  
+
   const handleArrow = () => {
-      navigate("/");
+    navigate("/");
   };
+
+  if (user.isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -49,12 +53,12 @@ const LoginPage = () => {
             xs={12}
             md={4}
             sx={{
-              backgroundColor:"#063954", 
+              backgroundColor: "#063954",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: { xs: '30vh', md: '100vh' }
+              height: { xs: "30vh", md: "100vh" },
             }}
           >
             <IconButton
@@ -145,7 +149,7 @@ const LoginPage = () => {
               )}
 
               <Grid item xs={12} style={{ width: "500px" }}>
-                <Button variant="contained" onClick={handleLogin} >
+                <Button variant="contained" onClick={handleLogin}>
                   LOGIN
                 </Button>
               </Grid>
@@ -153,7 +157,11 @@ const LoginPage = () => {
               <Grid item xs={12}>
                 <NavLink
                   to="/register"
-                  style={{ paddingLeft: 13, textDecoration: "none",color:'#063954' }}
+                  style={{
+                    paddingLeft: 13,
+                    textDecoration: "none",
+                    color: "#063954",
+                  }}
                 >
                   Don't have an account ? Register Here{" "}
                 </NavLink>
