@@ -22,7 +22,6 @@ Amplify.configure(config);
 
 function ProtectedRoute({ children }) {
   const { user } = useUser();
-  console.log(user);
   return user.isAuthenticated ? children : <Navigate replace to="/login" />;
 }
 

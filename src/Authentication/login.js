@@ -24,7 +24,6 @@ const LoginPage = () => {
       navigate("/dashboard");
     } catch (error) {
       setLoginError("Invalid Username or Password");
-      console.log(error);
     }
   };
 
