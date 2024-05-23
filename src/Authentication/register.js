@@ -209,7 +209,6 @@ function Register() {
                   name="name"
                   type="text"
                   variant="outlined"
-                  color="secondary"
                   label="Your Name"
                   fullWidth
                   required
@@ -227,7 +226,6 @@ function Register() {
                   name="email"
                   type="text"
                   variant="outlined"
-                  color="secondary"
                   label="Work Email"
                   fullWidth
                   required
@@ -244,7 +242,6 @@ function Register() {
                   name="password"
                   type="password"
                   variant="outlined"
-                  color="secondary"
                   label="Password"
                   fullWidth
                   required
@@ -261,7 +258,6 @@ function Register() {
                   name="confirmpassword"
                   type="password"
                   variant="outlined"
-                  color="secondary"
                   label="Confirm Password"
                   fullWidth
                   required
@@ -280,7 +276,6 @@ function Register() {
                   name="mobile"
                   type="tel"
                   variant="outlined"
-                  color="secondary"
                   label="Mobile"
                   fullWidth
                   required
@@ -298,7 +293,6 @@ function Register() {
                   name="company"
                   type="text"
                   variant="outlined"
-                  color="secondary"
                   label="Company"
                   fullWidth
                   required
@@ -337,7 +331,6 @@ function Register() {
                   name="jfunction"
                   type="text"
                   variant="outlined"
-                  color="secondary"
                   label="Job Level"
                   fullWidth
                   required
