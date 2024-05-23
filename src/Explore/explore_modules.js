@@ -102,7 +102,7 @@ function ExploreModules() {
           marginLeft: "auto",
           marginRight: "auto",
           borderRadius: "10px",
-          width: { xs: "100%", sm: "90%" },
+          width: { xs: "85%", sm: "90%" },
           height: { xs: theme.spacing(8), md: theme.spacing(8) },
         }}
       >
@@ -114,26 +114,28 @@ function ExploreModules() {
             height: "100%",
           }}
         >
-          <Button
-            sx={{
-              color: "white",
-              backgroundColor: "transparent",
-              textDecoration: "none",
-              textTransform: "none",
-              "&:hover": { backgroundColor: "transparent" },
-            }}
-          >
-            <Typography
-              variant="h6"
-              sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}
+          <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
+            <Button
+              sx={{
+                color: "white",
+                backgroundColor: "transparent",
+                textDecoration: "none",
+                textTransform: "none",
+                "&:hover": { backgroundColor: "transparent" },
+                whiteSpace: "nowrap", 
+              }}
             >
-              Applied Bell Curve
-            </Typography>
-          </Button>
+              <Typography
+                variant="h6"
+                sx={{ display: "flex", alignItems: "center",fontSize: { xs: '1rem', sm: '1.25rem' } }}
+              >
+                Applied Bell Curve
+              </Typography>
+            </Button>
+          </Box>
           <IconButton
             color="inherit"
             onClick={handleHomeClick}
-            sx={{ marginRight: 5 }}
           >
             <HomeIcon />
           </IconButton>
@@ -164,7 +166,10 @@ function ExploreModules() {
           alignItems: "center",
           justifyContent: "center",
           p: 2,
-          height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 48px - 70px)`,
+          height: {
+            xs: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 48px - ${theme.spacing(16)}px)`,
+            sm: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 48px - 70px)`,
+          },
           overflow: "hidden",
           maxWidth: "90%",
           margin: "auto",
@@ -181,7 +186,7 @@ function ExploreModules() {
         <Box
           sx={{
             display: "flex",
-            overflowY: "auto",
+            overflowY: "auto", 
             overflowX: "hidden",
             width: "100%",
             height: "100%",
@@ -292,8 +297,8 @@ function ExploreModules() {
                       alt={`Module Visual`}
                       sx={{
                         width: "90%",
-                        maxHeight: 300, // Set a maximum height
-                        objectFit: "contain", // Maintain aspect ratio
+                        maxHeight: 300, 
+                        objectFit: "contain", 
                         border: "2px solid black",
                         borderRadius: "10px",
                       }}
@@ -311,7 +316,7 @@ function ExploreModules() {
                 <Button
                   variant="contained"
                   size="large"
-                  sx={{ maxWidth: "fit-content", width: "40%" }}
+                  sx={{ maxWidth: "fit-content", width: {sx:"8%",md:"40%"} }}
                   onClick={() =>
                     navigate(
                       `/contactus?module=${modules[visibleModuleIndex].name}`

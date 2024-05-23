@@ -9,7 +9,7 @@ import {
   Container,
 } from "@mui/material";
 import theme from "../Utils/themes";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import pic from "./../Images/Applied_Bell_Curve_white.png";
 import { useUser } from "../Context/userContext";
 import IconButton from "@mui/material/IconButton";
@@ -78,13 +78,14 @@ const ContactUs = () => {
             item
             xs={12}
             md={4}
-            style={{
-              backgroundColor:"#063954", 
+            sx={{
+              backgroundColor: "#063954",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              position:"relative",
+              position: "relative",
+              height: { xs: "30vh", md: "100vh" },
             }}
           >
             <IconButton
@@ -101,7 +102,7 @@ const ContactUs = () => {
             <img
               src={pic}
               alt="Logo"
-              style={{ width: "100%", height: "70%" }}
+              style={{ width: "100%", height: "100%" }}
             />
           </Grid>
 
@@ -117,15 +118,14 @@ const ContactUs = () => {
               justifyContent: "center",
             }}
           >
-            {/* <Grid container spacing={1} sx={{ mx: 10 }}> */}
-            {/* <Grid item xs={12} sm={5} sx={{ textAlign: "left" }}> */}
-            <Box component="form" onSubmit={handleSubmit}>
-             {/* <Typography variant="h6" sx={{ color: "green" }}> */}
-              <Typography variant="h6">
+            <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 600, mx: "auto", px: 2}}>
+              <Typography variant="h6" align="center">
                 Contact Us
               </Typography>
-              <Typography variant="h4">Get in Touch With Us</Typography>
-              <Typography variant="h6">
+              <Typography variant="h4" align="center">
+                Get in Touch With Us
+              </Typography>
+              <Typography variant="h6" align="center">
                 Please fill out the details and someone from our team will be in
                 touch with you shortly.
               </Typography>
@@ -134,7 +134,6 @@ const ContactUs = () => {
                   name="name"
                   type="text"
                   variant="outlined"
-                  color="secondary"
                   label="Your Name"
                   fullWidth
                   required
@@ -146,7 +145,6 @@ const ContactUs = () => {
                   name="email"
                   type="email"
                   variant="outlined"
-                  color="secondary"
                   label="Your Work Email"
                   fullWidth
                   required
@@ -158,7 +156,6 @@ const ContactUs = () => {
                   name="message"
                   type="text"
                   variant="outlined"
-                  color="secondary"
                   label="Message (Your requirements)"
                   multiline
                   rows={5}
@@ -168,7 +165,7 @@ const ContactUs = () => {
                 />
               </Box>
               <br />
-              <Button type="submit" variant="contained">
+              <Button type="submit" variant="contained" sx={{mb:1}}>
                 Send a Message
               </Button>
             </Box>

@@ -106,11 +106,10 @@ const LoginPage = () => {
                   name="username"
                   type="text"
                   variant="outlined"
-                  color="secondary"
                   label="Username"
                   fullWidth
                   required
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2}}
                   value={formData.username}
                   onChange={handleChange}
                   onFocus={() => handleFocus("username")}
@@ -123,11 +122,10 @@ const LoginPage = () => {
                   name="password"
                   type="password"
                   variant="outlined"
-                  color="secondary"
                   label="Password"
                   fullWidth
                   required
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2}}
                   value={formData.password}
                   onChange={handleChange}
                   onFocus={() => handleFocus("password")}
