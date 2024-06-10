@@ -7,6 +7,7 @@ import {
   Grid,
   TextField,
   Container,
+  Alert,
 } from "@mui/material";
 import theme from "../Utils/themes";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -21,7 +22,7 @@ const ContactUs = () => {
     email: "",
     message: "",
   });
-
+  const [successMessage, setSuccessMessage] = useState("");
   const location = useLocation();
   const { user } = useUser();
   const navigate = useNavigate();
@@ -50,8 +51,6 @@ const ContactUs = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log(formData);
     fetch(`${process.env.REACT_APP_BACKEND}/send-email`, {
       method: "POST",
       headers: {
@@ -61,8 +60,11 @@ const ContactUs = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
         setFormData({ name: "", email: "", message: "" });
+        setSuccessMessage("Your message has been sent successfully!");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 5000); // Clear the success message after 5 seconds
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -118,7 +120,7 @@ const ContactUs = () => {
               justifyContent: "center",
             }}
           >
-            <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 600, mx: "auto", px: 2}}>
+            <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 600, mx: "auto", px: 2 }}>
               <Typography variant="h6" align="center">
                 Contact Us
               </Typography>
@@ -164,8 +166,13 @@ const ContactUs = () => {
                   onChange={handleChange}
                 />
               </Box>
+              {successMessage && (
+                <Alert severity="success" sx={{ my: 2 }}>
+                  {successMessage}
+                </Alert>
+              )}
               <br />
-              <Button type="submit" variant="contained" sx={{mb:1}}>
+              <Button type="submit" variant="contained" sx={{ mb: 1 }}>
                 Send a Message
               </Button>
             </Box>
