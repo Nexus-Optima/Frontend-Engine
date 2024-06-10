@@ -37,10 +37,10 @@ const Footer = () => {
             Follow Us
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-            <MuiLink href="#" color="inherit"><FacebookIcon /></MuiLink>
-            <MuiLink href="#" color="inherit"><TwitterIcon /></MuiLink>
-            <MuiLink href="#" color="inherit"><LinkedInIcon /></MuiLink>
-            <MuiLink href="#" color="inherit"><InstagramIcon /></MuiLink>
+            <MuiLink href="#" color="inherit" target="_blank"><FacebookIcon /></MuiLink>
+            <MuiLink href="#" color="inherit" target="_blank"><TwitterIcon /></MuiLink>
+            <MuiLink href="https://www.linkedin.com/company/applied-bell-curve/" target="_blank" color="inherit"><LinkedInIcon /></MuiLink>
+            <MuiLink href="#" color="inherit" target="_blank"><InstagramIcon /></MuiLink>
           </Box>
         </Grid>
       </Grid>
