@@ -13,5 +13,10 @@ export const MODULE_DESCRIPTIONS = {
     description: "Tool for Inventory Management",
     link:"https://shelf.appliedbellcurve.com",
   },
+  trim_manager: {
+    name:"Deckle Matching",
+    description:"Tool for trim management",
+    link:"https://trim.appliedbellcurve.com"
+  }
   // Add other module descriptions here
 };
