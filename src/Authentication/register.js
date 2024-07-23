@@ -12,6 +12,7 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  Alert
 } from "@mui/material";
 import pic from "../Images/white-22.png";
 import theme from "../Utils/themes";
@@ -20,64 +21,6 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Register() {
   const navigate = useNavigate();
-
-  const handleRegistration = async () => {
-    Object.entries(formData).forEach(([key, value]) => {
-      validateField(key, value);
-    });
-
-    const hasErrors = Object.values(errors).some((error) => error);
-    if (hasErrors) return;  
-
-    const requestBody = {
-      userid: formData.email,
-      username:formData.name,
-      email: formData.email,
-      phone:formData.mobile,
-      company:formData.company
-    };
-
-    try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND}/update_details`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      // Reset form fields after successful submission
-      setFormData({userid:'',username:'',email:'',phone:'',company:''});
-    } catch (error) {
-      console.error('There was an error:', error);
-    }
-  
-    try {
-      await signUp({
-        username: formData.email,
-        password: formData.password,
-        attributes: {
-          "custom:name": formData.name,
-          "custom:companyName": formData.company,
-        },
-      });
-      navigate("/login");
-    } catch (error) {
-      console.error("Error during registration:", error);
-    }
-  };
-
-  const handleMobileChange = (event) => {
-    const value = event.target.value.replace(/[^0-9]/g, "");
-    setFormData({
-      ...formData,
-      mobile: value,
-    });
-  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -101,6 +44,8 @@ function Register() {
     password: false,
     confirmpassword: false,
   });
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const validateField = (fieldName, value) => {
     setErrors((prevErrors) => ({
@@ -132,6 +77,64 @@ function Register() {
     }));
   };
 
+  const handleMobileChange = (event) => {
+    const value = event.target.value.replace(/[^0-9]/g, "");
+    setFormData({
+      ...formData,
+      mobile: value,
+    });
+  };
+
+  const handleRegistration = async () => {
+    Object.entries(formData).forEach(([key, value]) => {
+      validateField(key, value);
+    });
+
+    const hasErrors = Object.values(errors).some((error) => error);
+    if (hasErrors) return;  
+
+    const requestBody = {
+      userid: formData.email,
+      username: formData.name,
+      email: formData.email,
+      phone: formData.mobile,
+      company: formData.company
+    };
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/update_details`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      // Reset form fields after successful submission
+      setFormData({userid:'',username:'',email:'',phone:'',company:''});
+    } catch (error) {
+      setErrorMessage('There was an error updating details: ' + error.message);
+    }
+
+    try {
+      await signUp({
+        username: formData.email,
+        password: formData.password,
+        attributes: {
+          "custom:name": formData.name,
+          "custom:companyName": formData.company,
+        },
+      });
+      navigate("/login");
+    } catch (error) {
+      setErrorMessage('Error during registration: ' + error.message);
+    }
+  };
+
   const industries = [
     "Technology",
     "Finance",
@@ -141,7 +144,7 @@ function Register() {
   ];
   
   const handleArrow = () => {
-      navigate("/");
+    navigate("/");
   };
 
   return (
@@ -199,6 +202,11 @@ function Register() {
               Please fill in the following details to complete your registration
               and someone from our team will get in touch with you shortly
             </Typography>
+            {errorMessage && (
+              <Alert severity="error" style={{ width: '80%', marginTop: '20px' }}>
+                {errorMessage}
+              </Alert>
+            )}
             <Grid
               container
               spacing={2}
