@@ -1,7 +1,7 @@
 import { Typography, AppBar, Toolbar, Button, useTheme, Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+import Home from '@mui/icons-material/Home';
 import CallIcon from '@mui/icons-material/Call';
 import { useState } from "react";
 
@@ -39,8 +39,8 @@ const Header = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={() => handleNavigate('/explore')}>
-        <SearchIcon sx={{ mr: 1 }} /> Modules
+      <MenuItem onClick={() => handleNavigate('/')}>
+        <Home sx={{ mr: 1 }} /> Home
       </MenuItem>
       <MenuItem onClick={() => handleNavigate('/contactus')}>
         <CallIcon sx={{ mr: 1 }} /> Contact Us
@@ -75,15 +75,15 @@ const Header = () => {
         </Button>
 
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
-          <Button onClick={() => handleNavigate("/explore")} sx={{ 
+          <Button onClick={() => handleNavigate("/")} sx={{ 
             color: "white", 
             backgroundColor: 'transparent', 
             textDecoration: "none", 
             textTransform: "none", 
             '&:hover': { backgroundColor: 'transparent' },
           }}>
-            <SearchIcon sx={{ mr: 1 }} />
-            <Typography variant="h6" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>Modules</Typography>
+            <Home sx={{ mr: 1 }} />
+            <Typography variant="h6" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>Home</Typography>
           </Button>
           <Button onClick={() => handleNavigate("/contactus")} sx={{ 
             color: "white", 
