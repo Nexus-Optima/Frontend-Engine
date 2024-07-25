@@ -8,12 +8,12 @@ import {
   TextField,
   Container,
   Alert,
+  IconButton,
 } from "@mui/material";
 import theme from "../Utils/themes";
 import { useLocation, useNavigate } from "react-router-dom";
 import pic from "./../Images/Applied_Bell_Curve_white.png";
 import { useUser } from "../Context/userContext";
-import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ContactUs = () => {
@@ -24,7 +24,6 @@ const ContactUs = () => {
   });
   const [successMessage, setSuccessMessage] = useState("");
   const location = useLocation();
-  const { user } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,11 +41,7 @@ const ContactUs = () => {
   };
 
   const handleArrow = () => {
-    if (user.isAuthenticated) {
-      navigate("/dashboard");
-    } else {
-      navigate("/");
-    }
+    navigate(-1); // Navigate to the previous page
   };
 
   const handleSubmit = (event) => {

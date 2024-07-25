@@ -17,6 +17,8 @@ import ContactUs from "./ContactUs/contact_us";
 import ForgotPassword from "./Settings/ForgotPassword";
 import Settings from "./Settings/Settings";
 import { UserProvider, useUser } from "./Context/userContext";
+import ProductionPlanningPage from "./Explore/ProductionPlanningPage";
+import PurchaseManagementPage from "./Explore/PurchaseManagementPage";
 
 Amplify.configure(config);
 
@@ -35,6 +37,8 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<Register />} />
             <Route path="/explore" element={<ExploreModules />} />
+            <Route path="/explore/purchase-management" element={<PurchaseManagementPage />} />
+            <Route path="/explore/production-planning" element={<ProductionPlanningPage />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/forgot_password" element={<ForgotPassword />} />
             <Route

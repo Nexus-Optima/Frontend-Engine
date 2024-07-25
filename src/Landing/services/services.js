@@ -6,14 +6,13 @@ import {
   Grid,
   Box,
   ThemeProvider,
+  IconButton,
 } from "@mui/material";
 import {
   QueryStats,
   DesignServices,
   Storage,
-  Receipt,
-  Insights,
-  Dataset,
+  ArrowForward,
 } from "@mui/icons-material";
 import theme from "../../Utils/themes";
 
@@ -21,19 +20,18 @@ const services = [
   { icon: DesignServices, title: "OUR SERVICES", description: "" },
   {
     icon: QueryStats,
-    title: "Forecast",
+    title: "Purchase Management",
     description:
-      "With Forecaster, organizations can gain insights into the complexities of commodity markets. Forecaster analyzes the global demand and supply, local demand and supply and performs sentiment analysis to predict commodity prices. Procurement managers can use Forecaster to devise their procurement strategy and stay ahead of the market.",
+      "Our Purchase Management module features AI and machine learning-powered models for advanced commodity forecasting and related services. These state-of-the-art tools accurately predict market trends, enabling you to make informed buying decisions, optimize inventory, and reduce costs. Experience seamless integration with your procurement process and stay ahead in the competitive market.",
+    link: "/explore/purchase-management",
   },
   {
     icon: Storage,
-    title: "Inventory Manager",
+    title: "Production Planning",
     description:
-      "Inventory Manager enhances organizational efficiency by seamlessly integrating with SAP systems to track action items and maintain real-time data. Its intuitive interface and powerful features streamline inventory management, improve decision-making, and optimize resource allocation.",
+      "Our Production Planning module leverages AI-driven tools to optimize your manufacturing processes. By integrating advanced algorithms, we help reduce waste, increase efficiency, and boost profitability. Stay ahead in the industry with intelligent planning solutions that streamline your production workflow and enhance overall operational effectiveness.",
+    link: "/explore/production-planning",
   },
-  //   { icon: Storage, title: 'Inventory Management', description: 'Reduce inventory costs and downtime using Inventory Manager. Track real time current inventory levels and optimum inventory levels and automate inventory planning. Embedded analytics provide answers to – what to buy, how much to buy and when to buy.' },
-  //   { icon: Insights, title: 'Sales Analysis', description: 'Sales analysis involves examining sales reports to see what goods and services have and have not sold well.' },
-  //   { icon: Dataset, title: 'Data Insights', description: 'Data insights refer to the understanding and interpretation of data to improve business decisions.' },
 ];
 
 const ServiceCard = ({ service }) => (
@@ -53,7 +51,7 @@ const ServiceCard = ({ service }) => (
         flexGrow: 1,
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-start",
+        justifyContent: "space-between",
         padding: 2,
         margin: 3,
       }}
@@ -79,6 +77,12 @@ const ServiceCard = ({ service }) => (
           {service.description}
         </Typography>
       </Box>
+      <IconButton
+        href={service.link}
+        sx={{ color: "whitesmoke", alignSelf: "flex-end" }}
+      >
+        <Typography sx={{fontWeight:'bold'}}>Read More</Typography><ArrowForward />
+      </IconButton>
     </CardContent>
   </Card>
 );

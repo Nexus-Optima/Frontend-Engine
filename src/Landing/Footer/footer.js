@@ -21,7 +21,7 @@ const Footer = () => {
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', alignItems: 'center', gap: 1 }}>
             <Link to="/contactus" style={{ color: 'inherit', textDecoration: 'none', textAlign: 'center' }}>Send an enquiry</Link>
-            <Link to="/explore" style={{ color: 'inherit', textDecoration: 'none', textAlign: 'center' }}>Explore Modules</Link>
+            {/* <Link to="/explore" style={{ color: 'inherit', textDecoration: 'none', textAlign: 'center' }}>Explore Modules</Link> */}
           </Box>
         </Grid>
         
