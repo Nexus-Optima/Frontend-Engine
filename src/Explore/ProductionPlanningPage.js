@@ -1,11 +1,12 @@
 import React from "react";
 import ExploreModulePage from "./ExploreModulesPage";
+import Decklegif from "../Gifs/Deckle_Matching.gif"
 
 const tabs = [
   {
     label: "Deckle Matching",
     description: "Our Deckle Matching tool optimizes sheet trimming to reduce waste and increase profit by leveraging advanced algorithms.",
-    image: "/path/to/deckle-matching-image.jpg",
+    image: Decklegif,
     features: [
       "Optimized sheet trimming",
       "Waste reduction",
